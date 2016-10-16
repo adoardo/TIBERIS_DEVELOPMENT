@@ -24,7 +24,6 @@ date_default_timezone_set('Europe/Moscow');
             <h3>Звонки за последние 24 часа</h3>
             <div class="col-md-12">
                 <div class="table-responsive">
-                    
                     <table class="table">
                         <thead>
                             <tr>
@@ -37,9 +36,7 @@ date_default_timezone_set('Europe/Moscow');
                                 <th>uuid</th>
                             </tr>
                         </thead>
-                        <tbody class="callersdata">
-                        
-                        </tbody>
+                        <tbody class="callersdata"></tbody>
                     </table>
                     <div class="loader" data-from="<?php $date = date('Y-m-d');$date = date('Y-m-d',(strtotime ( '-1 day' , strtotime ( $date) ) )); echo $date.' '. date('H:i:s') ?>" data-to="<?php echo date('Y-m-d H:i:s');?>">
                         <img src="img/loading.gif"/>
@@ -49,10 +46,8 @@ date_default_timezone_set('Europe/Moscow');
         </div>
     </div>
 </section>
-
 <script src="js/scripts.js" type="text/javascript"></script>
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-
 </body>
 </html>

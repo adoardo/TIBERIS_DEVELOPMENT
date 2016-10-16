@@ -1,0 +1,112 @@
+
+<div id="showTogether" style="display:block;">
+
+<script type="text/javascript">
+    var form_show = true; //показать форму если в корзине есть товары
+</script>
+
+<span class="basketHeading">Бесплатная доставка сварочных аппаратов по Москве, Санкт-Петербургу!</span>
+
+<div id="noTovarsWrapper" style="display:none;margin-top: 100px;width: 600px;margin-left: 50px;">
+    <span class="basketHeading" style="font-size: 20px;color: #C83D3D;" >Ваша корзина пуста…</span>
+    <p>Ищете что-то конкретное?</p>
+    <p class="clearFloat marginTop20" style="text-align: justify;padding-top: 10px;">Также Вы можете посмотреть подробные описания, технические характеристики и изображения товаров. Для этого воспользуйтесь меню, находящимся слева, либо каталогом на <a href="/">главной странице.</a></p>
+</div>
+
+
+<h1 class="clearFloat" style="margin-top:40px;">Заполните форму ниже</h1>
+<span class="basketLightText">и нажмите кнопку "Оформить заказ". Ваша информация не будет передана третьим лицам. Обещаем!</span>
+
+
+<!------------------- Wufoo form ------------------->
+<div id="wufoo-z7x4m1">
+    <div id="form-text" style="display:none;">
+        <br>
+    <span class="basketLightText">
+      В связи с настройками безопасности Вашего браузера мы не можем отобразить форму заказа на этой странице. Пожалуйста, заполните ее по
+      <a href="http://tiberis.wufoo.com/forms/z7x4m1" target="_self" id="tib_wufoo_link">
+          этой ссылке</a>
+    </span>
+    </div>
+</div>
+
+<script type="text/javascript">
+    var z7x4m1;
+
+    jQuery(document).ready(function($){
+
+            if (product_data=='') {product_data = 'Заказ с пустой корзиной';}
+            var form_show = true; // принудительно показать форму, игнорируя наличие товаров
+
+            if(form_show) {
+                setTimeout(function(){
+                    (function(d, t) {
+                        if (!window.clientId) {
+                            var def_values = 'field26='+ product_data + '&field17=not_determined&field18=tiberis.ru';
+                        } else {
+                            var def_values = 'field26='+ product_data + '&field17='+clientId+'&field18=tiberis.ru';
+                        }
+                        $('#tib_wufoo_link').attr('href','http://tiberis.wufoo.com/forms/z7x4m1/def/embedKey=z7x4m1912814&'+def_values);
+                        var s = d.createElement(t), options = {
+                            'userName': 'tiberis',
+                            'formHash': 'z7x4m1',
+                            'autoResize': true,
+                            'defaultValues':def_values,
+                            'height': '801',
+                            'ssl': true,
+                            'async': true,
+                            'header': 'show'};
+                        /* s.src = ('https:' == d.location.protocol ? 'https://' : 'http://') + 'wufoo.com/scripts/embed/form.js'; */
+                        s.src = 'https://wufoo.com/scripts/embed/form.js';
+                        s.onload = s.onreadystatechange = function() {
+                            var rs = this.readyState;
+                            if (rs)
+                                if (rs != 'complete')
+                                    if (rs != 'loaded')
+                                        return;
+                            try {
+                                z7x4m1 = new WufooForm();
+                                z7x4m1.initialize(options);
+                                z7x4m1.display();
+                            } catch (e) {
+                            }
+                        };
+                        var scr = d.getElementsByTagName(t)[0], par = scr.parentNode;
+                        par.insertBefore(s, scr);
+                    })(document, 'script');
+
+                    $('#showTogether').show();
+                }, 750);
+
+            } // if form_show
+        });
+
+
+
+        var itimer = 1000; // m.sec
+        setTimeout(function(){
+            var timer_wait_id = setInterval(function(){
+                if (typeof(clientId) != undefined && document.getElementById('wufoo-z7x4m1') != null) {
+                    if (document.getElementById('wufoo-z7x4m1').getElementsByTagName('iframe')[0] != null) {
+
+                        clearInterval(timer_wait_id);
+                        var insert_iframe = document.getElementById('wufoo-z7x4m1').getElementsByTagName('iframe')[0];
+                        var src_raw = insert_iframe.src;
+                        var new_clientid = 'field17='+ clientId;
+                        src_arr = src_raw.split('&');
+                        if (src_arr[4] != new_clientid) {
+                            src_arr[4] = new_clientid;
+                            src_raw = src_arr[0]+'&'+src_arr[1]+'&'+src_arr[2]+'&'+src_arr[3]+'&'+src_arr[4]+'&'+src_arr[5];
+                            insert_iframe.src = src_raw;
+                        }
+                    }
+
+                }
+                itimer = itimer+1000;
+            }, 1000);
+        }, 1000);
+
+</script>
+<!------------------- END Wufoo form ------------------->
+
+</div>

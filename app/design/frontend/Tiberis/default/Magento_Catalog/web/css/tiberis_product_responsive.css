@@ -1,0 +1,157 @@
+/* PORTRAIT */
+
+@media only screen
+and (max-device-width: 800px) {
+	.product-info-main-left, .product-info-main-right {
+		width: 100%;
+	}
+	.product-info-main-right {
+		float:left;
+		padding-left : 0%;
+		padding-top: 20px;
+
+        border: 1px solid rgba(255, 102, 0, 0.3);
+        border-radius: 3px;
+        text-align: center;
+        margin-top: 10px;
+        background: rgba(255, 250, 246, 0.35);
+	}
+	.product-info-main-left {
+		float:right;
+		border: none;
+	}
+	.sidebar-additional{
+		border: none;
+	}
+	.atribelem div, .prod_main_desc1 div{
+		padding-right:0px;
+	}
+	body {
+		font-size: 1.5rem;
+	}
+
+	.product-info-main {
+		border-right: none;
+	}
+
+	.fotorama__nav-wrap {
+		max-height:22px;
+	}
+
+
+    .product-info-main .stock.available, .product-info-main .stock.unavailable {
+        width:40%;
+    }
+    .product-info-main .product.attibute.sku {
+        width: 60%;
+        text-align:right;
+        padding-left: 0%;
+    }
+
+    .no-machine-product img {
+        float: left;
+        width: 45%;
+    }
+    .no-machine-product p {
+        float: left;
+        padding-top: 18px;
+        width: 55%;
+        font-size: 1.4rem;
+        padding-left: 5%;
+    }
+    .product-info-main-right .new-price2 span, .product-info-main-right .new-price span {
+        font-size: 1.37rem;
+    }
+
+    .dostavkaLabel {
+        font-size:1.65rem;
+    }
+
+    #noRules p {
+        padding-right: 2%;
+    }
+
+    .fieldset .field.qty {
+        float: left;
+        padding-left: 5%;
+        padding-bottom: 15%;
+    }
+    .fieldset .actions {
+        margin-right:4%;
+    }
+    .product-units {
+        width: 30px;
+        position: absolute;
+        left: 32%;
+        top: 9px;
+    }
+    .box-tocart .action.tocart {
+        min-width:130px !important;
+        margin-left: 0%;
+    }
+    .oneClickBuyButton {
+        bottom: 5%;
+        font-size: 1.5rem;
+        text-align: center;
+        right: 7%;
+    }
+    #product-addtocart-button span {
+        font-size:1.5rem;
+        margin-left:16px;
+    }
+    .product-info-main .page-title-wrapper h1 {
+        font-size:2.4rem;
+    }
+    .vozmoznyskidky {
+        margin-top:-2px;
+    }
+    /* iPhone bug */
+    .sidebar.sidebar-additional {
+        width:100%;
+    }
+    .owl-carousel .owl-item {
+        width:60%;
+    }
+
+    #product-addtocart-button span::before {
+        content: url('cart12.svg');
+        font-family: 'porto-icons';
+        font-style: normal;
+        font-weight: normal;
+        speak: none;
+        display: inline-block;
+        text-decoration: inherit;
+        width: 16%;
+        margin-right: .5em;
+        text-align: center;
+        font-variant: normal;
+        text-transform: none;
+        -webkit-font-smoothing: antialiased;
+        position: absolute;
+        margin-left: -27px;
+        margin-top: -4px;
+    }
+
+    .nav-sections-item-title {
+        display:none !important;
+    }
+
+
+}
+
+
+/* LANDSCAPE */
+
+@media only screen
+and (max-device-width: 800px)
+and (orientation : landscape) {
+    .oneClickBuyButton {
+        right: 5%;
+    }
+    .product-units {
+        left: 22%;
+    }
+}
+
+
+/* APPLE MEDIA QUERIES http://stephen.io/mediaqueries/ */

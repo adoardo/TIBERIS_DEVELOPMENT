@@ -1,0 +1,19 @@
+<?php
+# Получем необходимые данные для рачёта стоимости доставки
+$_helper = $this->helper('Magento\Catalog\Helper\Output');
+$_product = $block->getProduct();
+
+$setID = $_product->getAttributeSetId();
+$title = $_product->getName();
+$price = intval($_product->getPrice());
+
+# Передаём скрипту формирования стоимости доставки параметры и получаем в ответ надпись
+$taxLabel = $block->getLayout()
+    ->createBlock('Magento\Catalog\Block\Product\View')
+    ->setTemplate('Magento_Catalog::product/view/dostavka_value.phtml')
+    ->setTibProductAtt($setID)
+    ->setTibProductName($title)
+    ->setTibProductPrice($price)->toHtml();
+echo '<div class="dostavkaLabel"><a href="'.$block->getUrl('shipping').'" target="_blank">'.$taxLabel.'</a></div>';
+?>
+

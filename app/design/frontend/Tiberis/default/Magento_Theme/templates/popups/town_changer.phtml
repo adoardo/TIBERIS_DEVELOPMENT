@@ -1,0 +1,43 @@
+<div id="popup-townchanger-modal">
+        <div class="window_name">Укажите свой город...</div>
+        <ul class="fastchoise_town"><li><span>Москва</span></li><li><span>Санкт-Петербург</span></li></ul>
+        <p style="height: 10px;font-weight: bold;padding-top: 8px;font-size: 14px;color: #7D7D7D;">Или введите Ваш город</p>
+        <input placeholder="Ваш город" type="text" name="town" id="autocomplete_city" class="autocomplete_field"/>
+        <div id="selectionA1"></div>
+    <div id="maskA1"></div>
+</div>
+<script>
+    /*
+require(
+    [
+        'jquery',
+        'Magento_Ui/js/modal/modal',
+        'Magento_Theme/js/tiberis-geoip'
+    ],
+    function(
+        $,
+        modal
+        ) {
+        var options = {
+            type: 'popup',
+            responsive: true,
+            innerScroll: false,
+            title: 'Укажите свой город',
+            buttons: [{
+                text: $.mage.__('Готово'),
+                class: 'townchangerPopupButYes',
+                click: function () {
+                    console.log('click click :)');
+                }
+            }]
+        };
+
+        var popup = modal(options, $('#popup-townchanger-modal'));
+
+        $('.townchangerbutton').on('click', function(event){
+            $('#popup-townchanger-modal').modal('openModal');
+        });
+    }
+);
+*/
+</script>

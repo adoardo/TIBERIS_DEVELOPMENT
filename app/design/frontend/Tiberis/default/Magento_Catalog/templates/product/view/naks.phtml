@@ -1,0 +1,25 @@
+<?php
+    $_helper = $this->helper('Magento\Catalog\Helper\Output');
+    $_product = $block->getProduct();
+
+    $_call = 'getTegi';
+    $_code = 'tegi';
+
+    $_attributeType = $block->getAtType();
+
+    if ($_attributeType && $_attributeType == 'text') {
+    	$_attributeValue = ($_helper->productAttribute($_product, $_product->$_call(), $_code)) ? $_product->getAttributeText($_code) : '';
+	} else {
+	    $_attributeValue = $_helper->productAttribute($_product, $_product->$_call(), $_code);
+	}
+
+	if (strpos($_attributeValue, 'HAKC') !== false): ?>
+	    <div class="custom-block custom-block-1">
+	   		<div>
+		        <em class="porto-icon-star"></em>
+		        <h3>НАКС</h3>
+		        <p>Сертифицируется по НАКС!</p>
+		    </div>
+		</div>
+	<?php endif;
+?>

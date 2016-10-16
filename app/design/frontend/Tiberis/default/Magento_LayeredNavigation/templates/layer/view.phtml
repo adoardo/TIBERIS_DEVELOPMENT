@@ -1,0 +1,546 @@
+<?php
+/**
+ * Copyright © 2015 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+?>
+<?php
+/**
+ * Category layered navigation
+ *
+ * @var $block \Magento\LayeredNavigation\Block\Navigation
+ */
+?>
+
+<?php if ($block->canShowBlock()): ?>
+    <div class="block filter">
+        <div class="block-title filter-title">
+            <strong><?php /* @escapeNotVerified */ echo __('Shop By') ?></strong>
+        </div>
+
+        <div class="block-content filter-content">
+            <?php echo $block->getChildHtml('state') ?>
+
+            <?php if ($block->getLayer()->getState()->getFilters()): ?>
+                <div class="block-actions filter-actions">
+                    <a href="<?php /* @escapeNotVerified */ echo $block->getClearUrl() ?>" class="action clear filter-clear"><span><?php /* @escapeNotVerified */ echo __('Очистить фильтр') ?></span></a>
+                </div>
+            <?php endif; ?>
+            <?php $wrapOptions = false; ?>
+            <?php $filterCounter = 0; ?>
+
+            <?php
+                $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+                $category = $objectManager->get('Magento\Framework\Registry')->registry('current_category');
+
+
+
+
+                $host = 'localhost';
+                $user = 'root';
+                $pass = '12431243';
+                $db = 'tiberis';
+
+                ini_set('mssql.charset', 'UTF-8');
+
+                $db = new PDO ('mysql:host=' . $host . ';dbname=' . $db, $user, $pass );
+
+                $db->query('SET NAMES utf8;');
+
+
+                if ($category !== null) {
+                    $catId = $category->getId();
+                    $products = $db->query("SELECT product_id FROM catalog_category_product_index WHERE category_id = '.$catId.' ;");
+
+                    $pMin = 0;
+                    $pMax = 10000;
+
+                    foreach ($products as $product) {
+                        $id = $product['product_id'];
+                        $temp = $db->query("SELECT final_price FROM catalog_product_index_price WHERE entity_id = '.$id.' AND customer_group_id='0' LIMIT 1;")->fetch();
+                        $price = explode('.',$temp['final_price']);
+                        $price = (int)$price[0];
+                        if ($pMax < $price) {
+                            $pMax = $price + 1;
+                        }
+                    }
+
+                } else {
+                    $wrapOptions = true;
+                }
+
+
+
+            ?>
+
+            <script>
+                function filterTotals($, b, c) {
+
+                    var a2 = $('.filtersado').attr('data-catid');
+                    var curUrl = $('.filtersado').attr('data-cururl');
+
+                    var brands = 'brend=';
+                    var tempParam = 0;
+                    $('.brands-filters div').each(function(i,elem){
+                        tempParam++;
+                    });
+
+                    if (tempParam==0) {
+                        if (curUrl.indexOf('brend=') + 1) {
+                            var a1 = curUrl.split('brend=');
+                            var b1 = a1[1].split('&');
+                            var c1 = b1[0].split('_');
+                            var i = 0;
+                            if (c1[0] != '') {
+                                while (i < c1.length) {
+                                    c1[i] = c1[i].replace('_', '');
+                                    if (i==0) {
+                                        brands = brands+c1[i];
+                                    } else {
+                                        brands = brands+'_'+c1[i];
+                                    }
+                                    i++;
+                                }
+                            }
+                        }
+                    } else {
+                        $('.brands-filters div').each(function(i,elem){
+                            if ($(this).hasClass("bgptn")) {
+                                if (brands=='brend=') {
+                                    brands = brands+$(this).attr('data-id');
+                                } else {
+                                    brands = brands+'_'+$(this).attr('data-id');
+                                }
+                            }
+                        });
+                        if (curUrl.indexOf('brend=') + 1) {
+                            var a1 = curUrl.split('brend=');
+                            var b1 = a1[1].split('&');
+                            var c1 = b1[0].split('_');
+                            var i = 0;
+                            if (c1[0] != '') {
+                                while (i < c1.length) {
+                                    brands = brands + '_' + c1[i];
+                                    i++;
+                                }
+                            }
+                        }
+
+                    }
+
+
+
+
+
+
+
+
+
+
+
+
+                    if (brands=='brend=') {
+                        brands = '';
+                    }
+
+                    $.get("http://51.254.132.135/tibscript/autocomplete/filters.php?c="+a2+"&pmin="+b+"&pmax="+c+'&'+brands, function(data) {
+                        var totals = $.parseJSON(data);
+                        console.log(totals);
+                        var tc = totals.length;
+                        if (tc > 0) {
+                            if (curUrl.indexOf('?') + 1) {
+                                temp = curUrl.split("?");
+                                temp = temp[0];
+                                sorting = temp[1];
+                                if (curUrl.indexOf('product_list_order') + 1) {
+                                    temp2 = $('.tiberis-sorter-elem.active').html();
+                                    if (temp2 == 'по популярности') {
+                                        sorting = '&product_list_order=popular_att&product_list_dir=desc';
+                                    } else {
+                                        if (temp2 == 'сначала дешёвые') {
+                                            sorting = '&product_list_order=price&product_list_dir=asc';
+                                        } else {
+                                            if (temp2 == 'сначала дорогие') {
+                                                sorting = '&product_list_order=price&product_list_dir=desc';
+                                            } else {
+                                                if (temp2 == 'новинки') {
+                                                    sorting = '&product_list_order=created_at&product_list_dir=desc';
+                                                } else {
+                                                    sorting = '&product_list_order=sale_amount&product_list_dir=desc';
+                                                }
+                                            }
+                                        }
+                                    }
+                                } else {
+                                    sorting = '';
+                                }
+                            } else {
+                                temp = curUrl;
+                                sorting = '';
+                            }
+                            var pr = jQuery.cookie('pmin')+'-'+jQuery.cookie('pmax');
+                            if (brands != 'brend=') {
+                                brands = brands+'&';
+                            }
+                            $('.info_left').html('<p>Найдено товаров: '+tc+'<span></span><a href="'+temp+'?'+brands+'price='+pr+sorting+'">Показать</a></p>');
+                            $('.bt_ok').prop('href',temp+'?'+brands+'price='+pr);
+                            $('.info_left').css('display','block');
+                            $('.info_left').animate({opacity:1});
+                        } else {
+                            $('.info_left').html('<p>Товаров не найдено</p>');
+                            $('.info_left').css('display','block');
+                            $('.info_left').animate({opacity:1}, function(){
+                                var tempTimeout = setTimeout(function(){
+                                    $('.info_left').css('display','none');
+                                    $('.info_left').css('opacity','0');
+                                }, 5000);
+                            });
+                        }
+                    });
+                }
+            </script>
+
+            <?php foreach ($block->getFilters() as $filter): ?>
+            <?php $filterCounter++; ?>
+            <?php if (!$wrapOptions): ?>
+            <strong role="heading" aria-level="2" class="block-subtitle filter-subtitle"><?php /* @escapeNotVerified */ echo __('Shopping Options') ?></strong>
+            <dl class="filter-options" id="narrow-by-list">
+                <?php
+                    $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+                    if (($category = $objectManager->get('Magento\Framework\Registry')->registry('current_category'))&&(count($category->getChildrenCategories())>0)) {
+                        $categories = $category->getChildrenCategories(); ?>
+
+                        <strong class="block-subtitle filter-current-subtitle" role="heading"><?php echo $block->escapeHtml(__($category->getName())) ?></strong>
+                        <dd class="filter-options-content subcategoryfilter">
+                            <ol class="items">
+                                <?php
+                                foreach ($categories as $category): ?>
+                                    <li class="item">
+                                        <a href="<?php echo $category->getUrl(); ?>"><?php echo $category->getName(); ?> (<?php echo $category->getProductCount(); ?>)</a>
+                                        <?php if (count($category->getChildrenCategories())>0) {
+                                            echo '<i class="subftr fa fa-plus-square" aria-hidden="true"></i><ul class="subfc">';
+                                            foreach ($category->getChildrenCategories() as $cat) {
+                                                echo '<li>';
+                                                echo '<a href="'.$cat->getUrl().'">'.$cat->getName().' ('.$cat->getProductCount().')</a>';
+                                                echo '</li>';
+                                            }
+                                            echo '</ul>';
+                                        } ?>
+                                    </li>
+
+                                <?php endforeach; ?>
+                            </ol>
+                        </dd>
+
+                        <script>
+                            require([
+                                'jquery',
+                                'domReady!'
+                            ], function ($) {
+                                $('.subftr').on('click', function(){
+                                    elem = $(this).parent('li').find('ul');
+                                    if (elem.hasClass('open')) {
+                                        elem.removeClass('open');
+                                        $(this).addClass('fa-plus-square');
+                                        $(this).removeClass('fa-minus-square');
+                                    } else {
+                                        elem.addClass('open');
+                                        $(this).removeClass('fa-plus-square');
+                                        $(this).addClass('fa-minus-square');
+                                    }
+                                });
+                            });
+                        </script>
+                    <?php } ?>
+
+
+
+
+
+                <?php $wrapOptions = true; endif; ?>
+                <?php if ($filterCounter == 1): ?>
+                <div class="filtersado relative" data-catid="<?php echo $catId; ?>" data-cururl="<?php echo $this->getUrl('*/*/*', ['_current' => true, '_use_rewrite' => true]); ?>">
+                    <div class="info_left"><p>Найдено товаров: <span></span><a href="#">Показать</a></p></div>
+                    <div class="filter-options-content new">
+                <?php endif; ?>
+                        <?php if (($filter->getItemsCount())&&($filter->getName()!='Category')): ?>
+
+
+
+
+
+
+                            <div class="block_filter <?php if (($filter->getName()=='Мощность')||($filter->getName()=='Диаметр электрода MAX')) {echo 'small';} ?> <?php if ($filter->getName()=='Бренд'){ echo 'brand-filter-wrapper'; } ?>">
+                                <?php
+                                if ($filter->getName()=='Price'){ ?>
+
+                                        <p class="filter_title_p" role="heading">Цена, р.</p>
+                                        <div class="sidebar-elem-wrapper">
+                                            <div id="priceFilter" class="sidebar-price-filter">
+                                                <div class="fsPar">
+                                                    <p class="price-from-input">От <input class="filterBoxInput" id="input-psmin"/></p>
+                                                    <p class="price-to-input">До <input class="filterBoxInput" id="input-psmax"/></p>
+                                                </div>
+                                                <div id="slider-price-filter">
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    <script>
+                                    require([
+                                        'jquery',
+                                        'Magento_LayeredNavigation/js/priceFilter',
+                                        'Magento_Theme/js/jquery.cookie',
+                                        'domReady!'
+                                    ], function ($,noUiSlider) {
+                                        var priceSlider = document.getElementById('slider-price-filter');
+                                        psmin = document.getElementById('input-psmin');
+                                        psmax = document.getElementById('input-psmax');
+
+                                        noUiSlider.create(priceSlider, {
+                                            start: [0, <?php echo $pMax; ?>],
+                                            connect: true,
+                                            range: {
+                                                'min': 0,
+                                                'max': <?php echo $pMax; ?>
+                                            }
+                                        });
+
+                                        var curUrl = $('.filtersado').attr('data-cururl');
+                                        if (curUrl.indexOf('?') + 1) {
+
+                                        } else {
+                                            jQuery.cookie("pmin", 0, { path: '/' });
+                                            jQuery.cookie("pmax", <?php echo $pMax; ?>, { path: '/' });
+                                        }
+
+
+                                        if (jQuery.cookie('pmin')) {
+                                            psmin.value = Math.round(jQuery.cookie('pmin'));
+                                            priceSlider.noUiSlider.set([jQuery.cookie('pmin'), null]);
+                                        }
+                                        if (jQuery.cookie('pmax')) {
+                                            psmax.value = Math.round(jQuery.cookie('pmax'));
+                                            priceSlider.noUiSlider.set([null, jQuery.cookie('pmax')]);
+                                        }
+
+                                        priceSlider.noUiSlider.on('update', function( values, handle ) {
+                                            temp1 = Math.round(values[0]);
+                                            this.approx = handle;
+                                            psmax.value = Math.round(values[1]);
+                                            psmin.value = Math.round(values[0]);
+                                        });
+
+                                        $("#input-psmin, #input-psmax").on('focusout', function(){
+                                            var temp = $(this).val();
+                                            var str = temp.replace(/\s/g, '');
+                                            if ($(this).attr('id')=='input-psmin'){
+                                                this.approx = 0;
+                                                priceSlider.noUiSlider.set([str, null]);
+                                            } else {
+                                                this.approx = 1;
+                                                priceSlider.noUiSlider.set([null, str]);
+                                            }
+                                        });
+
+                                        priceSlider.noUiSlider.on('set', function(){
+                                            /*$.get('index.php?hotelCount=1', function(response){
+                                             console.log(response);
+                                             });*/
+                                            jQuery.cookie('pmin', $('#input-psmin').val(), { expires: 256, path: '/' });
+                                            jQuery.cookie('pmax', $('#input-psmax').val(), { expires: 256, path: '/' });
+
+                                            filterTotals($, jQuery.cookie('pmin'), jQuery.cookie('pmax'));
+
+                                        });
+
+                                        $('.price-filter-submit').on('click', function(){
+
+                                            var rec = 'price='+jQuery.cookie('pmin')+'-'+jQuery.cookie('pmax');
+                                            var curLoc = window.location.href;
+
+                                            if (curLoc.indexOf("?")>0) {
+                                                temp = curLoc.split("?");
+                                                temp1 = temp[1].split("&");
+                                                if (temp1.length>1) {
+                                                    i = 0;
+                                                    finalLoc = temp[0]+'?';
+                                                    if (temp[1].indexOf("rice")>0) {
+                                                        while (i<temp1.length) {
+                                                            if (temp1[i].indexOf("rice")>0) {
+                                                                if (i>0) {
+                                                                    finalLoc = finalLoc+'&'+rec;
+                                                                } else {
+                                                                    finalLoc = finalLoc+rec;
+                                                                }
+                                                                breakflag = 1;
+                                                            } else {
+                                                                if (i>0) {
+                                                                    finalLoc = finalLoc+'&'+temp1[i];
+                                                                } else {
+                                                                    finalLoc = finalLoc+temp1[i];
+                                                                }
+                                                            }
+                                                            i++;
+                                                        }
+                                                    } else {
+                                                        finalLoc = curLoc+'&'+rec;
+                                                    }
+                                                } else {
+                                                    if (temp1[0].indexOf("price")>0) {
+                                                        finalLoc = temp[0]+'?'+rec;
+                                                    } else {
+                                                        finalLoc = temp[0]+'?'+temp1[0]+'&'+rec;
+                                                    }
+                                                }
+                                            } else {
+                                                finalLoc = curLoc+'?'+rec;
+                                            }
+                                            window.location.href = finalLoc;
+                                        });
+                                    });
+                                </script>
+                                <?php
+                                } else { ?>
+                                    <p class="filter_title_p" role="heading"><?php echo $block->escapeHtml(__($filter->getName())); ?></p>
+                                    <?php  echo $block->getChildBlock('renderer')->render($filter);
+                                }
+                                ?>
+
+                                <?php
+                                if ($filter->getName()=='Бренд') {
+                                    if ($filter->getItemsCount()>8) {
+
+                                        echo '<a class="filter-submit brand-filter-submit all"><span>Показать все <i class="fa fa-angle-down" aria-hidden="true"></i></span></a>';
+                                        ?>
+                                        <script>
+                                        require([
+                                            'jquery'
+                                        ], function ($) {
+
+                                            $('.filter-submit.brand-filter-submit.all').on('click', function(){
+                                                if ($(this).hasClass('open')) {
+                                                    $(this).removeClass('open');
+                                                    $(this).html('<span>Показать все <i class="fa fa-angle-down" aria-hidden="true"></i></span>');
+                                                    $('.filter-options-content .items').css('height','90px');
+                                                } else {
+                                                    $(this).addClass('open');
+                                                    $(this).html('<span>Скрыть <i class="fa fa-angle-up" aria-hidden="true"></i></span>');
+                                                    $('.filter-options-content .items').css('height','auto');
+                                                }
+                                            });
+                                        });
+                                        </script>
+                                    <?php
+                                    } else {
+                                        ?> <script>
+                                        require([
+                                            'jquery',
+                                            'domReady!'
+                                        ], function ($) {
+                                            $('.filter-options-content .items').css('height','auto');
+                                        });
+                                        </script> <?php
+                                    }
+                                    ?>
+                                    <script>
+                                        require([
+                                            'jquery',
+                                            'domReady!'
+                                        ], function ($) {
+                                            $('.brands-filters').on('click', function(){
+                                                if ($(this).children().hasClass('bgptn')) {
+                                                    $(this).children().removeClass('bgptn');
+                                                } else {
+                                                    $(this).children().addClass('bgptn');
+                                                }
+
+                                                filterTotals($, jQuery.cookie('pmin'), jQuery.cookie('pmax'));
+                                            });
+                                        });
+                                    </script>
+                                <?php
+                                }
+                                ?>
+                            </div>
+                            <?php if ($filter->getName()=='Price') {echo '<div class="line"></div>';} ?>
+
+                        <?php endif; ?>
+                        <?php endforeach; ?>
+                        <!--<a class="filter-submit brand-filter-submit all2"><span>Показать больше пареметров</span></a>-->
+                        <div class="dark_block">
+                            <?php
+                                $tempUrl = $this->getUrl('*/*/*', ['_current' => true, '_use_rewrite' => true]);
+                                $pos = strpos($tempUrl, '?');
+
+                                if ($pos !== false) {
+                                    $tempUrl2 = explode('?',$tempUrl);
+                                    $tempUrl = $tempUrl2[0];
+                                }
+                            ?>
+                            <div class="col-md-12">
+                                <a href="#" class="bt_ok">Применить</a>
+                                <a class="bt_clear">Очистить</a>
+                            </div>
+                            <p class="total-prod-count"></p>
+                            <script>
+                                require([
+                                    'jquery',
+                                    'domReady!'
+                                ], function ($) {
+                                    var a2 = $('.filtersado').attr('data-catid');
+                                    var curUrl = $('.filtersado').attr('data-cururl');
+
+                                    athrf = $('.filter-clear').attr('href');
+                                    $('.bt_clear').attr('href',athrf);
+
+                                    var brands = '&brend=';
+                                    if (curUrl.indexOf('brend=') + 1) {
+                                        var a = curUrl.split('brend=');
+                                        var b = a[1].split('&');
+                                        var c = b[0].split('_');
+                                        var i = 0;
+                                        while (i < c.length) {
+                                            if (i==0) {
+                                                brands = brands+c[i];
+                                            } else {
+                                                brands = brands+'_'+c[i];
+                                            }
+                                            i++;
+                                        }
+                                    } else {
+                                        brands = '';
+                                    }
+
+                                    console.log("http://51.254.132.135/tibscript/autocomplete/filters.php?c="+a2+"&pmin="+jQuery.cookie('pmin')+"&pmax="+jQuery.cookie('pmax')+brands);
+
+                                    $.get("http://51.254.132.135/tibscript/autocomplete/filters.php?c="+a2+"&pmin="+jQuery.cookie('pmin')+"&pmax="+jQuery.cookie('pmax')+'$'+brands, function(data2) {
+                                        console.log(data2);
+                                        var totals2 = $.parseJSON(data2);
+                                        $('.total-prod-count').html('Показано: '+totals2.length);
+                                    });
+                                });
+                            </script>
+                        </div>
+                    </div>
+                </div>
+                <?php if ($wrapOptions): ?>
+            </dl>
+        <?php endif; ?>
+        </div>
+    </div>
+<?php endif; ?>
+
+<script>
+    require([
+        'jquery'
+    ], function ($) {
+        $('.filter-checkbox').on('click', function(){
+            $(this).parent().get(0).click();
+        });
+    });
+</script>

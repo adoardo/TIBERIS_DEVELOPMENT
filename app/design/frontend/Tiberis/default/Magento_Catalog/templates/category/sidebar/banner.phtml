@@ -1,0 +1,20 @@
+<?php
+    # Получаем ID категории
+    $catId = $this->getData("category_id");
+
+    # Получаем директорию с папкой assets
+    /** @var \Magento\Framework\ObjectManagerInterface $om */
+    $om = \Magento\Framework\App\ObjectManager::getInstance();
+    /** @var \Magento\Store\Model\StoreManagerInterface $storeManager */
+    $storeManager = $om->get('Magento\Store\Model\StoreManagerInterface');
+    /** @var \Magento\Store\Api\Data\StoreInterface|\Magento\Store\Model\Store $currentStore */
+    $currentStore = $storeManager->getStore();
+    $mediaUrl = $currentStore->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);
+
+    # Тут будем писать логику загрузки разных баннеров для разных категорий
+    $mediaUrl = $mediaUrl.'assets/banner-sidebar-svarog.gif';
+?>
+
+<div class="tiberis-sidebar-banner">
+    <img class="tiberis-category-sidebar-banner" src="<?php echo $mediaUrl;?>" alt="" />
+</div>

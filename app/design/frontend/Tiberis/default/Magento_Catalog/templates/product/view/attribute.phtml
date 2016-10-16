@@ -1,0 +1,90 @@
+<?php
+/**
+ * Copyright © 2015 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/**
+ * Product view templates
+ *
+ * @see \Magento\Catalog\Block\Product\View
+ */
+?>
+<?php
+$_helper = $this->helper('Magento\Catalog\Helper\Output');
+$_product = $block->getProduct();
+$_call = $block->getAtCall();
+$_code = $block->getAtCode();
+$_className = $block->getCssClass();
+$_attributeLabel = $block->getAtLabel();
+$_attributeType = $block->getAtType();
+$_attributeAddAttribute = $block->getAddAttribute();
+
+if ($_attributeLabel && $_attributeLabel == 'default') {
+    $_attributeLabel = $_product->getResource()->getAttribute($_code)->getFrontendLabel();
+}
+
+if ($_code == 'brend') {
+    $_attributeValue = ($_helper->productAttribute($_product, $_product->$_call(), $_code)) ? $_product->getAttributeText($_code) : '';
+} else {
+    if ($_attributeType && $_attributeType == 'text') {
+        $_attributeValue = ($_helper->productAttribute($_product, $_product->$_call(), $_code)) ? $_product->getAttributeText($_code) : '';
+    } else {
+        $_attributeValue = $_helper->productAttribute($_product, $_product->$_call(), $_code);
+    }
+}
+
+?>
+
+<?php if ($_attributeValue): ?>
+	<?php
+	$temp = $_attributeValue;
+	if ($_attributeLabel == 'Гарантия: ') {
+		if ($temp > 11) {
+			$temp2 = 0;
+			while ($temp > 11) {
+				$temp = $temp - 12;
+				$temp2++;
+			}
+			if ($temp2 == 1) {
+				if ($temp == 0) {
+					$temp = '1 год';
+				} else {
+					$temp = '1 год '.$temp.' месяцев';
+				}
+			} else {
+				if (($temp2 == 2)||($temp2 == 3)||($temp2 == 4)) {
+					if ($temp == 0) {
+						$temp = $temp2.' года';
+					} else {
+						$temp = $temp2.' года '.$temp.' месяцев';
+					}
+				} else {
+					if ($temp == 0) {
+						$temp = $temp2.' лет';
+					} else {
+						$temp = $temp2.' лет '.$temp.' месяцев';
+					}
+				}
+			}
+		} else {
+			if ($temp > 4) {
+				$temp = $temp.' месяца';
+			} else {
+				if ($temp == 0) {
+					$temp = 'отсутствует';
+				} else {
+					$temp = $temp.' месяц';
+				}
+			}
+		}
+	}
+
+	?>
+<div class="product attibute <?php /* @escapeNotVerified */ echo $_className?>">
+    <?php if ($_attributeLabel != 'none'): ?><strong class="type"><?php /* @escapeNotVerified */ echo $_attributeLabel?></strong><?php endif; ?>
+    <div class="value" <?php /* @escapeNotVerified */ echo $_attributeAddAttribute;?>><?php /* @escapeNotVerified */ echo $temp; ?></div>
+</div>
+<?php endif; ?>

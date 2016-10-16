@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2016 SW-THEMES. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page layout="2columns-right" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <script src="Magento_Catalog::js/jquery.zoom.min.js"/>
+    </head>
+    <body>
+        <referenceBlock name="page_messages" remove="true"/>
+        <referenceBlock name="product_view_custom_block" remove="true"/>
+        <referenceContainer name="product.info.social" remove="true"/>
+        <move element="product.info.stock.sku" destination="product.info.main.top" after="product.info.type"/>
+        <move element="product.info.review" destination="product.info.main.top" after="-"/>
+        <move element="catalog.product.related" destination="sidebar.additional" after="product_view_custom_block"/>
+        <move element="product.info.review" destination="product.info.main.top" after="product.info.stock.sku"/>
+    </body>
+</page>

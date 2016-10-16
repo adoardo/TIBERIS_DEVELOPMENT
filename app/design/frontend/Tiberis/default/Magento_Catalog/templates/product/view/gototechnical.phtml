@@ -1,0 +1,35 @@
+<?php
+    $_helper = $this->helper('Magento\Catalog\Helper\Output');
+    $_product = $block->getProduct();
+
+    $_call = 'getTehnicheskie_harakteristiki';
+    $_code = 'tehnicheskie_harakteristiki';
+
+    $_attributeType = $block->getAtType();
+
+    if ($_attributeType && $_attributeType == 'text') {
+    	$_attributeValue = ($_helper->productAttribute($_product, $_product->$_call(), $_code)) ? $_product->getAttributeText($_code) : '';
+	} else {
+	    $_attributeValue = $_helper->productAttribute($_product, $_product->$_call(), $_code);
+	}
+
+	if ($_attributeValue): ?>
+		<div class="gotehnical">
+	    	<a class="action view" <?php echo 'href="'.$_product->getUrl().'#technical-params"'; ?>>Подробные характеристики</a>
+	    </div>
+	    <script>
+	    	jQuery('.gotehnical a').click(function (event) {
+                event.preventDefault();
+                var acnchor = jQuery(this).attr('href').replace(/^.*?(#|$)/, '');
+                jQuery(".product.data.items [data-role='content']").each(function(index){
+                    if (this.id == 'technical-params') {
+                        jQuery('.product.data.items').tabs('activate', index);
+                        jQuery('html, body').animate({
+                            scrollTop: jQuery('#' + acnchor).offset().top - 50
+                        }, 300);
+                    }
+                });
+            });
+	    </script>
+	<?php endif;
+?>

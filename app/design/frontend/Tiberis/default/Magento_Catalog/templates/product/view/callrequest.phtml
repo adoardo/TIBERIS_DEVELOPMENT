@@ -1,0 +1,243 @@
+<?php
+	$_helper = $this->helper('Magento\Catalog\Helper\Output');
+    $_product = $block->getProduct();
+
+	if ($_product->isAvailable()) { ?>
+
+		<div id="popup-callrequest-modal">
+
+			<div class="modal-name">
+			    <label>Контактное лицо:</label>
+			    <input type="text" required placeholder="Пример: Иван Иванов" name="contact[name]">
+			</div>
+
+			<div class="modal-phone">
+			    <label>Телефон: <text>+7</text></label>
+			    <input type="text" required placeholder="(XXX) XXX XX XX" name="contact[phone]">
+			</div>
+
+			<div class="modal-comment">
+			    <label>Комментарии:</label>
+			    <textarea name="contact[body]"></textarea>
+			</div>
+
+			<div class="modal-loading">
+				<img src="<?php echo $block->getViewFileUrl('Magento_Catalog::images/loader-1.gif'); ?>" alt="<?php echo __('Отправка...'); ?>" title="<?php echo __('Отправка...'); ?>" />
+			</div>
+
+			<div class="modal-response">
+
+			</div>
+
+		</div>
+		<script>
+		    require(
+		        [
+		            'jquery',
+		            'Magento_Ui/js/modal/modal'
+		        ],
+		        function(
+		            $,
+		            modal
+		        ) {
+		            var options = {
+		                type: 'popup',
+		                responsive: true,
+		                innerScroll: false,
+		                title: 'Заказать звонок',
+		                buttons: [{
+		                    text: $.mage.__('Вернуться к странице'),
+		                    class: 'callrequestPopupButNo',
+		                    click: function () {
+		                        this.closeModal();
+		                    }
+		                },{
+		                    text: $.mage.__('Отправить запрос'),
+		                    class: 'callrequestPopupButYes',
+		                    click: function () {
+		                    	setTimeout(function(){
+
+			                    		$('#popup-callrequest-modal .modal-loading').css('display','block');
+			                    		name = $("#popup-callrequest-modal .modal-name input").val();
+			                    		phone = $("#popup-callrequest-modal .modal-phone input").val();
+			                    		comment = $("#popup-callrequest-modal .modal-comment textarea").val();
+			                    		url = window.location.href;
+			                    		$.get('http://51.254.132.135/mail/process.php?name='+name+'&phone='+phone+'&message='+comment+'&url='+url+'&type=callrequest', function(data){
+			                    			$('.modal-response').html(data);
+			                    			$('.modal-response').css('display','block');
+			                    			$('.modal-loading').css('display','none');
+			                    			$('.modal-name').css('display','none');
+			                    			$('.modal-phone').css('display','none');
+			                    			$('.modal-comment').css('display','none');
+
+			                    			temp = setTimeout(function(){
+			                    				$('.callrequestPopupButNo').click();
+			                    				$('.modal-response').css('display','none');
+			                    				setTimeout(function(){
+					                    			$('.modal-name').css('display','block');
+					                    			$('.modal-phone').css('display','block');
+					                    			$('.modal-comment').css('display','block');
+			                    				},1000);
+			                    			}, 8000);
+			                    			$('#popup-callrequest-modal .modal-close-callback').off();
+			                    			$('#popup-callrequest-modal .modal-close-callback').on('click', function(){
+			                    				$('.callrequestPopupButNo').click();
+			                    				clearTimeout(temp);
+			                    				$('.modal-response').css('display','none');
+												setTimeout(function(){
+					                    			$('.modal-name').css('display','block');
+					                    			$('.modal-phone').css('display','block');
+					                    			$('.modal-comment').css('display','block');
+			                    				},1000);
+			                    			});
+			                    		});
+
+		                    	}, 200);
+		                    }
+		                }]
+		            };
+
+		            var popup = modal(options, $('#popup-callrequest-modal'));
+
+		            $('.callrequestbutton').on('click', function(event){
+		            	$('#popup-callrequest-modal').modal('openModal');
+
+		            	$(".modal-phone input").off();
+		            	$(".modal-phone input").val('');
+
+		            	$(".modal-name input").off();
+		            	$(".modal-name input").val('');
+
+		            	$(".modal-comment textarea").val('');
+
+
+		            	// Валидация ввода телефонного номера
+						var testA = '';
+
+					    $("#popup-callrequest-modal .modal-phone input").on('keydown',function(data) {
+					      testA = data.keyCode;
+					    });
+
+					    $("#popup-callrequest-modal .modal-phone input").on('input',function(data){
+					      var a = $(this).val().toString();
+
+					      if (a.length>15)
+					      {
+					        a = a.slice(0,15);
+					        $(this).val(a);
+					      }
+
+					      if (a[0]!='(')
+					      {
+					        $(this).val('('+a);
+					      }
+
+					      if ((a.length==5)&&(a[4]!=')')&&(a[5]!=')')&&(a[3]!=')')&&(a[2]!=')')&&(a[1]!=')'))
+					        {
+					          var b = a.slice(0,4);
+					          var c = a.slice(5);
+
+					          $(this).val(b+') '+c);
+					        }
+					      else
+					      {
+					        if ((a[4]!=')')&&(a.length>5)&&(a[3]!=')')&&(a[2]!=')')&&(a[1]!=')'))
+					        {
+					          var b = a.slice(0,4);
+					          var c = a.slice(5);
+
+					          $(this).val(b+') '+c);
+					        }
+					      }
+
+					      if ((a.length==1)&&(a[0]!='('))
+					      {
+					        $(this).val('('+a);
+					      }
+					      else
+					      {
+					        if ((a.length==4)&&(testA!=8)&&(a[4]!=')')&&(a[5]!=')'))
+					        {
+					          $(this).val(a+') ');
+					        }
+					        else
+					        {
+					          if (a.length==9)
+					          {
+					            if ((a[8]!=' ')&&(testA!=8))
+					              {
+					                  $(this).val(a+' ');
+					                  if (a[a.length]==' ')
+					                  {
+					                    a = a.splice(0,a.length-1);
+					                    $(this).val(a);
+					                  }
+					              }
+
+					            if ((a[6]!=' ')&&(a[a.length-1]!=' ')&&(testA!=8))
+					              {
+					                  $(this).val(a+' ');
+					              }
+					          }
+					          else
+					          {
+					            if (a.length==12)
+					            {
+
+					              if ((a[6]!=' ')&&(a[10]!=' ')&&(testA!=8))
+					              {
+
+					                  $(this).val(a+' ');
+					              }
+					            }
+					            else
+					            {
+					              if ((a.length==6)&&(a[6]!=' ')&&(testA!=8))
+					              {
+					                b = a[5];
+					                $(this).val(a+' ');
+					                a = a.slice(0,a.length-1);
+					                $(this).val(a+' '+b);
+					              }
+					              else
+					              {
+					                if ((a.length==10)&&(a[10]!=' ')&&(testA!=8))
+					                {
+					                  b = a[9];
+					                  $(this).val(a+' ');
+					                  a = a.slice(0,a.length-1);
+					                  $(this).val(a+' '+b);
+					                }
+					                else
+					                {
+					                  if ((a.length==13)&&(a[13]!=' ')&&(testA!=8))
+					                  {
+					                    b = a[12];
+					                    $(this).val(a+' ');
+					                    a = a.slice(0,a.length-1);
+					                    $(this).val(a+' '+b);
+					                  }
+					                }
+					              }
+					            }
+					          }
+					        }
+					      }
+
+					        if (((a[0]!='(')||(a[4]!=')')||(a[5]!=' ')||(a[9]!=' ')||(a[12]!=' '))&&(a[a.length]==' '))
+					        {
+
+					          a = a.splice(0,a.length-1);
+					          $(this).val(a);
+					        }
+
+					    });
+
+		            });
+		        }
+		    );
+		</script>
+
+    <?php
+	}
+?>

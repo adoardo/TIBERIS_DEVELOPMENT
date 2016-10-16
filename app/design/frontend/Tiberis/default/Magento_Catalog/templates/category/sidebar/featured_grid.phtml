@@ -1,0 +1,417 @@
+<?php
+/**
+ * Copyright © 2015 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+use Magento\Framework\App\Action\Action;
+
+// @codingStandardsIgnoreFile
+?>
+<?php
+/**
+ * Product list templates
+ *
+ * @var $block \Smartwave\Filterproducts\Block\
+ */
+?>
+<?php
+
+// Максимальная длина строки тайтла до ховера
+$titleNoHoverMaxLength = 60;
+
+// Массив формирования тайтлов
+$vendorsArray = array();
+$vendorsArray[0] = '3M';
+$vendorsArray[1] = 'ABICOR BINZEL';
+$vendorsArray[2] = 'AIKEN';
+$vendorsArray[3] = 'AURORA';
+$vendorsArray[4] = 'BLUEWELD';
+$vendorsArray[5] = 'BRIMA';
+$vendorsArray[6] = 'CASTOLIN';
+$vendorsArray[7] = 'CHAMPION';
+$vendorsArray[8] = 'ENDRESS';
+$vendorsArray[9] = 'ERGOMAX';
+$vendorsArray[10] = 'ESAB';
+$vendorsArray[11] = 'EWM';
+$vendorsArray[12] = 'FOXWELD';
+$vendorsArray[13] = 'FUBAG';
+$vendorsArray[14] = 'GASIQ';
+$vendorsArray[15] = 'GCE';
+$vendorsArray[16] = 'GCE KRASS';
+$vendorsArray[17] = 'GENMAC';
+$vendorsArray[18] = 'GYSMI';
+$vendorsArray[19] = 'HELVI';
+$vendorsArray[20] = 'HITACHI';
+$vendorsArray[21] = 'HUTER';
+$vendorsArray[22] = 'HYUNDAI';
+$vendorsArray[23] = 'KEMPPI';
+$vendorsArray[24] = 'LIDER';
+$vendorsArray[25] = 'LINCOLN';
+$vendorsArray[26] = 'LINCOLN ELECTRIC';
+$vendorsArray[27] = 'METAFLUX';
+$vendorsArray[28] = 'MOSA';
+$vendorsArray[29] = 'NEON';
+$vendorsArray[30] = 'REHM';
+$vendorsArray[31] = 'SHINDAIWA';
+$vendorsArray[32] = 'TECNA';
+$vendorsArray[33] = 'TELWIN';
+$vendorsArray[34] = 'TRAFIMET';
+$vendorsArray[35] = 'TRANSLAS';
+$vendorsArray[36] = 'TRITON';
+$vendorsArray[37] = 'БАРС';
+$vendorsArray[38] = 'ВИХРЬ';
+$vendorsArray[39] = 'КРАСС';
+$vendorsArray[40] = 'МЕЖГОСМЕТИЗ';
+$vendorsArray[41] = 'ПАТОН';
+$vendorsArray[42] = 'РЕСАНТА';
+$vendorsArray[43] = 'СВАРОГ';
+$vendorsArray[44] = 'СЕВЕР';
+$vendorsArray[45] = 'СИБИРЬ';
+$vendorsArray[46] = 'ТОРУС';
+$vendorsArray[47] = 'ФЕБ';
+$vendorsArray[48] = 'ФОРСАЖ';
+
+$vendorsArrayReal = array();
+$vendorsArrayReal[0] = '3m';
+$vendorsArrayReal[1] = 'Abicor Binzel';
+$vendorsArrayReal[2] = 'Aiken';
+$vendorsArrayReal[3] = 'Aurora';
+$vendorsArrayReal[4] = 'Blueweld';
+$vendorsArrayReal[5] = 'Brima';
+$vendorsArrayReal[6] = 'Castolin';
+$vendorsArrayReal[7] = 'Champion';
+$vendorsArrayReal[8] = 'Endress';
+$vendorsArrayReal[9] = 'Ergomax';
+$vendorsArrayReal[10] = 'Esab';
+$vendorsArrayReal[11] = 'Ewm';
+$vendorsArrayReal[12] = 'Foxweld';
+$vendorsArrayReal[13] = 'Fubag';
+$vendorsArrayReal[14] = 'Gasio';
+$vendorsArrayReal[15] = 'Gce';
+$vendorsArrayReal[16] = 'Gce Krass';
+$vendorsArrayReal[17] = 'Genmac';
+$vendorsArrayReal[18] = 'Gysmi';
+$vendorsArrayReal[19] = 'Helvi';
+$vendorsArrayReal[20] = 'Hitachi';
+$vendorsArrayReal[21] = 'Huter';
+$vendorsArrayReal[22] = 'Hyundai';
+$vendorsArrayReal[23] = 'Kemppi';
+$vendorsArrayReal[24] = 'Lider';
+$vendorsArrayReal[25] = 'Lincoln';
+$vendorsArrayReal[26] = 'Lincoln Electric';
+$vendorsArrayReal[27] = 'Metaflux';
+$vendorsArrayReal[28] = 'Mosa';
+$vendorsArrayReal[29] = 'Neon';
+$vendorsArrayReal[30] = 'Rehm';
+$vendorsArrayReal[31] = 'Shindaiwa';
+$vendorsArrayReal[32] = 'Tecna';
+$vendorsArrayReal[33] = 'Telwin';
+$vendorsArrayReal[34] = 'Trafimet';
+$vendorsArrayReal[35] = 'Translas';
+$vendorsArrayReal[36] = 'Triton';
+$vendorsArrayReal[37] = 'Барс';
+$vendorsArrayReal[38] = 'Вихрь';
+$vendorsArrayReal[39] = 'Красс';
+$vendorsArrayReal[40] = 'Межгосметиз';
+$vendorsArrayReal[41] = 'Патон';
+$vendorsArrayReal[42] = 'Ресанта';
+$vendorsArrayReal[43] = 'Сварог';
+$vendorsArrayReal[44] = 'Север';
+$vendorsArrayReal[45] = 'Сибирь';
+$vendorsArrayReal[46] = 'Торус';
+$vendorsArrayReal[47] = 'Феб';
+$vendorsArrayReal[48] = 'Форсаж';
+
+
+
+
+
+
+$_productCollection = $block->getLoadedProductCollection();
+$_helper = $this->helper('Magento\Catalog\Helper\Output');
+$_imagehelper = $this->helper('Magento\Catalog\Helper\Image');
+$_portohelper = $this->helper('Smartwave\Porto\Helper\Data');
+$review_model = $_portohelper->getModel('\Magento\Review\Model\Review');
+$_category_config = $_portohelper->getConfig('porto_settings/category');
+$_category_grid_config = $_portohelper->getConfig('porto_settings/category_grid');
+
+$aspect_ratio = $this->getData("aspect_ratio");
+if($aspect_ratio == null) {
+    $aspect_ratio = $_category_config['aspect_ratio'];
+}
+$image_width = $this->getData("image_width");
+if(!$image_width) {
+    $image_width = ($_category_config['ratio_width'])?$_category_config['ratio_width']:300;
+}
+$image_height = $this->getData("image_height");
+if(!$image_height) {
+    $image_height = ($_category_config['ratio_height'])?$_category_config['ratio_height']:300;
+}
+$move_actions = $this->getData("move_actions");
+if($move_actions == null) {
+    $move_actions = $_category_grid_config['move_actions'];
+}
+$column_count = $this->getData("column_count");
+if($column_count == null) {
+    $column_count = 4;
+}
+?>
+
+<?php if (!$_productCollection->count()): ?>
+    <div class="tiberis-sidebar-featured" style="display:none;"><h2 class="sidebar-title">Лучшие предложения</h2>
+<?php else: ?>
+    <div class="tiberis-sidebar-featured" style="order:1;"><h2 class="sidebar-title">Лучшие предложения</h2>
+    <?php
+    $viewMode = 'grid';
+    $image = 'category_page_grid';
+    $hover_image = 'category_page_grid-hover';
+    $showDescription = false;
+    $templateType = \Magento\Catalog\Block\Product\ReviewRendererInterface::SHORT_VIEW;
+    ?>
+    <div class="products wrapper <?php echo $viewMode; ?> columns<?php echo $column_count; ?> products-<?php echo $viewMode; ?>">
+        <?php $iterator = 1; ?>
+        <ol class="filterproducts products list items product-items">
+            <?php /** @var $_product \Magento\Catalog\Model\Product */ ?>
+            <?php foreach ($_productCollection as $_product): ?>
+                <?php echo($iterator++ == 1) ? '<li class="item product product-item encin">' : '</li><li class="item product product-item encin">' ?>
+                <div class="product-item-info" data-container="product-grid">
+                    <?php // Product Image ?>
+                    <div class="product photo product-item-photo encin">
+                        <a href="<?php echo $_product->getProductUrl() ?>" tabindex="-1">
+                        <?php
+                            if($aspect_ratio)
+                                $productImage = $_imagehelper->init($_product, $image)->constrainOnly(FALSE)->keepAspectRatio(TRUE)->keepFrame(FALSE)->resize($image_width);
+                            else
+                                $productImage = $_imagehelper->init($_product, $image)->resize($image_width, $image_height);
+                            $productImageUrl = $productImage->getUrl();
+                        ?>
+                            <img class="product-image-photo default_image" src="<?php echo $productImageUrl; ?>" alt="<?php echo $productImage->getLabel(); ?>"/>
+                        <?php if($_category_config['alternative_image']): ?>
+                        <?php
+                            if($aspect_ratio)
+                                $productHoverImage = $_imagehelper->init($_product, $hover_image)->constrainOnly(FALSE)->keepAspectRatio(TRUE)->keepFrame(FALSE)->resize($image_width);
+                            else
+                                $productHoverImage = $_imagehelper->init($_product, $hover_image)->resize($image_width, $image_height);
+                            $productHoverImageUrl = $productHoverImage->getUrl();
+                        ?>
+                            <?php if($productImageUrl != str_replace("/thumbnail/","/small_image/",$productHoverImageUrl)): ?>
+                            <img class="product-image-photo hover_image" src="<?php echo $productHoverImageUrl; ?>" alt="<?php echo $productHoverImage->getLabel(); ?>"/>
+                            <?php endif; ?>
+                        <?php endif; ?>
+                        </a>
+                        <?php if($_category_config['actions'] && $move_actions): ?>
+                        <div class="product-item-inner">
+                            <div class="product actions product-item-actions">
+                                <div class="actions-primary">
+                                    <?php if ($_product->isSaleable()): ?>
+                                        <?php $postParams = $block->getAddToCartPostParams($_product); ?>
+                                        <form data-role="tocart-form" action="<?php echo $postParams['action']; ?>" method="post">
+                                            <input type="hidden" name="product" value="<?php echo $postParams['data']['product']; ?>">
+                                            <input type="hidden" name="<?php echo Action::PARAM_NAME_URL_ENCODED; ?>" value="<?php echo $postParams['data'][Action::PARAM_NAME_URL_ENCODED]; ?>">
+                                            <?php echo $block->getBlockHtml('formkey')?>
+                                            <button type="submit"
+                                                    title="<?php echo $block->escapeHtml(__('В корзину')); ?>"
+                                                    class="action tocart primary">
+                                                <span><?php echo __('В корзину') ?></span>
+                                            </button>
+                                        </form>
+                                    <?php else: ?>
+                                        <?php if ($_product->getIsSalable()): ?>
+                                            <div class="stock available"><span><?php echo __('In stock') ?></span></div>
+                                        <?php else: ?>
+                                            <div class="stock unavailable"><span><?php echo __('Out of stock') ?></span></div>
+                                        <?php endif; ?>
+                                    <?php endif; ?>
+                                </div>
+                                <!--
+                                <?php if ($block->getMode() == 'grid'): ?>
+                                <?php if($_category_config['addtowishlist']): ?>
+                                <?php if ($this->helper('Magento\Wishlist\Helper\Data')->isAllow()): ?>
+                                    <a href="#"
+                                       class="action towishlist actions-secondary"
+                                       title="<?php echo $block->escapeHtml(__('Add to Wish List')); ?>"
+                                       aria-label="<?php echo $block->escapeHtml(__('Add to Wish List')); ?>"
+                                       data-post='<?php echo $block->getAddToWishlistParams($_product); ?>'
+                                       data-action="add-to-wishlist"
+                                       role="button">
+                                        <span><?php echo __('Add to Wish List') ?></span>
+                                    </a>
+                                <?php endif; ?>
+                                <?php endif; ?>
+                                <?php endif; ?>
+
+                                <?php if($_category_config['addtocompare']): ?>
+                                <?php
+                                $compareHelper = $this->helper('Magento\Catalog\Helper\Product\Compare');
+                                ?>
+                                <a href="#"
+                                   class="action tocompare actions-secondary"
+                                   title="<?php echo $block->escapeHtml(__('Add to Compare')); ?>"
+                                   aria-label="<?php echo $block->escapeHtml(__('Add to Compare')); ?>"
+                                   data-post='<?php echo $compareHelper->getPostDataParams($_product); ?>'
+                                   role="button">
+                                    <span><?php echo __('Add to Compare') ?></span>
+                                </a>
+                                <?php endif; ?>
+                                -->
+                            </div>
+                        </div>
+                        <?php endif; ?>
+                    </div>
+                    <div class="product details product-item-details">
+                        <?php
+                            $_productNameStripped = $block->stripTags($_product->getName(), null, true);
+                        ?>
+                        <strong class="product name product-item-name encin">
+
+                            <?php
+                            $productTitle = $_helper->productAttribute($_product, $_product->getName(), 'name');
+
+                            $productTitleNoHover = $productTitle;
+
+                            $i = 0;
+                            while ($i < count($vendorsArray)) {
+                                if ((strpos($productTitleNoHover, $vendorsArray[$i])) !== false) {
+                                    $pieces = explode($vendorsArray[$i], $productTitleNoHover);
+                                    $productTitleNoHover = $vendorsArray[$i].' '.$pieces[1];
+                                    break;
+                                } else {
+                                    if ((strpos($productTitleNoHover, $vendorsArrayReal[$i])) !== false) {
+                                        $pieces = explode($vendorsArrayReal[$i], $productTitleNoHover);
+                                        $productTitleNoHover = $vendorsArrayReal[$i].' '.$pieces[1];
+                                        break;
+                                    }
+                                }
+                                $i++;
+                            }
+
+                            if (strlen($productTitleNoHover) > $titleNoHoverMaxLength) {
+                                // Разбиваем по словам
+                                $pieces = explode(" ", $productTitleNoHover);
+                                $name1 = '';
+                                $name2 = '';
+                                $i = 0;
+                                // Для каждого слова
+                                while ($i < count($pieces)) {
+                                    // Приписываем пословно в нэйм 1 с пробелом
+                                    $name1 .= $pieces[$i].' ';
+                                    // Если длина ещё не $titleNoHoverMaxLength
+                                    if (strlen($name1) < $titleNoHoverMaxLength) {
+                                        // Суём слово в нэйм 2
+                                        $name2 .= $pieces[$i].' ';
+                                    } else {
+                                        // Иначе стираем пробел и завершаем цикл
+                                        //substr($name2, 0, -1);
+
+                                        // Иначе добавляем троеточие и завершаем цикл
+                                        $name2 .= '...';
+                                        break;
+                                    }
+                                    $i++;
+                                }
+                                // Присваеваем на выход содержимое нэйм 2
+                                $productTitleNoHover = $name2;
+                            }
+                            ?>
+                            <a class="product-item-link"
+                               href="<?php echo $_product->getProductUrl() ?>">
+                                <?php echo $productTitleNoHover ?>
+                            </a>
+                        </strong>
+
+                        <?php if ($showDescription):?>
+                            <div class="product description product-item-description">
+                                <!--<?php echo $_helper->productAttribute($_product, $_product->getShortDescription(), 'short_description') ?>
+                                <a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $_productNameStripped ?>"
+                                   class="action more"><?php echo __('Learn More') ?></a>-->
+                                <?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?>
+                            </div>
+                        <?php endif; ?>
+                        <?php if($_category_config['product_price']): ?>
+                            <div class="featured-price-wrapper encin">
+                                <?php /*ЦЕНА ТУТ*/echo $block->getProductPrice($_product) ?>
+                            </div>
+                        <?php endif; ?>
+                        <?php echo $block->getProductDetailsHtml($_product); ?>
+                        <?php if($_category_config['actions'] && !$move_actions): ?>
+                            <div class="product-item-inner encin">
+                                <div class="product actions product-item-actions">
+                                    <div class="actions-primary">
+                                        <?php if ($_product->isSaleable()): ?>
+                                            <?php $postParams = $block->getAddToCartPostParams($_product); ?>
+                                            <form data-role="tocart-form" action="<?php echo $postParams['action']; ?>" method="post">
+                                                <input type="hidden" name="product" value="<?php echo $postParams['data']['product']; ?>">
+                                                <input type="hidden" name="<?php echo Action::PARAM_NAME_URL_ENCODED; ?>" value="<?php echo $postParams['data'][Action::PARAM_NAME_URL_ENCODED]; ?>">
+                                                <?php echo $block->getBlockHtml('formkey')?>
+                                                <button type="submit"
+                                                        title="<?php echo $block->escapeHtml(__('В корзину')); ?>"
+                                                        class="action tocart primary encin">
+                                                    <span><?php echo __('В корзину') ?></span>
+                                                </button>
+                                            </form>
+                                        <?php else: ?>
+                                            <?php if ($_product->getIsSalable()): ?>
+                                                <div class="stock available"><span><?php echo __('In stock') ?></span></div>
+                                            <?php else: ?>
+                                                <div class="stock unavailable"><span><?php echo __('Out of stock') ?></span></div>
+                                            <?php endif; ?>
+                                        <?php endif; ?>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php endif; ?>
+                    </div>
+
+                </div>
+                <?php echo($iterator == count($_productCollection)+1) ? '</li>' : '' ?>
+            <?php endforeach; ?>
+        </ol>
+    </div>
+    <script type="text/javascript">
+        require([
+            'jquery'
+        ], function ($) {
+            $('.main .products.grid .product-items.filterproducts li.product-item:nth-child(2n)').addClass('nth-child-2n');
+            $('.main .products.grid .product-items.filterproducts li.product-item:nth-child(2n+1)').addClass('nth-child-2np1');
+            $('.main .products.grid .product-items.filterproducts li.product-item:nth-child(3n)').addClass('nth-child-3n');
+            $('.main .products.grid .product-items.filterproducts li.product-item:nth-child(3n+1)').addClass('nth-child-3np1');
+            $('.main .products.grid .product-items.filterproducts li.product-item:nth-child(4n)').addClass('nth-child-4n');
+            $('.main .products.grid .product-items.filterproducts li.product-item:nth-child(4n+1)').addClass('nth-child-4np1');
+            $('.main .products.grid .product-items.filterproducts li.product-item:nth-child(5n)').addClass('nth-child-5n');
+            $('.main .products.grid .product-items.filterproducts li.product-item:nth-child(5n+1)').addClass('nth-child-5np1');
+            $('.main .products.grid .product-items.filterproducts li.product-item:nth-child(6n)').addClass('nth-child-6n');
+            $('.main .products.grid .product-items.filterproducts li.product-item:nth-child(6n+1)').addClass('nth-child-6np1');
+            $('.main .products.grid .product-items.filterproducts li.product-item:nth-child(7n)').addClass('nth-child-7n');
+            $('.main .products.grid .product-items.filterproducts li.product-item:nth-child(7n+1)').addClass('nth-child-7np1');
+            $('.main .products.grid .product-items.filterproducts li.product-item:nth-child(8n)').addClass('nth-child-8n');
+            $('.main .products.grid .product-items.filterproducts li.product-item:nth-child(8n+1)').addClass('nth-child-8np1');
+        });
+    </script>
+
+    <script type="text/javascript">
+        require([
+            'jquery',
+            'owl.carousel/owl.carousel.min'
+        ], function ($) {
+            $(".filterproducts").owlCarousel({
+                loop: true,
+                items: 1,
+                nav: true,
+                navText: ["<em class='porto-icon-left-open-huge'></em>","<em class='porto-icon-right-open-huge'></em>"],
+                dots: false,
+                autoplay: false
+            });
+        });
+    </script>
+
+    <?php if (!$block->isRedirectToCartEnabled()) : ?>
+        <script type="text/x-magento-init">
+        {
+            "[data-role=tocart-form], .form.map.checkout": {
+                "catalogAddToCart": {}
+            }
+        }
+        </script>
+    <?php endif; ?>
+<?php endif; ?>
+</div>

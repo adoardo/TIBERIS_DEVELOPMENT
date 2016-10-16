@@ -1,0 +1,111 @@
+[2014-06-16 22:35:15] REDEXPRESS order.php | Action: get_invoice, status:[OK] * post_from_ip:[88.198.62.162] 1C: ТБ000048768 red_invoice: 100507957
+[2014-06-16 22:37:54] REDEXPRESS order.php | Action: get_invoice, status:[red CreateInvoiceTkn ERROR: Номер заказа: ТБ000048768 уже существует.] * post_from_ip:[88.198.62.162] 1C: ТБ000048768 red_invoice: n/a
+[2014-06-17 16:48:53] REDEXPRESS order.php | Action: get_invoice, status:[red CreateInvoiceTkn ERROR: Неверное значение даты. Дата должна находится в диапазоне от "01.01.2013 0:00:00" до "01.01.2100 0:00:00".] * post_from_ip:[88.198.62.162] 1C: ТБ000000003 red_invoice: n/a
+[2014-06-17 16:55:43] REDEXPRESS order.php | Action: delete_invoice, status:[red DeleteInvoiceTkn ERROR: Операция успешно выполнена.] * post_from_ip:[88.198.62.162] 1C: ТБ000048768 red_invoice: 100507957
+[2014-06-17 16:56:36] REDEXPRESS order.php | Action: delete_invoice, status:[red DeleteInvoiceTkn ERROR: Накладная с номером 100507957 не найдена.] * post_from_ip:[88.198.62.162] 1C: ТБ000048768 red_invoice: 100507957
+[2014-06-17 17:25:46] REDEXPRESS order.php | Action: delete_invoice, status:[red DeleteInvoiceTkn ERROR: Параметер с индексом 0 - null] * post_from_ip:[88.198.62.162] 1C: ТБ000048768 red_invoice: 
+[2014-06-17 17:26:04] REDEXPRESS order.php | Action: get_invoice, status:[OK] * post_from_ip:[88.198.62.162] 1C: ТБ000048768 red_invoice: 100508772
+[2014-06-17 17:26:30] REDEXPRESS order.php | Action: delete_invoice, status:[red DeleteInvoiceTkn ERROR: Операция успешно выполнена.] * post_from_ip:[88.198.62.162] 1C: ТБ000048768 red_invoice: 100508772
+[2014-06-17 17:26:49] REDEXPRESS order.php | Action: delete_invoice, status:[red DeleteInvoiceTkn ERROR: Накладная с номером 100508772 не найдена.] * post_from_ip:[88.198.62.162] 1C: ТБ000048768 red_invoice: 100508772
+[2014-06-17 17:32:50] REDEXPRESS order.php | Action: delete_invoice, status:[red DeleteInvoiceTkn ERROR: Накладная с номером 100508772 не найдена. *** ] * post_from_ip:[88.198.62.162] 1C: ТБ000048768 red_invoice: 100508772
+[2014-06-17 17:33:08] REDEXPRESS order.php | Action: get_invoice, status:[OK] * post_from_ip:[88.198.62.162] 1C: ТБ000048768 red_invoice: 100508797
+[2014-06-17 17:33:18] REDEXPRESS order.php | Action: delete_invoice, status:[red DeleteInvoiceTkn ERROR: Операция успешно выполнена. *** ] * post_from_ip:[88.198.62.162] 1C: ТБ000048768 red_invoice: 100508797
+[2014-06-17 17:41:44] REDEXPRESS order.php | Action: delete_invoice, status:[OK] * post_from_ip:[88.198.62.162] 1C: ТБ000048768 red_invoice: 100508797
+[2014-06-17 17:41:55] REDEXPRESS order.php | Action: get_invoice, status:[OK] * post_from_ip:[88.198.62.162] 1C: ТБ000048768 red_invoice: 100508827
+[2014-06-17 17:42:14] REDEXPRESS order.php | Action: delete_invoice, status:[OK] * post_from_ip:[88.198.62.162] 1C: ТБ000048768 red_invoice: 100508827
+[2014-06-17 17:43:18] REDEXPRESS order.php | Action: delete_invoice, status:[OK] * post_from_ip:[88.198.62.162] 1C: СК000000805 red_invoice: 100495500
+[2014-06-17 17:44:18] REDEXPRESS order.php | Action: delete_invoice, status:[OK] * post_from_ip:[88.198.62.162] 1C: ТБ000048619 red_invoice: 100495495
+[2014-06-17 17:59:39] REDEXPRESS order.php | Action: get_invoice, status:[OK] * post_from_ip:[88.198.62.162] 1C: ТБ000048768 red_invoice: 100508862
+[2014-06-17 18:00:38] REDEXPRESS order.php | Action: delete_invoice, status:[OK] * post_from_ip:[88.198.62.162] 1C: ТБ000048768 red_invoice: 100508862
+[2014-06-17 18:01:59] REDEXPRESS order.php | Action: get_invoice, status:[OK] * post_from_ip:[88.198.62.162] 1C: ТБ000048768 red_invoice: 100508867
+[2014-06-17 18:02:15] REDEXPRESS order.php | Action: delete_invoice, status:[OK] * post_from_ip:[88.198.62.162] 1C: ТБ000048768 red_invoice: 100508867
+[2014-06-17 18:03:53] REDEXPRESS order.php | Action: get_invoice, status:[OK] * post_from_ip:[88.198.62.162] 1C: ТБ000048768 red_invoice: 100508872
+[2014-06-17 18:04:14] REDEXPRESS order.php | Action: delete_invoice, status:[OK] * post_from_ip:[88.198.62.162] 1C: ТБ000048768 red_invoice: 100508872
+[2014-06-17 18:07:01] REDEXPRESS order.php | Action: get_invoice, status:[OK] * post_from_ip:[88.198.62.162] 1C: ТБ000048768 red_invoice: 100508877
+[2014-06-17 18:09:43] REDEXPRESS order.php | Action: get_invoice, status:[red CreateInvoiceTkn ERROR: Номер заказа: ТБ000048768 уже существует.] * post_from_ip:[88.198.62.162] 1C: ТБ000048768 red_invoice: n/a
+[2014-06-17 18:10:31] REDEXPRESS order.php | Action: delete_invoice, status:[OK] * post_from_ip:[88.198.62.162] 1C: ТБ000048768 red_invoice: 
+[2014-06-17 18:11:11] REDEXPRESS order.php | Action: delete_invoice, status:[OK] * post_from_ip:[88.198.62.162] 1C: ТБ000048768 red_invoice: 
+[2014-06-17 18:12:38] REDEXPRESS order.php | Action: get_invoice, status:[red CreateInvoiceTkn ERROR: Номер заказа: ТБ000048768 уже существует.] * post_from_ip:[88.198.62.162] 1C: ТБ000048768 red_invoice: n/a
+[2014-06-17 18:37:22] REDEXPRESS order.php | Action: get_invoice, status:[red CreateInvoiceTkn ERROR: Номер заказа: ТБ000048768 уже существует.] * post_from_ip:[88.198.62.162] 1C: ТБ000048768 red_invoice: n/a
+[2014-06-17 18:39:17] REDEXPRESS order.php | Action: delete_invoice, status:[OK] * post_from_ip:[88.198.62.162] 1C: ТБ000048768 red_invoice: 100508877
+[2014-06-17 18:39:31] REDEXPRESS order.php | Action: get_invoice, status:[OK] * post_from_ip:[88.198.62.162] 1C: ТБ000048768 red_invoice: 100508897
+[2014-06-17 18:42:24] REDEXPRESS order.php | Action: delete_invoice, status:[OK] * post_from_ip:[88.198.62.162] 1C: ТБ000048768 red_invoice: 100508897
+[2014-06-17 18:42:58] REDEXPRESS order.php | Action: get_invoice, status:[OK] * post_from_ip:[88.198.62.162] 1C: ТБ000048768 red_invoice: 100508902
+[2014-06-17 18:45:30] REDEXPRESS order.php | Action: delete_invoice, status:[OK] * post_from_ip:[88.198.62.162] 1C: ТБ000048768 red_invoice: 100508902
+[2014-06-17 18:45:42] REDEXPRESS order.php | Action: get_invoice, status:[OK] * post_from_ip:[88.198.62.162] 1C: ТБ000048768 red_invoice: 100508907
+[2014-06-17 18:54:23] REDEXPRESS order.php | Action: delete_invoice, status:[OK] * post_from_ip:[88.198.62.162] 1C: ТБ000048768 red_invoice: 100508907
+[2014-06-17 18:54:29] REDEXPRESS order.php | Action: get_invoice, status:[OK] * post_from_ip:[88.198.62.162] 1C: ТБ000048768 red_invoice: 100508912
+[2014-06-17 18:57:06] REDEXPRESS order.php | Action: delete_invoice, status:[OK] * post_from_ip:[88.198.62.162] 1C: ТБ000048768 red_invoice: 100508912
+[2014-06-17 19:00:52] REDEXPRESS order.php | Action: get_invoice, status:[OK] * post_from_ip:[88.198.62.162] 1C: ТБ000048768 red_invoice: 100508917
+[2014-06-17 19:17:31] REDEXPRESS order.php | Action: delete_invoice, status:[OK] * post_from_ip:[88.198.62.162] 1C: ТБ000048768 red_invoice: 100508917
+[2014-06-17 20:35:32] REDEXPRESS order.php | Action: get_invoice, status:[OK] * post_from_ip:[88.198.62.162] 1C: ТБ000048768 red_invoice: 100508977
+[2014-06-17 20:37:00] REDEXPRESS order.php | Action: delete_invoice, status:[OK] * post_from_ip:[88.198.62.162] 1C: ТБ000048768 red_invoice: 100508977
+[2014-06-17 20:38:39] REDEXPRESS order.php | Action: get_invoice, status:[OK] * post_from_ip:[88.198.62.162] 1C: ТБ000048768 red_invoice: 100508982
+[2014-06-17 20:39:50] REDEXPRESS order.php | Action: delete_invoice, status:[OK] * post_from_ip:[88.198.62.162] 1C: ТБ000048768 red_invoice: 100508982
+[2014-06-17 20:39:54] REDEXPRESS order.php | Action: get_invoice, status:[OK] * post_from_ip:[88.198.62.162] 1C: ТБ000048768 red_invoice: 100508987
+[2014-06-17 20:41:53] REDEXPRESS order.php | Action: delete_invoice, status:[OK] * post_from_ip:[88.198.62.162] 1C: ТБ000048768 red_invoice: 100508987
+[2014-06-17 20:41:57] REDEXPRESS order.php | Action: get_invoice, status:[OK] * post_from_ip:[88.198.62.162] 1C: ТБ000048768 red_invoice: 100508992
+[2014-06-17 20:50:07] REDEXPRESS order.php | Action: delete_invoice, status:[OK] * post_from_ip:[88.198.62.162] 1C: ТБ000048768 red_invoice: 100508992
+[2014-06-18 18:08:19] REDEXPRESS order.php | Action: delete_invoice, status:[OK] * post_from_ip:[88.198.62.162] 1C: СК000001954 red_invoice: 100514084
+[2014-06-24 23:22:53] REDEXPRESS order.php | Action: get_invoice, status:[red CreateInvoiceTkn ERROR: Неверное значение даты. Дата должна находится в диапазоне от "01.01.2013 0:00:00" до "01.01.2100 0:00:00".] * post_from_ip:[88.198.62.162] 1C: ТБ000000003 red_invoice: n/a
+[2014-06-24 23:24:57] REDEXPRESS order.php | Action: get_invoice, status:[OK] * post_from_ip:[88.198.62.162] 1C: ТБ000048768 red_invoice: 100509677
+[2014-06-24 23:26:53] REDEXPRESS order.php | Action: delete_invoice, status:[OK] * post_from_ip:[88.198.62.162] 1C: ТБ000048768 red_invoice: 100509677
+[2014-06-24 23:27:22] REDEXPRESS order.php | Action: get_invoice, status:[OK] * post_from_ip:[88.198.62.162] 1C: ТБ000048768 red_invoice: 100509682
+[2014-07-02 13:07:08] REDEXPRESS order.php | Action: get_invoice, status:[OK] * post_from_ip:[88.198.62.162] 1C: ТБ000048766 red_invoice: 100510282
+[2014-07-02 13:09:21] REDEXPRESS order.php | Action: delete_invoice, status:[OK] * post_from_ip:[88.198.62.162] 1C: ТБ000048766 red_invoice: 100510282
+[2014-07-02 13:10:54] REDEXPRESS order.php | Action: get_invoice, status:[OK] * post_from_ip:[88.198.62.162] 1C: ТБ000048766 red_invoice: 100510287
+[2014-07-02 13:11:38] REDEXPRESS order.php | Action: delete_invoice, status:[OK] * post_from_ip:[88.198.62.162] 1C: ТБ000048766 red_invoice: 100510287
+[2014-07-02 13:11:51] REDEXPRESS order.php | Action: delete_invoice, status:[OK] * post_from_ip:[88.198.62.162] 1C: ТБ000048768 red_invoice: 100509682
+[2014-07-02 13:11:59] REDEXPRESS order.php | Action: get_invoice, status:[OK] * post_from_ip:[88.198.62.162] 1C: ТБ000048768 red_invoice: 100510292
+[2014-07-02 13:12:35] REDEXPRESS order.php | Action: delete_invoice, status:[OK] * post_from_ip:[88.198.62.162] 1C: ТБ000048768 red_invoice: 100510292
+[2014-07-24 14:30:43] REDEXPRESS order.php | Action: get_invoice, status:[OK] * post_from_ip:[88.198.62.162] 1C: ТБ000048768 red_invoice: 100555419
+[2014-07-24 14:33:55] REDEXPRESS order.php | Action: delete_invoice, status:[OK] * post_from_ip:[88.198.62.162] 1C: ТБ000048768 red_invoice: 100555419
+[2014-07-24 14:34:16] REDEXPRESS order.php | Action: get_invoice, status:[OK] * post_from_ip:[88.198.62.162] 1C: ТБ000048768 red_invoice: 100555424
+[2014-07-24 14:35:13] REDEXPRESS order.php | Action: delete_invoice, status:[OK] * post_from_ip:[88.198.62.162] 1C: ТБ000048768 red_invoice: 100555424
+[2014-07-24 15:39:11] REDEXPRESS order.php | Action: get_invoice, status:[OK] * post_from_ip:[88.198.62.162] 1C: ТБ000048766 red_invoice: 100555429
+[2014-07-24 15:41:07] REDEXPRESS order.php | Action: delete_invoice, status:[OK] * post_from_ip:[88.198.62.162] 1C: ТБ000048766 red_invoice: 100555429
+[2014-07-24 15:41:15] REDEXPRESS order.php | Action: get_invoice, status:[OK] * post_from_ip:[88.198.62.162] 1C: ТБ000048766 red_invoice: 100555434
+[2014-07-24 15:42:10] REDEXPRESS order.php | Action: delete_invoice, status:[OK] * post_from_ip:[88.198.62.162] 1C: ТБ000048766 red_invoice: 100555434
+[2014-07-24 15:43:00] REDEXPRESS order.php | Action: get_invoice, status:[OK] * post_from_ip:[88.198.62.162] 1C: ТБ000048766 red_invoice: 100555439
+[2014-07-24 15:43:26] REDEXPRESS order.php | Action: delete_invoice, status:[OK] * post_from_ip:[88.198.62.162] 1C: ТБ000048766 red_invoice: 100555439
+[2014-08-05 16:10:54] REDEXPRESS order.php | Action: get_invoice, status:[red CreateInvoiceTkn ERROR: Превышена разрешенная длина почтового индекса. Максимальная длина 6. Установленное значение 
+            .] * post_from_ip:[88.198.62.162] 1C: СК000005338 red_invoice: n/a
+[2014-08-05 16:23:30] REDEXPRESS order.php | Action: get_invoice, status:[red CreateInvoiceTkn ERROR: Превышена разрешенная длина почтового индекса. Максимальная длина 6. Установленное значение 
+            .] * post_from_ip:[88.198.62.162] 1C: СК000005338 red_invoice: n/a
+[2014-08-05 16:26:41] REDEXPRESS order.php | Action: get_invoice, status:[red CreateInvoiceTkn ERROR: Превышена разрешенная длина почтового индекса. Максимальная длина 6. Установленное значение 
+            .] * post_from_ip:[88.198.62.162] 1C: СК000005338 red_invoice: n/a
+[2014-08-05 16:30:27] REDEXPRESS order.php | Action: get_invoice, status:[red CreateInvoiceTkn ERROR: Превышена разрешенная длина почтового индекса. Максимальная длина 6. Установленное значение 
+            .] * post_from_ip:[88.198.62.162] 1C: СК000005338 red_invoice: n/a
+[2014-08-05 16:34:06] REDEXPRESS order.php | Action: get_invoice, status:[red CreateInvoiceTkn ERROR: Превышена допустимая длина значения свойства. Максимальная длина 10. Установленное значение "
+            "] * post_from_ip:[88.198.62.162] 1C: СК000005338 red_invoice: n/a
+[2014-08-05 16:36:40] REDEXPRESS order.php | Action: get_invoice, status:[red CreateInvoiceTkn ERROR: Превышена разрешенная длина почтового индекса. Максимальная длина 6. Установленное значение 
+            .] * post_from_ip:[88.198.62.162] 1C: СК000005338 red_invoice: n/a
+[2014-08-05 16:38:18] REDEXPRESS order.php | Action: get_invoice, status:[OK] * post_from_ip:[88.198.62.162] 1C: СК000005338 red_invoice: 100577097
+[2014-08-05 16:39:17] REDEXPRESS order.php | Action: get_invoice, status:[red CreateInvoiceTkn ERROR: Превышена разрешенная длина почтового индекса. Максимальная длина 6. Установленное значение 
+            .] * post_from_ip:[88.198.62.162] 1C: СК000005338 red_invoice: n/a
+[2014-08-05 16:40:14] REDEXPRESS order.php | Action: get_invoice, status:[red CreateInvoiceTkn ERROR: Превышена разрешенная длина почтового индекса. Максимальная длина 6. Установленное значение 
+            .] * post_from_ip:[88.198.62.162] 1C: СК000005338 red_invoice: n/a
+[2014-08-05 16:41:33] REDEXPRESS order.php | Action: get_invoice, status:[red CreateInvoiceTkn ERROR: Превышена допустимая длина значения свойства. Максимальная длина 10. Установленное значение "
+            "] * post_from_ip:[88.198.62.162] 1C: СК000005338 red_invoice: n/a
+[2014-08-05 16:51:21] REDEXPRESS order.php | Action: get_invoice, status:[red CreateInvoiceTkn ERROR: Превышена допустимая длина значения свойства. Максимальная длина 10. Установленное значение "
+            "] * post_from_ip:[88.198.62.162] 1C: СК000005373 red_invoice: n/a
+[2014-08-05 17:16:18] REDEXPRESS order.php | Action: get_invoice, status:[red CreateInvoiceTkn ERROR: Превышена разрешенная длина почтового индекса. Максимальная длина 6. Установленное значение 
+            .] * post_from_ip:[88.198.62.162] 1C: СК000005338 red_invoice: n/a
+[2014-08-05 17:19:47] REDEXPRESS order.php | Action: get_invoice, status:[red CreateInvoiceTkn ERROR: Превышена разрешенная длина почтового индекса. Максимальная длина 6. Установленное значение 
+            .] * post_from_ip:[88.198.62.162] 1C: СК000005338 red_invoice: n/a
+[2014-08-05 17:21:58] REDEXPRESS order.php | Action: get_invoice, status:[red CreateInvoiceTkn ERROR: Превышена допустимая длина значения свойства. Максимальная длина 10. Установленное значение "
+            "] * post_from_ip:[88.198.62.162] 1C: СК000005373 red_invoice: n/a
+[2014-08-05 17:24:13] REDEXPRESS order.php | Action: get_invoice, status:[red CreateInvoiceTkn ERROR: Превышена допустимая длина значения свойства. Максимальная длина 10. Установленное значение "
+            "] * post_from_ip:[88.198.62.162] 1C: СК000005373 red_invoice: n/a
+[2014-08-05 17:25:50] REDEXPRESS order.php | Action: get_invoice, status:[OK] * post_from_ip:[88.198.62.162] 1C: СК000005373 red_invoice: 100577142
+[2014-08-05 17:26:17] REDEXPRESS order.php | Action: get_invoice, status:[red CreateInvoiceTkn ERROR: Превышена допустимая длина значения свойства. Максимальная длина 10. Установленное значение "
+            "] * post_from_ip:[88.198.62.162] 1C: СК000005338 red_invoice: n/a
+[2014-08-05 17:27:34] REDEXPRESS order.php | Action: get_invoice, status:[red CreateInvoiceTkn ERROR: Номер заказа: СК000005338 уже существует.] * post_from_ip:[88.198.62.162] 1C: СК000005338 red_invoice: n/a
+[2014-08-05 17:28:40] REDEXPRESS order.php | Action: get_invoice, status:[red CreateInvoiceTkn ERROR: Номер заказа: СК000005338 уже существует.] * post_from_ip:[88.198.62.162] 1C: СК000005338 red_invoice: n/a
+[2014-08-18 22:37:48] REDEXPRESS order.php | Action: get_invoice, status:[OK] * post_from_ip:[88.198.62.162] 1C: СК5249/5    red_invoice: 100588251
+[2014-08-18 22:41:55] REDEXPRESS order.php | Action: get_invoice, status:[OK] * post_from_ip:[88.198.62.162] 1C: ИЗА00000001 red_invoice: 100588256
+[2014-08-18 22:55:11] REDEXPRESS order.php | Action: delete_invoice, status:[OK] * post_from_ip:[88.198.62.162] 1C: ИЗА00000001 red_invoice: 100588256
+[2014-09-11 19:13:02] REDEXPRESS order.php | Action: get_invoice, status:[OK] * post_from_ip:[88.198.62.162] 1C: СК000006779 red_invoice: 100645715
+[2014-09-11 19:13:10] REDEXPRESS order.php | Action: delete_invoice, status:[OK] * post_from_ip:[88.198.62.162] 1C: СК000006779 red_invoice: 100645715
+[2014-09-11 19:13:29] REDEXPRESS order.php | Action: get_invoice, status:[OK] * post_from_ip:[88.198.62.162] 1C: СК000006779 red_invoice: 100645720
+[2014-09-11 20:59:49] REDEXPRESS order.php | Action: delete_invoice, status:[OK] * post_from_ip:[88.198.62.162] 1C: СК000006779 red_invoice: 100645720

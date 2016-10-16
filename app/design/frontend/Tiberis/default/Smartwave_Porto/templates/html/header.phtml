@@ -1,0 +1,1706 @@
+<?php
+use Magento\Framework\App\Action\Action;
+$header_type = $this->getConfig('porto_settings/header/header_type');
+
+$useragent = $_SERVER['HTTP_USER_AGENT'];
+
+if(preg_match('/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows (ce|phone)|xda|xiino/i',$useragent)||preg_match('/1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i',substr($useragent,0,4))) {
+    # Вызываем header для мобильных устройств
+    ?>
+    <header class="page-header type<?php echo $header_type; ?>">
+    <?php if($header_type == 3 || $header_type == 4 || $header_type == 9): ?>
+        <div class="header content">
+            <?php echo $this->getChildHtml("logo"); ?>
+            <?php echo $this->getChildHtml("navigation.sections"); ?>
+            <div class="panel header">
+                <div class="top-panel">
+                    <?php echo $this->getChildHtml("skip_to_content"); ?>
+                    <?php echo $this->getChildHtml("header.links"); ?>
+                    <div class="search-area">
+                        <a href="javascript:void(0)" class="search-toggle-icon"><i class="porto-icon-search"></i></a>
+                        <?php echo $this->getChildHtml("top.search"); ?>
+                    </div>
+                </div>
+                <div class="bottom-panel">
+                    <?php echo $this->getChildHtml("currency"); ?>
+                    <?php echo $this->getChildHtml("store_language"); ?>
+                    <?php echo $this->getChildHtml("minicart"); ?>
+                </div>
+            </div>
+        </div>
+    <?php elseif($header_type == 12): ?>
+        <div class="header content">
+            <?php echo $this->getChildHtml("logo"); ?>
+            <?php echo $this->getChildHtml("navigation.sections"); ?>
+            <div class="panel header">
+                <div class="top-panel">
+                    <?php echo $this->getChildHtml("skip_to_content"); ?>
+                    <div class="top-links-area">
+                        <a class="top-links-icon" href="javascript:void(0)">links</a>
+                        <?php echo $this->getChildHtml("header.links"); ?>
+                    </div>
+                    <?php echo $this->getChildHtml("custom_block"); ?>
+                    <div class="search-area">
+                        <a href="javascript:void(0)" class="search-toggle-icon"><i class="porto-icon-search"></i></a>
+                        <?php echo $this->getChildHtml("top.search"); ?>
+                    </div>
+                </div>
+                <div class="bottom-panel">
+                    <?php echo $this->getChildHtml("currency"); ?>
+                    <?php echo $this->getChildHtml("store_language"); ?>
+                    <?php echo $this->getChildHtml("minicart"); ?>
+                </div>
+            </div>
+        </div>
+    <?php elseif($header_type == 5 ): ?>
+        <div class="panel wrapper">
+            <div class="panel header">
+                <?php echo $this->getChildHtml("skip_to_content"); ?>
+                <?php echo $this->getChildHtml("currency"); ?>
+                <?php echo $this->getChildHtml("store_language"); ?>
+                <?php echo $this->getChildHtml("header.links"); ?>
+            </div>
+        </div>
+        <div class="header content">
+            <?php echo $this->getChildHtml("logo"); ?>
+            <?php echo $this->getChildHtml("minicart"); ?>
+            <div class="search-area">
+                <a href="javascript:void(0)" class="search-toggle-icon"><i class="porto-icon-search"></i></a>
+                <?php echo $this->getChildHtml("top.search"); ?>
+            </div>
+            <?php echo $this->getChildHtml("navigation.sections"); ?>
+        </div>
+    <?php elseif($header_type == 6 ): ?>
+        <div class="panel wrapper">
+            <div class="panel header">
+                <?php echo $this->getChildHtml("skip_to_content"); ?>
+                <?php echo $this->getChildHtml("currency"); ?>
+                <?php echo $this->getChildHtml("store_language"); ?>
+                <?php echo $this->getChildHtml("header.links"); ?>
+            </div>
+        </div>
+        <div class="header content">
+            <?php echo $this->getChildHtml("logo"); ?>
+            <?php echo $this->getChildHtml("minicart"); ?>
+            <div class="search-area">
+                <a href="javascript:void(0)" class="search-toggle-icon"><i class="porto-icon-search"></i></a>
+                <?php echo $this->getChildHtml("top.search"); ?>
+            </div>
+            <?php echo $this->getChildHtml("custom_block"); ?>
+            <?php echo $this->getChildHtml("navigation.sections"); ?>
+        </div>
+    <?php elseif($header_type == 7 ): ?>
+        <div class="panel wrapper">
+            <div class="panel header">
+                <div class="search-area">
+                    <a href="javascript:void(0)" class="search-toggle-icon"><em class="porto-icon-search"></em><?php echo __('Search'); ?></a>
+                    <?php echo $this->getChildHtml("top.search"); ?>
+                </div>
+                <?php echo $this->getChildHtml("skip_to_content"); ?>
+                <?php echo $this->getChildHtml("currency"); ?>
+                <?php echo $this->getChildHtml("store_language"); ?>
+                <?php echo $this->getChildHtml("minicart"); ?>
+                <span class="split"></span>
+                <div class="toplinks-area">
+                    <a href="javascript:void(0)" class="toplinks-toggle"><?php echo __('Links'); ?></a>
+                    <?php echo $this->getChildHtml("header.links"); ?>
+                </div>
+                <span class="split"></span>
+                <?php echo $this->getChildHtml("custom_block"); ?>
+            </div>
+        </div>
+        <div class="header content">
+            <?php echo $this->getChildHtml("logo"); ?>
+            <?php echo $this->getChildHtml("navigation.sections"); ?>
+        </div>
+    <?php elseif($header_type == 8 ): ?>
+        <div class="panel wrapper">
+            <div class="panel header">
+                <?php echo $this->getChildHtml("skip_to_content"); ?>
+                <?php echo $this->getChildHtml("currency"); ?>
+                <?php echo $this->getChildHtml("store_language"); ?>
+                <?php echo $this->getChildHtml("header.links"); ?>
+            </div>
+        </div>
+        <div class="header content">
+            <?php echo $this->getChildHtml("logo"); ?>
+            <?php echo $this->getChildHtml("minicart"); ?>
+            <?php echo $this->getChildHtml("top.search"); ?>
+            <?php echo $this->getChildHtml("custom_block"); ?>
+        </div>
+        <div class="menu-container">
+            <?php
+            $toggle_text = $this->getConfig('porto_settings/header/toggle_text');
+            $custom_block_id_8 = $this->getConfig('porto_settings/header/static_block_8');
+            ?>
+            <div class="container">
+                <div class="menu-wrapper row">
+                    <div class="drop-menu">
+                        <a href="javascript:void(0)">
+                            <?php echo $toggle_text; ?>
+                        </a>
+                        <?php echo $this->getChildHtml("navigation.sections"); ?>
+                    </div>
+                    <div class="custom-menu-block">
+                        <?php
+                        $block = $this->getLayout()->createBlock('Magento\Cms\Block\Block');
+                        if($block) {
+                            $block->setBlockId($custom_block_id_8);
+                        }
+                        if($block){
+                            echo $block->toHtml();
+                        }
+                        ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <?php elseif($header_type == 10 ): ?>
+        <div class="switcher-area">
+            <?php echo $this->getChildHtml("skip_to_content"); ?>
+            <?php echo $this->getChildHtml("currency"); ?>
+            <?php echo $this->getChildHtml("store_language"); ?>
+            <?php echo $this->getChildHtml("minicart"); ?>
+        </div>
+        <div class="header content">
+            <?php echo $this->getChildHtml("logo"); ?>
+            <?php echo $this->getChildHtml("navigation.sections"); ?>
+            <?php echo $this->getChildHtml("top.search"); ?>
+        </div>
+        <div class="panel wrapper">
+            <div class="panel header">
+                <?php echo $this->getChildHtml("header.links"); ?>
+            </div>
+        </div>
+        <div class="custom-block-area">
+            <?php echo $this->getChildHtml("custom_block"); ?>
+        </div>
+    <?php else: ?>
+        <div class="panel wrapper">
+            <div class="panel header">
+                <?php echo $this->getChildHtml("skip_to_content"); ?>
+                <?php echo $this->getChildHtml("currency"); ?>
+                <?php echo $this->getChildHtml("store_language"); ?>
+                <?php echo $this->getChildHtml("header.links"); ?>
+            </div>
+        </div>
+        <div class="header content">
+            <?php echo $this->getChildHtml("logo"); ?>
+            <?php echo $this->getChildHtml("minicart"); ?>
+            <?php echo $this->getChildHtml("top.search"); ?>
+            <?php echo $this->getChildHtml("custom_block"); ?>
+        </div>
+
+        <?php echo $this->getChildHtml("navigation.sections"); ?>
+    <?php endif; ?>
+</header>
+    <?php
+} else {
+    # Вызываем header для десктопа
+    ?>
+    <header class="page-header type2">
+    <div class="panel wrapper">
+    <div class="panel header">
+    <?php echo $this->getChildHtml("skip_to_content"); ?>
+    <?php echo $this->getChildHtml("currency"); ?>
+    <?php echo $this->getChildHtml("store_language"); ?>
+
+    <div class="col-md-3 tiberis-head-townchanger">
+        <?php #Выбор города ?>
+
+        <ul class="tiberis-menu-stock main nav town-select-wrapper">
+            <div class="universal-tiberis-megasuperduperloader"><img src="<?php echo $block->getUrl("pub/media/assets/")?>ajax-loader.gif"/></div>
+            <li>
+                <a class="tiberis-menu-select-town"><i class="fa fa-map-marker" aria-hidden="true"></i><text class="yourtownis">Определение города...</text></a>
+                <ul class="tiberis-menu-select-town-ul tcs">
+                    <div class="select-town wrapper tcs">
+                        <p class="tcs">Выберите свой город</p>
+                        <span class="tcs"><img src="<?php echo $block->getUrl("pub/media/assets/")?>vgmap.png"/>Мы доставляем заказы во все регионы России</span>
+                        <div class="select-town-towns tcs">
+                            <a class="tcs">Москва</a>
+                            <a class="tcs">Санкт-Петербург</a>
+                        </div>
+                        <div class="select-town townchanger tcs">
+                            <p class="tcs">Или выберите другой город:</p>
+                            <input placeholder="Введите свой город" type="text" name="town" id="autocomplete_city" class="autocomplete_field tcs" autocomplete="off">
+                            <div class="tc-example">
+                                <span class="tcs">Например: <a class="tcs">Новокузнецк</a></span>
+                            </div>
+                            <button class="tcs" id="savetown">ГОТОВО</button>
+                        </div>
+                    </div>
+                </ul>
+            </li>
+        </ul>
+        <script>
+        require([
+            'jquery',
+            'Magento_Theme/js/jquery.cookie',
+            'Magento_Theme/js/tiberis-geoip',
+            'domReady!'
+        ], function ($) {
+
+            function doTownWind(){
+                $('.tiberis-menu-select-town-ul').css('display','block');
+                $('.tiberis-menu-select-town').addClass('open');
+                $(".tiberis-menu-stock li > a::after").css('content','\f810');
+            }
+
+            var townsCrymea = {
+                0:"Симферополь",
+                1:"Севастополь",
+                2:"Инкерман",
+                3:"Балаклава",
+                4:"Бахчисарай",
+                5:"Евпатория",
+                6:"Саки",
+                7:"Черноморское",
+                8:"Джанкой",
+                9:"Красноперекопск",
+                10:"Армянск",
+                11:"Белогорск",
+                12:"Ялта",
+                13:"Алушта",
+                14:"Алупка",
+                15:"Форос",
+                16:"Гурзуф",
+                17:"Партенит",
+                18:"Феодосия",
+                19:"Судак",
+                20:"Старый Крым",
+                21:"Приморский",
+                22:"Коктебель",
+                23:"Керчь",
+                24:"Щёлкино"
+            }
+
+            var isInCrymeaFlag = 0;
+
+            // prefixed (for automatic functions) object
+            var auto_fn={};
+
+            // [get town from GeoIP service]
+            auto_fn.get_geoip_town = function() {
+                var tiberis_usertown = jQuery.cookie('tiberis_usertown');
+                console.log('USERTOWN: '+tiberis_usertown);
+                if ((undefined === tiberis_usertown)||(null === tiberis_usertown)) {
+                    jQuery.get( "https://api.sypexgeo.net/json",
+                        function(data){
+                            //console.log(data);
+                            if (!data.error)  {
+                                city = data.city.name_ru;
+                                region = data.region.name_ru;
+                                if ((data.city.name_ru=='')||(undefined === data.city.name_ru))
+                                {
+                                    city = 'Москва';
+                                    region = 'Московская область';
+                                }
+                                else
+                                {
+                                    doTownWind();
+                                }
+
+                                jQuery.cookie('tiberis_townAccept', '0', { expires: 256, path: '/' });
+
+                                auto_fn.change_phones(city,region);
+                                auto_fn.change_town_btn(city,region,300);
+                                jQuery.cookie('tiberis_usertown', city+'@'+region, { expires: 256, path: '/' });
+
+                                $('#autocomplete_city').val(city);
+                            } else {
+
+                                auto_fn.change_phones('Москва','Московская область');
+                                city = 'Москва';
+                                region = 'Московская область';
+                                jQuery.cookie('tiberis_townAccept', '0', { expires: 256, path: '/' });
+                                doTownWind();
+                            }
+                        }
+                    );
+                } else {
+
+                    usertown = tiberis_usertown.split('@');
+                    $('#autocomplete_city').val(usertown[0]);
+
+                    $('.tiberis-menu-select-town').html('<i class="fa fa-map-marker" aria-hidden="true"></i><text class="yourtownis">Ваш город: '+usertown[0]+'</text>');
+                    auto_fn.change_phones(usertown[0],usertown[1]);
+                    auto_fn.change_town_btn(usertown[0],usertown[1],300);
+                    $.cookie('tiberis_usertown', tiberis_usertown, { expires: 256, path: '/' });
+
+                    var tiberis_townAccept = jQuery.cookie('tiberis_townAccept');
+                    if (undefined === tiberis_townAccept)
+                    {
+                        jQuery.cookie('tiberis_townAccept', '0', { expires: 256, path: '/' });
+                        doTownWind();
+                    }
+                    else
+                    {
+                        if (tiberis_townAccept == '0')
+                        {
+                            doTownWind();
+                        }
+                    }
+                }
+                //Crymea actions  феодосия: 88.135.81.97
+                jQuery.get("https://api.sypexgeo.net/json",
+                    function(data){
+                        window.isInCrymeaFlag = 1;
+                        if (!data.error)  {
+                            jQuery.cookie('tiberis_timezone', data.region.timezone, { expires: 256, path: '/' });
+                        } else {
+                            console.log('Error timezon definition');
+                        }
+                    }
+                );
+
+                $('.universal-tiberis-megasuperduperloader').css('display','none');
+            };
+
+            // [Change Phone Numbers for our Town]
+            auto_fn.change_phones = function(city, region) {
+                if (undefined === city) city = '';
+                if (undefined === region) {region = '';}
+                else if (region == "Москва") {region = 'Московская область';}
+                else if (region == "Санкт-Петербург") {region = 'Ленинградская область';}
+
+                if (region == '' && city == 'Москва') {region = 'Московская область';}
+                else if (region == '' && city == 'Санкт-Петербург') {region = 'Ленинградская область';}
+
+                onclick_event = "_gaq.push(['_trackEvent','Forms', 'Start', 'Callback']);javascript:createClose();";
+
+                switch(region) {
+                    case 'Ленинградская область': {
+                        jQuery('.header-widget-right-left .header-widget-right-phone span').html('+7 (812) 309 38 95');
+                        break;
+                    }
+                    case 'Московская область': {
+                        jQuery('.header-widget-right-left .header-widget-right-phone span').html('+7 (495) 663 72 84');
+                        break;
+                    }
+                    default: {
+                        jQuery('.header-widget-right-left .header-widget-right-phone span').html('+7 (495) 663 72 84');
+                    }
+                }
+
+            };
+
+            // [Change Phone Numbers for our Town]
+            auto_fn.change_town_btn = function(city, region, effect) {
+                if (undefined === effect) {effect = 0;}
+                if (undefined === city || city == '') {city = 'Выберите свой город...';}
+                if (undefined === region) {region = '';}
+                else if (region == "Москва") {region = 'Московская область';}
+                else if (region == "Санкт-Петербург") {region = 'Ленинградская область';}
+
+                if (!jQuery('#headerBlock .logo').hasClass('logo_up')) { jQuery('#headerBlock .logo').addClass('logo_up'); }
+                jQuery('.town_btn_wrap').show().find('.town_btn').text(city).show(effect);
+            };
+
+
+            var bigRegion = {
+                0: "",
+                1: "Дальневосточный федеральный округ",
+                2: "Приволжский федеральный округ",
+                3: "Северо-Западный федеральный округ",
+                4: "Северо-Кавказский федеральный округ",
+                5: "Сибирский федеральный округ",
+                6: "Уральский федеральный округ",
+                7: "Центральный федеральный округ",
+                8: "Южный федеральный округ",
+                9: "Крымский федеральный округ"
+            }
+
+            var ﻿towns = {
+                0:{0:"Абакан",1:"RU",2:"Республика Хакасия",3:5},
+                1:{0:"Абинск",1:"RU",2:"Краснодарский край",3:8},
+                2:{0:"Адлер",1:"RU",2:"Краснодарский край",3:8},
+                3:{0:"Азов",1:"RU",2:"Ростовская область",3:8},
+                4:{0:"Аксай",1:"RU",2:"Ростовская область",3:8},
+                5:{0:"Алапаевск",1:"RU",2:"Свердловская область",3:6},
+                6:{0:"Алдан",1:"RU",2:"Республика Саха (Якутия)",3:1},
+                7:{0:"Александров",1:"RU",2:"Владимирская область",3:7},
+                8:{0:"Александровск",1:"RU",2:"Пермский край",3:2},
+                9:{0:"Александровск-Сахалинский",1:"RU",2:"Сахалинская область",3:1},
+                10:{0:"Александровское",1:"RU",2:"Ставропольский край",3:4},
+                11:{0:"Алексеевка",1:"RU",2:"Белгородская область",3:7},
+                12:{0:"Алексин",1:"RU",2:"Тульская область",3:7},
+                13:{0:"Альметьевск",1:"RU",2:"Республика Татарстан",3:2},
+                14:{0:"Амурск",1:"RU",2:"Хабаровский край",3:1},
+                15:{0:"Анадырь",1:"RU",2:"Чукотский автономный округ",3:1},
+                16:{0:"Анапа",1:"RU",2:"Краснодарский край",3:8},
+                17:{0:"Ангарск",1:"RU",2:"Иркутская область",3:5},
+                18:{0:"Анжеро-Судженск",1:"RU",2:"Кемеровская область",3:5},
+                19:{0:"Анива",1:"RU",2:"Сахалинская область",3:1},
+                20:{0:"Анна",1:"RU",2:"Воронежская область",3:7},
+                21:{0:"Апатиты",1:"RU",2:"Мурманская область",3:3},
+                22:{0:"Апрелевка",1:"RU",2:"Московская область",3:7},
+                23:{0:"Арзамас",1:"RU",2:"Нижегородская область",3:2},
+                24:{0:"Арзгир",1:"RU",2:"Ставропольский край",3:4},
+                25:{0:"Армавир",1:"RU",2:"Краснодарский край",3:8},
+                26:{0:"Арсеньев",1:"RU",2:"Приморский край",3:1},
+                27:{0:"Артем",1:"RU",2:"Приморский край",3:1},
+                28:{0:"Артемовский",1:"RU",2:"Свердловская область",3:6},
+                29:{0:"Архангельск",1:"RU",2:"Архангельская область",3:3},
+                30:{0:"Асбест",1:"RU",2:"Свердловская область",3:6},
+                31:{0:"Астрахань",1:"RU",2:"Астраханская область",3:8},
+                32:{0:"Аткарск",1:"RU",2:"Саратовская область",3:2},
+                33:{0:"Ачинск",1:"RU",2:"Красноярский край",3:5},
+                34:{0:"Аша",1:"RU",2:"Челябинская область",3:6},
+                35:{0:"Аэропорт «Домодедово»",1:"RU",2:"Московская область",3:7},
+                36:{0:"Бабаево",1:"RU",2:"Вологодская область",3:3},
+                37:{0:"Багаевский",1:"RU",2:"Ростовская область",3:8},
+                38:{0:"Байконур",1:"RU",2:"Республика Алтай",3:5},
+                39:{0:"Балабаново",1:"RU",2:"Калужская область",3:7},
+                40:{0:"Балаково",1:"RU",2:"Саратовская область",3:2},
+                41:{0:"Балахна",1:"RU",2:"Нижегородская область",3:2},
+                42:{0:"Балашиха",1:"RU",2:"Московская область",3:7},
+                43:{0:"Балашов",1:"RU",2:"Саратовская область",3:2},
+                44:{0:"Баргузин",1:"RU",2:"Республика Бурятия",3:5},
+                45:{0:"Барнаул",1:"RU",2:"Алтайский край",3:5},
+                46:{0:"Батайск",1:"RU",2:"Ростовская область",3:8},
+                47:{0:"Белая Калитва",1:"RU",2:"Ростовская область",3:8},
+                48:{0:"Белгород",1:"RU",2:"Белгородская область",3:7},
+                49:{0:"Белово",1:"RU",2:"Кемеровская область",3:5},
+                50:{0:"Белогорск",1:"RU",2:"Амурская область",3:1},
+                51:{0:"Белорецк",1:"RU",2:"Республика Башкортостан",3:2},
+                52:{0:"Белореченск",1:"RU",2:"Краснодарский край",3:8},
+                53:{0:"Бердск",1:"RU",2:"Новосибирская область",3:5},
+                54:{0:"Березники",1:"RU",2:"Пермский край",3:2},
+                55:{0:"Березовка",1:"RU",2:"Пермский край",3:2},
+                56:{0:"Березовский",1:"RU",2:"Кемеровская область",3:5},
+                57:{0:"Березовский",1:"RU",2:"Свердловская область",3:6},
+                58:{0:"Беслан",1:"RU",2:"Республика Северная Осетия (Алания)",3:4},
+                59:{0:"Бийск",1:"RU",2:"Алтайский край",3:5},
+                60:{0:"Биробиджан",1:"RU",2:"Еврейская автономная область",3:1},
+                61:{0:"Бирск",1:"RU",2:"Республика Башкортостан",3:2},
+                62:{0:"Благовещенск",1:"RU",2:"Амурская область",3:1},
+                63:{0:"Благодарный",1:"RU",2:"Ставропольский край",3:4},
+                64:{0:"Бобров",1:"RU",2:"Воронежская область",3:7},
+                65:{0:"Богданович",1:"RU",2:"Свердловская область",3:6},
+                66:{0:"Богородск",1:"RU",2:"Нижегородская область",3:2},
+                67:{0:"Богучар",1:"RU",2:"Воронежская область",3:7},
+                68:{0:"Бодайбо",1:"RU",2:"Иркутская область",3:5},
+                69:{0:"Бологое",1:"RU",2:"Тверская область",3:7},
+                70:{0:"Большой Камень",1:"RU",2:"Приморский край",3:1},
+                71:{0:"Бор",1:"RU",2:"Нижегородская область",3:2},
+                72:{0:"Борисоглебск",1:"RU",2:"Воронежская область",3:7},
+                73:{0:"Боровичи",1:"RU",2:"Новгородская область",3:3},
+                74:{0:"Боровск",1:"RU",2:"Калужская область",3:7},
+                75:{0:"Братск",1:"RU",2:"Иркутская область",3:5},
+                76:{0:"Бронницы",1:"RU",2:"Московская область",3:7},
+                77:{0:"Брянск",1:"RU",2:"Брянская область",3:7},
+                78:{0:"Буденновск",1:"RU",2:"Ставропольский край",3:4},
+                79:{0:"Бузулук",1:"RU",2:"Оренбургская область",3:2},
+                80:{0:"Буйнакск",1:"RU",2:"Республика Дагестан",3:4},
+                81:{0:"Бутурлиновка",1:"RU",2:"Воронежская область",3:7},
+                82:{0:"Валуйки",1:"RU",2:"Белгородская область",3:7},
+                83:{0:"Ванино",1:"RU",2:"Хабаровский край",3:1},
+                84:{0:"Великие Луки",1:"RU",2:"Псковская область",3:3},
+                85:{0:"Великий Новгород",1:"RU",2:"Новгородская область",3:3},
+                86:{0:"Великий Устюг",1:"RU",2:"Вологодская область",3:3},
+                87:{0:"Вельск",1:"RU",2:"Архангельская область",3:3},
+                88:{0:"Верхний Уфалей",1:"RU",2:"Челябинская область",3:6},
+                89:{0:"Верхняя Пышма",1:"RU",2:"Свердловская область",3:6},
+                90:{0:"Верхняя Салда",1:"RU",2:"Свердловская область",3:6},
+                91:{0:"Веселый",1:"RU",2:"Ростовская область",3:8},
+                92:{0:"Вешенская",1:"RU",2:"Ростовская область",3:8},
+                93:{0:"Взморье",1:"RU",2:"Калининградская область",3:3},
+                94:{0:"Видное",1:"RU",2:"Московская область",3:7},
+                95:{0:"Вилючинск",1:"RU",2:"Камчатский край",3:1},
+                96:{0:"Вихоревка",1:"RU",2:"Иркутская область",3:5},
+                97:{0:"Владивосток",1:"RU",2:"Приморский край",3:1},
+                98:{0:"Владикавказ",1:"RU",2:"Республика Северная Осетия (Алания)",3:4},
+                99:{0:"Владимир",1:"RU",2:"Владимирская область",3:7},
+                100:{0:"Внуково",1:"RU",2:"Московская область",3:7},
+                101:{0:"Волгоград",1:"RU",2:"Волгоградская область",3:8},
+                102:{0:"Волгодонск",1:"RU",2:"Ростовская область",3:8},
+                103:{0:"Волжск",1:"RU",2:"Республика Марий Эл",3:2},
+                104:{0:"Волжский",1:"RU",2:"Волгоградская область",3:8},
+                105:{0:"Вологда",1:"RU",2:"Вологодская область",3:3},
+                106:{0:"Волоколамск",1:"RU",2:"Московская область",3:7},
+                107:{0:"Волоконовка",1:"RU",2:"Белгородская область",3:7},
+                108:{0:"Волосово",1:"RU",2:"Ленинградская область",3:3},
+                109:{0:"Волхов",1:"RU",2:"Ленинградская область",3:3},
+                110:{0:"Вольно-Надеждинское",1:"RU",2:"Приморский край",3:1},
+                111:{0:"Вольск",1:"RU",2:"Саратовская область",3:2},
+                112:{0:"Воркута",1:"RU",2:"Республика Коми",3:3},
+                113:{0:"Воробьевка",1:"RU",2:"Воронежская область",3:7},
+                114:{0:"Воронеж",1:"RU",2:"Воронежская область",3:7},
+                115:{0:"Воскресенск",1:"RU",2:"Московская область",3:7},
+                116:{0:"Воскресенское",1:"RU",2:"Московская область",3:7},
+                117:{0:"Воткинск",1:"RU",2:"Республика Удмуртия",3:2},
+                118:{0:"Всеволожск",1:"RU",2:"Ленинградская область",3:3},
+                119:{0:"Вурнары",1:"RU",2:"Республика Чувашия",3:2},
+                120:{0:"Выборг",1:"RU",2:"Ленинградская область",3:3},
+                121:{0:"Выкса",1:"RU",2:"Нижегородская область",3:2},
+                122:{0:"Вырица",1:"RU",2:"Ленинградская область",3:3},
+                123:{0:"Выселки",1:"RU",2:"Краснодарский край",3:8},
+                124:{0:"Вышний Волочек",1:"RU",2:"Тверская область",3:7},
+                125:{0:"Вязовая",1:"RU",2:"Челябинская область",3:6},
+                126:{0:"Вязьма",1:"RU",2:"Смоленская область",3:7},
+                127:{0:"Вятские Поляны",1:"RU",2:"Кировская область",3:2},
+                128:{0:"Гаврилов-ям",1:"RU",2:"Ярославская область",3:7},
+                129:{0:"Гагарин",1:"RU",2:"Смоленская область",3:7},
+                130:{0:"Гай",1:"RU",2:"Оренбургская область",3:2},
+                131:{0:"Галенки",1:"RU",2:"Приморский край",3:1},
+                132:{0:"Гатчина",1:"RU",2:"Ленинградская область",3:3},
+                133:{0:"Геленджик",1:"RU",2:"Краснодарский край",3:8},
+                134:{0:"Георгиевск",1:"RU",2:"Ставропольский край",3:4},
+                135:{0:"Глазов",1:"RU",2:"Республика Удмуртия",3:2},
+                136:{0:"Голицыно",1:"RU",2:"Московская область",3:7},
+                137:{0:"Горно-Алтайск",1:"RU",2:"Республика Алтай",3:5},
+                138:{0:"Горнозаводск",1:"RU",2:"Пермский край",3:2},
+                139:{0:"Городец",1:"RU",2:"Нижегородская область",3:2},
+                140:{0:"Городище",1:"RU",2:"Волгоградская область",3:8},
+                141:{0:"Гремячинск",1:"RU",2:"Пермский край",3:2},
+                142:{0:"Грозный",1:"RU",2:"Республика Чечня",3:4},
+                143:{0:"Грязовец",1:"RU",2:"Вологодская область",3:3},
+                144:{0:"Губаха",1:"RU",2:"Пермский край",3:2},
+                145:{0:"Губкин",1:"RU",2:"Белгородская область",3:7},
+                146:{0:"Гудермес",1:"RU",2:"Республика Чечня",3:4},
+                147:{0:"Гуково",1:"RU",2:"Ростовская область",3:8},
+                148:{0:"Гулькевичи",1:"RU",2:"Краснодарский край",3:8},
+                149:{0:"Гусиноозерск",1:"RU",2:"Республика Бурятия",3:5},
+                150:{0:"Гусь Хрустальный",1:"RU",2:"Владимирская область",3:7},
+                151:{0:"Далматово",1:"RU",2:"Курганская область",3:6},
+                152:{0:"Дальнегорск",1:"RU",2:"Приморский край",3:1},
+                153:{0:"Дальнереченск",1:"RU",2:"Приморский край",3:1},
+                154:{0:"Дедовск",1:"RU",2:"Московская область",3:7},
+                155:{0:"Демидово",1:"RU",2:"Владимирская область",3:7},
+                156:{0:"Десногорск",1:"RU",2:"Смоленская область",3:7},
+                157:{0:"Дзержинск",1:"RU",2:"Нижегородская область",3:2},
+                158:{0:"Дзержинский",1:"RU",2:"Московская область",3:7},
+                159:{0:"Дивногорск",1:"RU",2:"Красноярский край",3:5},
+                160:{0:"Дивное",1:"RU",2:"Ставропольский край",3:4},
+                161:{0:"Димитровград",1:"RU",2:"Ульяновская область",3:2},
+                162:{0:"Дмитров",1:"RU",2:"Московская область",3:7},
+                163:{0:"Добрянка",1:"RU",2:"Пермский край",3:2},
+                164:{0:"Долгопрудный",1:"RU",2:"Московская область",3:7},
+                165:{0:"Домодедово",1:"RU",2:"Московская область",3:7},
+                166:{0:"Донецк",1:"RU",2:"Ростовская область",3:8},
+                167:{0:"Дубна",1:"RU",2:"Московская область",3:7},
+                168:{0:"Дубовка",1:"RU",2:"Волгоградская область",3:8},
+                169:{0:"Дудинка",1:"RU",2:"Красноярский край",3:5},
+                170:{0:"Егорлык",1:"RU",2:"Ростовская область",3:8},
+                171:{0:"Егорлыкская",1:"RU",2:"Ростовская область",3:8},
+                172:{0:"Егорьевск",1:"RU",2:"Московская область",3:7},
+                173:{0:"Ейск",1:"RU",2:"Краснодарский край",3:8},
+                174:{0:"Екатеринбург",1:"RU",2:"Свердловская область",3:6},
+                175:{0:"Елабуга",1:"RU",2:"Республика Татарстан",3:2},
+                176:{0:"Елань",1:"RU",2:"Волгоградская область",3:8},
+                177:{0:"Елец",1:"RU",2:"Липецкая область",3:7},
+                178:{0:"Елизово",1:"RU",2:"Камчатский край",3:1},
+                179:{0:"Еманжелинск",1:"RU",2:"Челябинская область",3:6},
+                180:{0:"Ерофей-Павлович",1:"RU",2:"Амурская область",3:1},
+                181:{0:"Ессентуки",1:"RU",2:"Ставропольский край",3:4},
+                182:{0:"Ефремов",1:"RU",2:"Тульская область",3:7},
+                183:{0:"Железноводск",1:"RU",2:"Ставропольский край",3:4},
+                184:{0:"Железногорск",1:"RU",2:"Красноярский край",3:5},
+                185:{0:"Железногорск",1:"RU",2:"Курская область",3:7},
+                186:{0:"Железногорск-Илимский",1:"RU",2:"Иркутская область",3:5},
+                187:{0:"Железнодорожный",1:"RU",2:"Московская область",3:7},
+                188:{0:"Жигулевск",1:"RU",2:"Самарская область",3:2},
+                189:{0:"Жирновск",1:"RU",2:"Волгоградская область",3:8},
+                190:{0:"Жуковка",1:"RU",2:"Брянская область",3:7},
+                191:{0:"Жуковский",1:"RU",2:"Московская область",3:7},
+                192:{0:"Забайкальск",1:"RU",2:"Забайкальский край",3:5},
+                193:{0:"Заволжье",1:"RU",2:"Нижегородская область",3:2},
+                194:{0:"Заполярный",1:"RU",2:"Мурманская область",3:3},
+                195:{0:"Зарайск",1:"RU",2:"Московская область",3:7},
+                196:{0:"Заречный",1:"RU",2:"Пензенская область",3:2},
+                197:{0:"Заринск",1:"RU",2:"Алтайский край",3:5},
+                198:{0:"Звенигород",1:"RU",2:"Московская область",3:7},
+                199:{0:"Зеленогорск",1:"RU",2:"Красноярский край",3:5},
+                200:{0:"Зеленоград",1:"RU",2:"Московская область",3:7},
+                201:{0:"Зеленокумск",1:"RU",2:"Ставропольский край",3:4},
+                202:{0:"Зерноград",1:"RU",2:"Ростовская область",3:8},
+                203:{0:"Зима",1:"RU",2:"Иркутская область",3:5},
+                204:{0:"Зимовники",1:"RU",2:"Ростовская область",3:8},
+                205:{0:"Златоуст",1:"RU",2:"Челябинская область",3:6},
+                206:{0:"Иваново",1:"RU",2:"Ивановская область",3:7},
+                207:{0:"Ивантеевка",1:"RU",2:"Московская область",3:7},
+                208:{0:"Ижевск",1:"RU",2:"Республика Удмуртия",3:2},
+                209:{0:"Изобильный",1:"RU",2:"Ставропольский край",3:4},
+                210:{0:"Иланский",1:"RU",2:"Красноярский край",3:5},
+                211:{0:"Иловля",1:"RU",2:"Волгоградская область",3:8},
+                212:{0:"Инжавино",1:"RU",2:"Тамбовская область",3:7},
+                213:{0:"Инта",1:"RU",2:"Республика Коми",3:3},
+                214:{0:"Ипатово",1:"RU",2:"Ставропольский край",3:4},
+                215:{0:"Иркутск",1:"RU",2:"Иркутская область",3:5},
+                216:{0:"Искитим",1:"RU",2:"Новосибирская область",3:5},
+                217:{0:"Истра",1:"RU",2:"Московская область",3:7},
+                218:{0:"Ишимбай",1:"RU",2:"Республика Башкортостан",3:2},
+                219:{0:"Йошкар-Ола",1:"RU",2:"Республика Марий Эл",3:2},
+                220:{0:"Кабанск",1:"RU",2:"Республика Бурятия",3:5},
+                221:{0:"Кавалерово",1:"RU",2:"Приморский край",3:1},
+                222:{0:"Кагальницкая",1:"RU",2:"Ростовская область",3:8},
+                223:{0:"Казанская",1:"RU",2:"Ростовская область",3:8},
+                224:{0:"Казань",1:"RU",2:"Республика Татарстан",3:2},
+                225:{0:"Казлук",1:"RU",2:"Республика Коми",3:3},
+                226:{0:"Калач",1:"RU",2:"Воронежская область",3:7},
+                227:{0:"Калач-на-дону",1:"RU",2:"Волгоградская область",3:8},
+                228:{0:"Калининград",1:"RU",2:"Калининградская область",3:3},
+                229:{0:"Калтан",1:"RU",2:"Кемеровская область",3:5},
+                230:{0:"Калуга",1:"RU",2:"Калужская область",3:7},
+                231:{0:"Калязин",1:"RU",2:"Тверская область",3:7},
+                232:{0:"Каменоломни",1:"RU",2:"Ростовская область",3:8},
+                233:{0:"Каменск-Уральский",1:"RU",2:"Свердловская область",3:6},
+                234:{0:"Каменск-Шахтинский",1:"RU",2:"Ростовская область",3:8},
+                235:{0:"Камень-Рыболов",1:"RU",2:"Приморский край",3:1},
+                236:{0:"Камышин",1:"RU",2:"Волгоградская область",3:8},
+                237:{0:"Канаш",1:"RU",2:"Республика Чувашия",3:2},
+                238:{0:"Кандалакша",1:"RU",2:"Мурманская область",3:3},
+                239:{0:"Каневская",1:"RU",2:"Краснодарский край",3:8},
+                240:{0:"Канск",1:"RU",2:"Красноярский край",3:5},
+                241:{0:"Кантемировка",1:"RU",2:"Воронежская область",3:7},
+                242:{0:"Карабаш",1:"RU",2:"Челябинская область",3:6},
+                243:{0:"Карагай",1:"RU",2:"Пермский край",3:2},
+                244:{0:"Касимов",1:"RU",2:"Рязанская область",3:7},
+                245:{0:"Каспийск",1:"RU",2:"Республика Дагестан",3:4},
+                246:{0:"Качканар",1:"RU",2:"Свердловская область",3:6},
+                247:{0:"Кашары",1:"RU",2:"Ростовская область",3:8},
+                248:{0:"Кашира",1:"RU",2:"Московская область",3:7},
+                249:{0:"Кемерово",1:"RU",2:"Кемеровская область",3:5},
+                250:{0:"Кизел",1:"RU",2:"Пермский край",3:2},
+                251:{0:"Кизляр",1:"RU",2:"Республика Дагестан",3:4},
+                252:{0:"Кимры",1:"RU",2:"Тверская область",3:7},
+                253:{0:"Кинешма",1:"RU",2:"Ивановская область",3:7},
+                254:{0:"Киржач",1:"RU",2:"Владимирская область",3:7},
+                255:{0:"Кириши",1:"RU",2:"Ленинградская область",3:3},
+                256:{0:"Киров",1:"RU",2:"Кировская область",3:2},
+                257:{0:"Кировград",1:"RU",2:"Свердловская область",3:6},
+                258:{0:"Кирово-Чепецк",1:"RU",2:"Кировская область",3:2},
+                259:{0:"Кировск",1:"RU",2:"Ленинградская область",3:3},
+                260:{0:"Кировск",1:"RU",2:"Мурманская область",3:3},
+                261:{0:"Кировский",1:"RU",2:"Приморский край",3:1},
+                262:{0:"Киселевск",1:"RU",2:"Кемеровская область",3:5},
+                263:{0:"Кисловодск",1:"RU",2:"Ставропольский край",3:4},
+                264:{0:"Климовск",1:"RU",2:"Московская область",3:7},
+                265:{0:"Клин",1:"RU",2:"Московская область",3:7},
+                266:{0:"Клинцы",1:"RU",2:"Брянская область",3:7},
+                267:{0:"Ковров",1:"RU",2:"Владимирская область",3:7},
+                268:{0:"Когалым",1:"RU",2:"Ханты-Мансийский автономный округ",3:6},
+                269:{0:"Кодинск",1:"RU",2:"Красноярский край",3:5},
+                270:{0:"Кола",1:"RU",2:"Мурманская область",3:3},
+                271:{0:"Коломна",1:"RU",2:"Московская область",3:7},
+                272:{0:"Кольчугино",1:"RU",2:"Владимирская область",3:7},
+                273:{0:"Комсомольск-на-Амуре",1:"RU",2:"Хабаровский край",3:1},
+                274:{0:"Конаково",1:"RU",2:"Тверская область",3:7},
+                275:{0:"Кондопога",1:"RU",2:"Республика Карелия",3:3},
+                276:{0:"Константиновск",1:"RU",2:"Ростовская область",3:8},
+                277:{0:"Копейск",1:"RU",2:"Челябинская область",3:6},
+                278:{0:"Коркино",1:"RU",2:"Челябинская область",3:6},
+                279:{0:"Королев",1:"RU",2:"Московская область",3:7},
+                280:{0:"Корсаков",1:"RU",2:"Сахалинская область",3:1},
+                281:{0:"Коряжма",1:"RU",2:"Архангельская область",3:3},
+                282:{0:"Кострома",1:"RU",2:"Костромская область",3:7},
+                283:{0:"Котельники",1:"RU",2:"Московская область",3:7},
+                284:{0:"Котельниково",1:"RU",2:"Волгоградская область",3:8},
+                285:{0:"Котово",1:"RU",2:"Волгоградская область",3:8},
+                286:{0:"Котовск",1:"RU",2:"Тамбовская область",3:7},
+                287:{0:"Красноармейск",1:"RU",2:"Московская область",3:7},
+                288:{0:"Красновишерск",1:"RU",2:"Пермский край",3:2},
+                289:{0:"Красногорск",1:"RU",2:"Московская область",3:7},
+                290:{0:"Краснодар",1:"RU",2:"Краснодарский край",3:8},
+                291:{0:"Краснознаменск",1:"RU",2:"Московская область",3:7},
+                292:{0:"Краснокаменск",1:"RU",2:"Забайкальский край",3:5},
+                293:{0:"Краснокамск",1:"RU",2:"Пермский край",3:2},
+                294:{0:"Краснотурьинск",1:"RU",2:"Свердловская область",3:6},
+                295:{0:"Красноуральск",1:"RU",2:"Свердловская область",3:6},
+                296:{0:"Красноуфимск",1:"RU",2:"Свердловская область",3:6},
+                297:{0:"Красноярск",1:"RU",2:"Красноярский край",3:5},
+                298:{0:"Красный Сулин",1:"RU",2:"Ростовская область",3:8},
+                299:{0:"Красный Яр",1:"RU",2:"Самарская область",3:2},
+                300:{0:"Крымск",1:"RU",2:"Краснодарский край",3:8},
+                301:{0:"Кстово",1:"RU",2:"Нижегородская область",3:2},
+                302:{0:"Куанда",1:"RU",2:"Забайкальский край",3:5},
+                303:{0:"Кудымкар",1:"RU",2:"Пермский край",3:2},
+                304:{0:"Кузнецк",1:"RU",2:"Пензенская область",3:2},
+                305:{0:"Кулебаки",1:"RU",2:"Нижегородская область",3:2},
+                306:{0:"Кумертау",1:"RU",2:"Республика Башкортостан",3:2},
+                307:{0:"Кунгур",1:"RU",2:"Пермский край",3:2},
+                308:{0:"Купавна",1:"RU",2:"Московская область",3:7},
+                309:{0:"Курагино",1:"RU",2:"Красноярский край",3:5},
+                310:{0:"Курган",1:"RU",2:"Курганская область",3:6},
+                311:{0:"Курганинск",1:"RU",2:"Краснодарский край",3:8},
+                312:{0:"Курсавка",1:"RU",2:"Ставропольский край",3:4},
+                313:{0:"Курск",1:"RU",2:"Курская область",3:7},
+                314:{0:"Курчатов",1:"RU",2:"Курская область",3:7},
+                315:{0:"Кушва",1:"RU",2:"Свердловская область",3:6},
+                316:{0:"Кызыл",1:"RU",2:"Республика Тыва (Тува)",3:5},
+                317:{0:"Кыштым",1:"RU",2:"Челябинская область",3:6},
+                318:{0:"Лабытнанги",1:"RU",2:"Ямало-Ненецкий автономный округ",3:6},
+                319:{0:"Лангепас",1:"RU",2:"Ханты-Мансийский автономный округ",3:6},
+                320:{0:"Лебедянь",1:"RU",2:"Липецкая область",3:7},
+                321:{0:"Левокумское",1:"RU",2:"Ставропольский край",3:4},
+                322:{0:"Лениногорск",1:"RU",2:"Республика Татарстан",3:2},
+                323:{0:"Ленинск",1:"RU",2:"Волгоградская область",3:8},
+                324:{0:"Ленинск-Кузнецкий",1:"RU",2:"Кемеровская область",3:5},
+                325:{0:"Ленск",1:"RU",2:"Республика Саха (Якутия)",3:1},
+                326:{0:"Лермонтов",1:"RU",2:"Ставропольский край",3:4},
+                327:{0:"Лесной",1:"RU",2:"Свердловская область",3:6},
+                328:{0:"Лесозаводск",1:"RU",2:"Приморский край",3:1},
+                329:{0:"Лесосибирск",1:"RU",2:"Красноярский край",3:5},
+                330:{0:"Летняя Ставка",1:"RU",2:"Ставропольский край",3:4},
+                331:{0:"Линево",1:"RU",2:"Новосибирская область",3:5},
+                332:{0:"Липецк",1:"RU",2:"Липецкая область",3:7},
+                333:{0:"Лобня",1:"RU",2:"Московская область",3:7},
+                334:{0:"Лосино-Петровский",1:"RU",2:"Московская область",3:7},
+                335:{0:"Луга",1:"RU",2:"Ленинградская область",3:3},
+                336:{0:"Луховицы",1:"RU",2:"Московская область",3:7},
+                337:{0:"Лучегорск",1:"RU",2:"Приморский край",3:1},
+                338:{0:"Лысково",1:"RU",2:"Нижегородская область",3:2},
+                339:{0:"Лысьва",1:"RU",2:"Пермский край",3:2},
+                340:{0:"Лыткарино",1:"RU",2:"Московская область",3:7},
+                341:{0:"Люберцы",1:"RU",2:"Московская область",3:7},
+                342:{0:"Магадан",1:"RU",2:"Магаданская область",3:1},
+                343:{0:"Магнитогорск",1:"RU",2:"Челябинская область",3:6},
+                344:{0:"Майкоп",1:"RU",2:"Республика Адыгея",3:8},
+                345:{0:"Малаховка",1:"RU",2:"Московская область",3:7},
+                346:{0:"Малоярославец",1:"RU",2:"Калужская область",3:7},
+                347:{0:"Мариинск",1:"RU",2:"Кемеровская область",3:5},
+                348:{0:"Маркс",1:"RU",2:"Саратовская область",3:2},
+                349:{0:"Матвеев Курган",1:"RU",2:"Ростовская область",3:8},
+                350:{0:"Махачкала",1:"RU",2:"Республика Дагестан",3:4},
+                351:{0:"Мегион",1:"RU",2:"Ханты-Мансийский автономный округ",3:6},
+                352:{0:"Медвежьегорск",1:"RU",2:"Республика Карелия",3:3},
+                353:{0:"Медногорск",1:"RU",2:"Оренбургская область",3:2},
+                354:{0:"Междуреченск",1:"RU",2:"Кемеровская область",3:5},
+                355:{0:"Менделеево",1:"RU",2:"Калининградская область",3:3},
+                356:{0:"Менделеевск",1:"RU",2:"Республика Татарстан",3:2},
+                357:{0:"Миасс",1:"RU",2:"Челябинская область",3:6},
+                358:{0:"Микунь",1:"RU",2:"Республика Коми",3:3},
+                359:{0:"Миллерово",1:"RU",2:"Ростовская область",3:8},
+                360:{0:"Минеральные Воды",1:"RU",2:"Ставропольский край",3:4},
+                361:{0:"Минусинск",1:"RU",2:"Красноярский край",3:5},
+                362:{0:"Мирный",1:"RU",2:"Архангельская область",3:3},
+                363:{0:"Мирный",1:"RU",2:"Республика Саха (Якутия)",3:1},
+                364:{0:"Михайловка",1:"RU",2:"Волгоградская область",3:8},
+                365:{0:"Михайловка",1:"RU",2:"Приморский край",3:1},
+                366:{0:"Михнево",1:"RU",2:"Московская область",3:7},
+                367:{0:"Мичуринск",1:"RU",2:"Тамбовская область",3:7},
+                368:{0:"Могоча",1:"RU",2:"Забайкальский край",3:5},
+                369:{0:"Можайск",1:"RU",2:"Московская область",3:7},
+                370:{0:"Мончегорск",1:"RU",2:"Мурманская область",3:3},
+                371:{0:"Морозовск",1:"RU",2:"Ростовская область",3:8},
+                372:{0:"Москва",1:"RU",2:"Московская область",3:7},
+                373:{0:"Муравленко",1:"RU",2:"Ямало-Ненецкий автономный округ",3:6},
+                374:{0:"Мурманск",1:"RU",2:"Мурманская область",3:3},
+                375:{0:"Муром",1:"RU",2:"Владимирская область",3:7},
+                376:{0:"Мытищи",1:"RU",2:"Московская область",3:7},
+                377:{0:"Мышкин",1:"RU",2:"Ярославская область",3:7},
+                378:{0:"Набережные Челны",1:"RU",2:"Республика Татарстан",3:2},
+                379:{0:"Навашино",1:"RU",2:"Нижегородская область",3:2},
+                380:{0:"Навля",1:"RU",2:"Брянская область",3:7},
+                381:{0:"Надым",1:"RU",2:"Ямало-Ненецкий автономный округ",3:6},
+                382:{0:"Назрань",1:"RU",2:"Республика Ингушетия",3:4},
+                383:{0:"Нальчик",1:"RU",2:"Республика Кабардино-Балкария",3:4},
+                384:{0:"Наро-Фоминск",1:"RU",2:"Московская область",3:7},
+                385:{0:"Нарьян-Мар",1:"RU",2:"Ненецкий автономный округ",3:3},
+                386:{0:"Нахабино",1:"RU",2:"Московская область",3:7},
+                387:{0:"Находка",1:"RU",2:"Приморский край",3:1},
+                388:{0:"Невинномысск",1:"RU",2:"Ставропольский край",3:4},
+                389:{0:"Невьянск",1:"RU",2:"Свердловская область",3:6},
+                390:{0:"Нерехта",1:"RU",2:"Костромская область",3:7},
+                391:{0:"Нерюнгри",1:"RU",2:"Республика Саха (Якутия)",3:1},
+                392:{0:"Нефтегорск",1:"RU",2:"Самарская область",3:2},
+                393:{0:"Нефтекамск",1:"RU",2:"Республика Башкортостан",3:2},
+                394:{0:"Нефтекумск",1:"RU",2:"Ставропольский край",3:4},
+                395:{0:"Нефтеюганск",1:"RU",2:"Ханты-Мансийский автономный округ",3:6},
+                396:{0:"Нехаевский",1:"RU",2:"Волгоградская область",3:8},
+                397:{0:"Нижневартовск",1:"RU",2:"Ханты-Мансийский автономный округ",3:6},
+                398:{0:"Нижнекамск",1:"RU",2:"Республика Татарстан",3:2},
+                399:{0:"Нижнеудинск",1:"RU",2:"Иркутская область",3:5},
+                400:{0:"Нижние Серги",1:"RU",2:"Свердловская область",3:6},
+                401:{0:"Нижний Архыз",1:"RU",2:"Республика Карачаево-Черкессия",3:4},
+                402:{0:"Нижний Новгород",1:"RU",2:"Нижегородская область",3:2},
+                403:{0:"Нижний Тагил",1:"RU",2:"Свердловская область",3:6},
+                404:{0:"Нижняя Салда",1:"RU",2:"Свердловская область",3:6},
+                405:{0:"Нижняя Тура",1:"RU",2:"Свердловская область",3:6},
+                406:{0:"Николаевск",1:"RU",2:"Волгоградская область",3:8},
+                407:{0:"Николаевск-на-Амуре",1:"RU",2:"Хабаровский край",3:1},
+                408:{0:"Новая Усмань",1:"RU",2:"Воронежская область",3:7},
+                409:{0:"Новоалександровск",1:"RU",2:"Ставропольский край",3:4},
+                410:{0:"Новоаннинский",1:"RU",2:"Волгоградская область",3:8},
+                411:{0:"Нововоронеж",1:"RU",2:"Воронежская область",3:7},
+                412:{0:"Новодвинск",1:"RU",2:"Архангельская область",3:3},
+                413:{0:"Новозыбков",1:"RU",2:"Брянская область",3:7},
+                414:{0:"Новокубанск",1:"RU",2:"Краснодарский край",3:8},
+                415:{0:"Новокузнецк",1:"RU",2:"Кемеровская область",3:5},
+                416:{0:"Новокуйбышевск",1:"RU",2:"Самарская область",3:2},
+                417:{0:"Новомичуринск",1:"RU",2:"Рязанская область",3:7},
+                418:{0:"Новомосковск",1:"RU",2:"Тульская область",3:7},
+                419:{0:"Новониколаевский",1:"RU",2:"Волгоградская область",3:8},
+                420:{0:"Новопавловск",1:"RU",2:"Ставропольский край",3:4},
+                421:{0:"Новороссийск",1:"RU",2:"Краснодарский край",3:8},
+                422:{0:"Новосибирск",1:"RU",2:"Новосибирская область",3:5},
+                423:{0:"Новотроицк",1:"RU",2:"Оренбургская область",3:2},
+                424:{0:"Новоуральск",1:"RU",2:"Свердловская область",3:6},
+                425:{0:"Новочебоксарск",1:"RU",2:"Республика Чувашия",3:2},
+                426:{0:"Новочеркасск",1:"RU",2:"Ростовская область",3:8},
+                427:{0:"Новошахтинск",1:"RU",2:"Ростовская область",3:8},
+                428:{0:"Новошахтинский",1:"RU",2:"Приморский край",3:1},
+                429:{0:"Новый Оскол",1:"RU",2:"Белгородская область",3:7},
+                430:{0:"Новый Рогачик",1:"RU",2:"Волгоградская область",3:8},
+                431:{0:"Новый Ургал",1:"RU",2:"Хабаровский край",3:1},
+                432:{0:"Новый Уренгой",1:"RU",2:"Ямало-Ненецкий автономный округ",3:6},
+                433:{0:"Ногинск",1:"RU",2:"Московская область",3:7},
+                434:{0:"Норильск",1:"RU",2:"Красноярский край",3:5},
+                435:{0:"Ноябрьск",1:"RU",2:"Ямало-Ненецкий автономный округ",3:6},
+                436:{0:"Нытва",1:"RU",2:"Пермский край",3:2},
+                437:{0:"Обнинск",1:"RU",2:"Калужская область",3:7},
+                438:{0:"Одинцово",1:"RU",2:"Московская область",3:7},
+                439:{0:"Озерск",1:"RU",2:"Челябинская область",3:6},
+                440:{0:"Октябрьский",1:"RU",2:"Волгоградская область",3:8},
+                441:{0:"Октябрьский",1:"RU",2:"Республика Башкортостан",3:2},
+                442:{0:"Оленегорск",1:"RU",2:"Мурманская область",3:3},
+                443:{0:"Ольга",1:"RU",2:"Приморский край",3:1},
+                444:{0:"Ольховатка",1:"RU",2:"Воронежская область",3:7},
+                445:{0:"Омск",1:"RU",2:"Омская область",3:5},
+                446:{0:"Орда",1:"RU",2:"Пермский край",3:2},
+                447:{0:"Орел",1:"RU",2:"Орловская область",3:7},
+                448:{0:"Оренбург",1:"RU",2:"Оренбургская область",3:2},
+                449:{0:"Орехово-Зуево",1:"RU",2:"Московская область",3:7},
+                450:{0:"Орлов",1:"RU",2:"Кировская область",3:2},
+                451:{0:"Орловский",1:"RU",2:"Ростовская область",3:8},
+                452:{0:"Орск",1:"RU",2:"Оренбургская область",3:2},
+                453:{0:"Оса",1:"RU",2:"Пермский край",3:2},
+                454:{0:"Отрадное",1:"RU",2:"Ленинградская область",3:3},
+                455:{0:"Очер",1:"RU",2:"Пермский край",3:2},
+                456:{0:"п. Лесной Городок",1:"RU",2:"Московская область",3:7},
+                457:{0:"Павлово",1:"RU",2:"Нижегородская область",3:2},
+                458:{0:"Павловский Посад",1:"RU",2:"Московская область",3:7},
+                459:{0:"Палласовка",1:"RU",2:"Волгоградская область",3:8},
+                460:{0:"Пенза",1:"RU",2:"Пензенская область",3:2},
+                461:{0:"Первомайск",1:"RU",2:"Нижегородская область",3:2},
+                462:{0:"Первоуральск",1:"RU",2:"Свердловская область",3:6},
+                463:{0:"Переславль-Залесский",1:"RU",2:"Ярославская область",3:7},
+                464:{0:"Пермь",1:"RU",2:"Пермский край",3:2},
+                465:{0:"Песьянка",1:"RU",2:"Пермский край",3:2},
+                466:{0:"Петрозаводск",1:"RU",2:"Республика Карелия",3:3},
+                467:{0:"Петропавловск-Камчатский",1:"RU",2:"Камчатский край",3:1},
+                468:{0:"Печора",1:"RU",2:"Республика Коми",3:3},
+                469:{0:"Пикалево",1:"RU",2:"Ленинградская область",3:3},
+                470:{0:"Питкяранта",1:"RU",2:"Республика Карелия",3:3},
+                471:{0:"Подольск",1:"RU",2:"Московская область",3:7},
+                472:{0:"Покров",1:"RU",2:"Владимирская область",3:7},
+                473:{0:"Покровка",1:"RU",2:"Приморский край",3:1},
+                474:{0:"Полевской",1:"RU",2:"Свердловская область",3:6},
+                475:{0:"Поронайск",1:"RU",2:"Сахалинская область",3:1},
+                476:{0:"пос. Вешки",1:"RU",2:"Московская область",3:7},
+                477:{0:"пос. Лесной",1:"RU",2:"Московская область",3:7},
+                478:{0:"Приморско-Ахтарск",1:"RU",2:"Краснодарский край",3:8},
+                479:{0:"Прокопьевск",1:"RU",2:"Кемеровская область",3:5},
+                480:{0:"Протвино",1:"RU",2:"Московская область",3:7},
+                481:{0:"Прохоровка",1:"RU",2:"Белгородская область",3:7},
+                482:{0:"Псков",1:"RU",2:"Псковская область",3:3},
+                483:{0:"Пулково",1:"RU",2:"Санкт-Петербург",3:3},
+                484:{0:"Путилково",1:"RU",2:"Московская область",3:7},
+                485:{0:"Пушкино",1:"RU",2:"Московская область",3:7},
+                486:{0:"Пущино",1:"RU",2:"Московская область",3:7},
+                487:{0:"Пыть-ях",1:"RU",2:"Ханты-Мансийский автономный округ",3:6},
+                488:{0:"Пятигорск",1:"RU",2:"Ставропольский край",3:4},
+                489:{0:"Радужный",1:"RU",2:"Владимирская область",3:7},
+                490:{0:"Радужный",1:"RU",2:"Ханты-Мансийский автономный округ",3:6},
+                491:{0:"Раменское",1:"RU",2:"Московская область",3:7},
+                492:{0:"Ревда",1:"RU",2:"Свердловская область",3:6},
+                493:{0:"Ремонтное",1:"RU",2:"Ростовская область",3:8},
+                494:{0:"Репьевка",1:"RU",2:"Воронежская область",3:7},
+                495:{0:"Реутов",1:"RU",2:"Московская область",3:7},
+                496:{0:"Родионово-Несветайская",1:"RU",2:"Ростовская область",3:8},
+                497:{0:"Романовская",1:"RU",2:"Ростовская область",3:8},
+                498:{0:"Рославль",1:"RU",2:"Смоленская область",3:7},
+                499:{0:"Россошь",1:"RU",2:"Воронежская область",3:7},
+                500:{0:"Ростов",1:"RU",2:"Ярославская область",3:7},
+                501:{0:"Ростов-на-Дону",1:"RU",2:"Ростовская область",3:8},
+                502:{0:"Рубцовск",1:"RU",2:"Алтайский край",3:5},
+                503:{0:"Рудня",1:"RU",2:"Волгоградская область",3:8},
+                504:{0:"Руза",1:"RU",2:"Московская область",3:7},
+                505:{0:"Рузаевка",1:"RU",2:"Республика Мордовия",3:2},
+                506:{0:"Румянцево",1:"RU",2:"Московская область",3:7},
+                507:{0:"Рыбинск",1:"RU",2:"Ярославская область",3:7},
+                508:{0:"Ряжск",1:"RU",2:"Рязанская область",3:7},
+                509:{0:"Рязань",1:"RU",2:"Рязанская область",3:7},
+                510:{0:"Салават",1:"RU",2:"Республика Башкортостан",3:2},
+                511:{0:"Салехард",1:"RU",2:"Ямало-Ненецкий автономный округ",3:6},
+                512:{0:"Салым",1:"RU",2:"Ханты-Мансийский автономный округ",3:6},
+                513:{0:"Сальск",1:"RU",2:"Ростовская область",3:8},
+                514:{0:"Самара",1:"RU",2:"Самарская область",3:2},
+                515:{0:"Санкт-Петербург",1:"RU",2:"Ленинградская область",3:3},
+                516:{0:"Саракташ",1:"RU",2:"Оренбургская область",3:2},
+                517:{0:"Саранск",1:"RU",2:"Республика Мордовия",3:2},
+                518:{0:"Сарапул",1:"RU",2:"Республика Удмуртия",3:2},
+                519:{0:"Саратов",1:"RU",2:"Саратовская область",3:2},
+                520:{0:"Саров",1:"RU",2:"Нижегородская область",3:2},
+                521:{0:"Сатка",1:"RU",2:"Челябинская область",3:6},
+                522:{0:"Сафоново",1:"RU",2:"Смоленская область",3:7},
+                523:{0:"Саяногорск",1:"RU",2:"Республика Хакасия",3:5},
+                524:{0:"Светлогорск",1:"RU",2:"Калининградская область",3:3},
+                525:{0:"Светлоград",1:"RU",2:"Ставропольский край",3:4},
+                526:{0:"Светлый",1:"RU",2:"Калининградская область",3:3},
+                527:{0:"Светлый Яр",1:"RU",2:"Волгоградская область",3:8},
+                528:{0:"Свободный",1:"RU",2:"Амурская область",3:1},
+                529:{0:"Северобайкальск",1:"RU",2:"Республика Бурятия",3:5},
+                530:{0:"Северодвинск",1:"RU",2:"Архангельская область",3:3},
+                531:{0:"Северск",1:"RU",2:"Томская область",3:5},
+                532:{0:"Сегежа",1:"RU",2:"Республика Карелия",3:3},
+                533:{0:"Селятино",1:"RU",2:"Московская область",3:7},
+                534:{0:"Семенов",1:"RU",2:"Нижегородская область",3:2},
+                535:{0:"Семикаракорск",1:"RU",2:"Ростовская область",3:8},
+                536:{0:"Сергач",1:"RU",2:"Нижегородская область",3:2},
+                537:{0:"Сергиев Посад",1:"RU",2:"Московская область",3:7},
+                538:{0:"Серебряные Пруды",1:"RU",2:"Московская область",3:7},
+                539:{0:"Серов",1:"RU",2:"Свердловская область",3:6},
+                540:{0:"Серпухов",1:"RU",2:"Московская область",3:7},
+                541:{0:"Сертолово",1:"RU",2:"Ленинградская область",3:3},
+                542:{0:"Сестрорецк",1:"RU",2:"Санкт-Петербург",3:3},
+                543:{0:"Сибай",1:"RU",2:"Республика Башкортостан",3:2},
+                544:{0:"Сковородино",1:"RU",2:"Амурская область",3:1},
+                545:{0:"Славянка",1:"RU",2:"Приморский край",3:1},
+                546:{0:"Славянск-на-Кубани",1:"RU",2:"Краснодарский край",3:8},
+                547:{0:"Смоленск",1:"RU",2:"Смоленская область",3:7},
+                548:{0:"Снежинск",1:"RU",2:"Челябинская область",3:6},
+                549:{0:"Собинка",1:"RU",2:"Владимирская область",3:7},
+                550:{0:"Советск",1:"RU",2:"Калининградская область",3:3},
+                551:{0:"Советская Гавань",1:"RU",2:"Хабаровский край",3:1},
+                552:{0:"Советский",1:"RU",2:"Ханты-Мансийский автономный округ",3:6},
+                553:{0:"Совхоз имени Ленина",1:"RU",2:"Московская область",3:7},
+                554:{0:"Соликамск",1:"RU",2:"Пермский край",3:2},
+                555:{0:"Солнечная Долина",1:"RU",2:"Челябинская область",3:6},
+                556:{0:"Солнечногорск",1:"RU",2:"Московская область",3:7},
+                557:{0:"Сортавала",1:"RU",2:"Республика Карелия",3:3},
+                558:{0:"Сосновоборск",1:"RU",2:"Красноярский край",3:5},
+                559:{0:"Сосновый Бор",1:"RU",2:"Ленинградская область",3:3},
+                560:{0:"Сочи",1:"RU",2:"Краснодарский край",3:8},
+                561:{0:"Спасск-Дальний",1:"RU",2:"Приморский край",3:1},
+                562:{0:"Средняя Ахтуба",1:"RU",2:"Волгоградская область",3:8},
+                563:{0:"Ставрополь",1:"RU",2:"Ставропольский край",3:4},
+                564:{0:"Старая Купавна",1:"RU",2:"Московская область",3:7},
+                565:{0:"Старая Полтавка",1:"RU",2:"Волгоградская область",3:8},
+                566:{0:"Старая Русса",1:"RU",2:"Новгородская область",3:3},
+                567:{0:"Старая Чара",1:"RU",2:"Забайкальский край",3:5},
+                568:{0:"Старый Оскол",1:"RU",2:"Белгородская область",3:7},
+                569:{0:"Степное",1:"RU",2:"Ставропольский край",3:4},
+                570:{0:"Стерлитамак",1:"RU",2:"Республика Башкортостан",3:2},
+                571:{0:"Стрежевой",1:"RU",2:"Томская область",3:5},
+                572:{0:"Ступино",1:"RU",2:"Московская область",3:7},
+                573:{0:"Суворов",1:"RU",2:"Тульская область",3:7},
+                574:{0:"Сургут",1:"RU",2:"Ханты-Мансийский автономный округ",3:6},
+                575:{0:"Сухой Лог",1:"RU",2:"Свердловская область",3:6},
+                576:{0:"Сходня",1:"RU",2:"Московская область",3:7},
+                577:{0:"Сызрань",1:"RU",2:"Самарская область",3:2},
+                578:{0:"Сыктывкар",1:"RU",2:"Республика Коми",3:3},
+                579:{0:"Сысерть",1:"RU",2:"Свердловская область",3:6},
+                580:{0:"Таганрог",1:"RU",2:"Ростовская область",3:8},
+                581:{0:"Тайга",1:"RU",2:"Кемеровская область",3:5},
+                582:{0:"Тайшет",1:"RU",2:"Иркутская область",3:5},
+                583:{0:"Таксимо",1:"RU",2:"Республика Бурятия",3:5},
+                584:{0:"Тамбов",1:"RU",2:"Тамбовская область",3:7},
+                585:{0:"Тарасовский",1:"RU",2:"Ростовская область",3:8},
+                586:{0:"Тарко-сале",1:"RU",2:"Ямало-Ненецкий автономный округ",3:6},
+                587:{0:"Татищево",1:"RU",2:"Саратовская область",3:2},
+                588:{0:"Таштагол",1:"RU",2:"Кемеровская область",3:5},
+                589:{0:"Тверь",1:"RU",2:"Тверская область",3:7},
+                590:{0:"Тейково",1:"RU",2:"Ивановская область",3:7},
+                591:{0:"Темрюк",1:"RU",2:"Краснодарский край",3:8},
+                592:{0:"Терней",1:"RU",2:"Приморский край",3:1},
+                593:{0:"Тимашевск",1:"RU",2:"Краснодарский край",3:8},
+                594:{0:"Тихвин",1:"RU",2:"Ленинградская область",3:3},
+                595:{0:"Тихорецк",1:"RU",2:"Краснодарский край",3:8},
+                596:{0:"Тобольск",1:"RU",2:"Тюменская область",3:6},
+                597:{0:"Тольятти",1:"RU",2:"Самарская область",3:2},
+                598:{0:"Томилино",1:"RU",2:"Московская область",3:7},
+                599:{0:"Томск",1:"RU",2:"Томская область",3:5},
+                600:{0:"Топки",1:"RU",2:"Кемеровская область",3:5},
+                601:{0:"Трехгорный",1:"RU",2:"Челябинская область",3:6},
+                602:{0:"Троицк",1:"RU",2:"Московская область",3:7},
+                603:{0:"Троицк",1:"RU",2:"Челябинская область",3:6},
+                604:{0:"Трудовое",1:"RU",2:"Приморский край",3:1},
+                605:{0:"Туапсе",1:"RU",2:"Краснодарский край",3:8},
+                606:{0:"Туймазы",1:"RU",2:"Республика Башкортостан",3:2},
+                607:{0:"Тула",1:"RU",2:"Тульская область",3:7},
+                608:{0:"Тутаев",1:"RU",2:"Ярославская область",3:7},
+                609:{0:"Тымовское",1:"RU",2:"Сахалинская область",3:1},
+                610:{0:"Тында",1:"RU",2:"Амурская область",3:1},
+                611:{0:"Тюмень",1:"RU",2:"Тюменская область",3:6},
+                612:{0:"Увельский",1:"RU",2:"Челябинская область",3:6},
+                613:{0:"Углич",1:"RU",2:"Ярославская область",3:7},
+                614:{0:"Удомля",1:"RU",2:"Тверская область",3:7},
+                615:{0:"Улан-Удэ",1:"RU",2:"Республика Бурятия",3:5},
+                616:{0:"Ульяновск",1:"RU",2:"Ульяновская область",3:2},
+                617:{0:"Унеча",1:"RU",2:"Брянская область",3:7},
+                618:{0:"Урай",1:"RU",2:"Ханты-Мансийский автономный округ",3:6},
+                619:{0:"Урень",1:"RU",2:"Нижегородская область",3:2},
+                620:{0:"Урюпинск",1:"RU",2:"Волгоградская область",3:8},
+                621:{0:"Усинск",1:"RU",2:"Республика Коми",3:3},
+                622:{0:"Уссурийск",1:"RU",2:"Приморский край",3:1},
+                623:{0:"Усть-Илимск",1:"RU",2:"Иркутская область",3:5},
+                624:{0:"Усть-Кинельский",1:"RU",2:"Самарская область",3:2},
+                625:{0:"Усть-Кут",1:"RU",2:"Иркутская область",3:5},
+                626:{0:"Уфа",1:"RU",2:"Республика Башкортостан",3:2},
+                627:{0:"Ухта",1:"RU",2:"Республика Коми",3:3},
+                628:{0:"Учалы",1:"RU",2:"Республика Башкортостан",3:2},
+                629:{0:"Фокино",1:"RU",2:"Приморский край",3:1},
+                630:{0:"Фролово",1:"RU",2:"Волгоградская область",3:8},
+                631:{0:"Фрязево",1:"RU",2:"Московская область",3:7},
+                632:{0:"Фрязино",1:"RU",2:"Московская область",3:7},
+                633:{0:"Хабаровск",1:"RU",2:"Хабаровский край",3:1},
+                634:{0:"Ханты-Мансийск",1:"RU",2:"Ханты-Мансийский автономный округ",3:6},
+                635:{0:"Хасавюрт",1:"RU",2:"Республика Дагестан",3:4},
+                636:{0:"Хилок",1:"RU",2:"Забайкальский край",3:5},
+                637:{0:"Химки",1:"RU",2:"Московская область",3:7},
+                638:{0:"Холмск",1:"RU",2:"Сахалинская область",3:1},
+                639:{0:"Хороль",1:"RU",2:"Приморский край",3:1},
+                640:{0:"Целина",1:"RU",2:"Ростовская область",3:8},
+                641:{0:"Цимлянск",1:"RU",2:"Ростовская область",3:8},
+                642:{0:"Чайковский",1:"RU",2:"Пермский край",3:2},
+                643:{0:"Чалтырь",1:"RU",2:"Ростовская область",3:8},
+                644:{0:"Чамзинка",1:"RU",2:"Республика Мордовия",3:2},
+                645:{0:"Чапаевск",1:"RU",2:"Самарская область",3:2},
+                646:{0:"Чебаркуль",1:"RU",2:"Челябинская область",3:6},
+                647:{0:"Чебоксары",1:"RU",2:"Республика Чувашия",3:2},
+                648:{0:"Чегдомын",1:"RU",2:"Хабаровский край",3:1},
+                649:{0:"Челябинск",1:"RU",2:"Челябинская область",3:6},
+                650:{0:"Череповец",1:"RU",2:"Вологодская область",3:3},
+                651:{0:"Черкесск",1:"RU",2:"Республика Карачаево-Черкессия",3:4},
+                652:{0:"Черниговка",1:"RU",2:"Приморский край",3:1},
+                653:{0:"Черноголовка",1:"RU",2:"Московская область",3:7},
+                654:{0:"Черногорск",1:"RU",2:"Республика Хакасия",3:5},
+                655:{0:"Чернушка",1:"RU",2:"Пермский край",3:2},
+                656:{0:"Чернышевск",1:"RU",2:"Забайкальский край",3:5},
+                657:{0:"Черняховск",1:"RU",2:"Калининградская область",3:3},
+                658:{0:"Чертково",1:"RU",2:"Ростовская область",3:8},
+                659:{0:"Чехов",1:"RU",2:"Московская область",3:7},
+                660:{0:"Чита",1:"RU",2:"Забайкальский край",3:5},
+                661:{0:"Чудово",1:"RU",2:"Новгородская область",3:3},
+                662:{0:"Чусовой",1:"RU",2:"Пермский край",3:2},
+                663:{0:"Шадринск",1:"RU",2:"Курганская область",3:6},
+                664:{0:"Шарыпово",1:"RU",2:"Красноярский край",3:5},
+                665:{0:"Шарья",1:"RU",2:"Костромская область",3:7},
+                666:{0:"Шатура",1:"RU",2:"Московская область",3:7},
+                667:{0:"Шахты",1:"RU",2:"Ростовская область",3:8},
+                668:{0:"Шахунья",1:"RU",2:"Нижегородская область",3:2},
+                669:{0:"Шебекино",1:"RU",2:"Белгородская область",3:7},
+                670:{0:"Шелехов",1:"RU",2:"Иркутская область",3:5},
+                671:{0:"Шерегеш",1:"RU",2:"Кемеровская область",3:5},
+                672:{0:"Шилка",1:"RU",2:"Забайкальский край",3:5},
+                673:{0:"Шимановск",1:"RU",2:"Амурская область",3:1},
+                674:{0:"Шумерля",1:"RU",2:"Республика Чувашия",3:2},
+                675:{0:"Шумиха",1:"RU",2:"Курганская область",3:6},
+                676:{0:"Щелково",1:"RU",2:"Московская область",3:7},
+                677:{0:"Щербинка",1:"RU",2:"Московская область",3:7},
+                678:{0:"Электрогорск",1:"RU",2:"Московская область",3:7},
+                679:{0:"Электросталь",1:"RU",2:"Московская область",3:7},
+                680:{0:"Электроугли",1:"RU",2:"Московская область",3:7},
+                681:{0:"Элиста",1:"RU",2:"Республика Калмыкия",3:8},
+                682:{0:"Энгельс",1:"RU",2:"Саратовская область",3:2},
+                683:{0:"Юбилейный",1:"RU",2:"Московская область",3:7},
+                684:{0:"Югорск",1:"RU",2:"Ханты-Мансийский автономный округ",3:6},
+                685:{0:"Южно-Сахалинск",1:"RU",2:"Сахалинская область",3:1},
+                686:{0:"Южноуральск",1:"RU",2:"Челябинская область",3:6},
+                687:{0:"Юрга",1:"RU",2:"Кемеровская область",3:5},
+                688:{0:"Юрюзань",1:"RU",2:"Челябинская область",3:6},
+                689:{0:"Ядрин",1:"RU",2:"Республика Чувашия",3:2},
+                690:{0:"Яковлевка",1:"RU",2:"Приморский край",3:1},
+                691:{0:"Якутск",1:"RU",2:"Республика Саха (Якутия)",3:1},
+                692:{0:"Янаул",1:"RU",2:"Республика Башкортостан",3:2},
+                693:{0:"Яранск",1:"RU",2:"Кировская область",3:2},
+                694:{0:"Ярославль",1:"RU",2:"Ярославская область",3:7},
+                695:{0:"Ярцево",1:"RU",2:"Смоленская область",3:7},
+                696:{0:"Ясный",1:"RU",2:"Оренбургская область",3:2},
+                697:{0:"Яхрома",1:"RU",2:"Московская область",3:7},
+                698:{0:"Симферополь",1:"RU",2:"Республика Крым",3:9},
+                699:{0:"Севастополь",1:"RU",2:"Республика Крым",3:9},
+                700:{0:"Инкерман",1:"RU",2:"Республика Крым",3:9},
+                701:{0:"Балаклава",1:"RU",2:"Республика Крым",3:9},
+                702:{0:"Бахчисарай",1:"RU",2:"Республика Крым",3:9},
+                703:{0:"Евпатория",1:"RU",2:"Республика Крым",3:9},
+                704:{0:"Саки",1:"RU",2:"Республика Крым",3:9},
+                705:{0:"Черноморское",1:"RU",2:"Республика Крым",3:9},
+                706:{0:"Джанкой",1:"RU",2:"Республика Крым",3:9},
+                707:{0:"Красноперекопск",1:"RU",2:"Республика Крым",3:9},
+                708:{0:"Армянск",1:"RU",2:"Республика Крым",3:9},
+                709:{0:"Белогорск",1:"RU",2:"Республика Крым",3:9},
+                710:{0:"Ялта",1:"RU",2:"Республика Крым",3:9},
+                711:{0:"Алушта",1:"RU",2:"Республика Крым",3:9},
+                712:{0:"Алупка",1:"RU",2:"Республика Крым",3:9},
+                713:{0:"Форос",1:"RU",2:"Республика Крым",3:9},
+                714:{0:"Гурзуф",1:"RU",2:"Республика Крым",3:9},
+                715:{0:"Партенит",1:"RU",2:"Республика Крым",3:9},
+                716:{0:"Феодосия",1:"RU",2:"Республика Крым",3:9},
+                717:{0:"Судак",1:"RU",2:"Республика Крым",3:9},
+                718:{0:"Старый Крым",1:"RU",2:"Республика Крым",3:9},
+                719:{0:"Приморский",1:"RU",2:"Республика Крым",3:9},
+                720:{0:"Коктебель",1:"RU",2:"Республика Крым",3:9},
+                721:{0:"Керчь",1:"RU",2:"Республика Крым",3:9},
+                722:{0:"Щёлкино",1:"RU",2:"Республика Крым",3:9}
+            }
+
+
+            /*------------------------------------------------------------*/
+            // GeoIP if not set cookie. Else change town and region from cookie
+            auto_fn.get_geoip_town();
+
+            var townsArray	= $.map(towns, function (value, key) {
+                // value[0]=city, value[1]=RU, value[2]=region, value[3]=okrug
+                return { value: value[0], data: value[2] };
+            });
+
+
+            // Initialize autocomplete with local lookup:
+            $('#autocomplete_city').autocomplete2({
+                lookup: townsArray,
+                minChars: 1,
+                maxHeight: 200,
+                triggerSelectOnValidInput: false,
+                onSelect: function (suggestion) {
+                    auto_fn.change_phones(suggestion.value, suggestion.data);
+                    jQuery.cookie('tiberis_usertown', suggestion.value+'@'+suggestion.data, { expires: 256, path: '/' });
+                }
+            });
+
+
+
+            $('.tiberis-menu-select-town').on('click', function(){
+                if ($('.tiberis-menu-select-town').hasClass("open")) {
+                    $('.tiberis-menu-select-town').removeClass("open");
+                    $(".tiberis-menu-select-town-ul").css("display", "none");
+                    $(".tiberis-menu-stock li > a::after").css('content','\f813');
+                } else {
+                    $('.tiberis-menu-select-town').addClass("open");
+                    $(".tiberis-menu-select-town-ul").css("display", "block");
+                    $(".tiberis-menu-stock li > a::after").css('content','\f810');
+                }
+            });
+
+
+
+            $(document).click(function(e) {
+                $(".ui-autocomplete").css("display", "none");
+                if ((e.srcElement)&&((e.srcElement.className.indexOf('tcs') == -1)&&(e.srcElement.className != 'tiberis-menu-select-town open')&&(e.srcElement.className != 'autocomplete-suggestion')&&((e.srcElement.parentElement)&&(e.srcElement.parentElement.className.indexOf('autocomplete') == -1)))) {
+                    if (e.srcElement.className != "yourtownis") {
+                        $('.tiberis-menu-select-town').removeClass("open");
+                        $(".tiberis-menu-select-town-ul").css("display", "none");
+                        $(".tiberis-menu-stock li > a::after").css('content','\f813');
+                    }
+                }
+            });
+
+            $("#savetown").on('click',function(){
+                if ($('#autocomplete_city').val()!='') {
+                    $.cookie('tiberis_townAccept', '1', { expires: 256, path: '/' });
+                    $('.tiberis-menu-select-town').html('<i class="fa fa-map-marker" aria-hidden="true"></i><text class="yourtownis">Ваш город: '+$('#autocomplete_city').val()+'</text>');
+                }
+                $('.tiberis-menu-select-town').removeClass("open");
+                $(".tiberis-menu-select-town-ul").css("display", "none");
+                $(".tiberis-menu-stock li > a::after").css('content','\f813');
+            });
+
+            $('.select-town-towns a, .tc-example span a').on('click', function(){
+                var temp = $(this).html();
+                $('#autocomplete_city').val(temp);
+
+                if (temp == 'Санкт-Петербург') {
+                    city = 'Санкт-Петербург';
+                    region = 'Ленинградская область';
+                } else {
+                    if (temp == 'Новокузнецк') {
+                        city = 'Новокузнецк';
+                        region = 'Кемеровская область';
+                    } else {
+                        city = 'Москва';
+                        region = 'Московская область';
+                    }
+                }
+
+                jQuery.cookie('tiberis_usertown', city+'@'+region, { expires: 256, path: '/' });
+
+                auto_fn.change_phones(city, region);
+            });
+        });
+        </script>
+    </div>
+
+    <ul class="header links">
+        <li class="links-level1">
+            <a class="links-arrow-down" href="#"><text>О компании</text></a>
+            <ul>
+                <li class="links-level2"><a>О нас</a></li>
+                <li class="links-level2"><a>Отзывы</a></li>
+                <li class="links-level2"><a>Наши сертификаты</a></li>
+            </ul>
+        </li>
+        <li class="links-level1">
+            <a class="links-arrow-down" href="#"><text>Оплата и доставка</text></a>
+            <ul>
+                <li class="links-level2"><a>Способы оплаты</a></li>
+                <li class="links-level2"><a>Варианты доставки</a></li>
+                <li class="links-level2"><a>Как получить заказ</a></li>
+            </ul>
+        </li>
+        <li class="links-level1"><a href="#"><text style="border-bottom: 1px solid;margin-right: 30px;">Сервис и гарантии</text></a></li>
+        <li class="links-level1">
+            <a class="links-arrow-down" href="#"><text>Сварщикам</text></a>
+            <ul>
+                <li class="links-level2"><a>Статьи о сварке и оборудовании</a></li>
+                <li class="links-level2"><a>Ответы специалистов на вопросы об оборудовании</a></li>
+            </ul>
+        </li>
+        <li class="links-level1"><a style="margin-right:0px !important" href="#"><text style="border-bottom: 1px solid;">Контакты</text></a></li>
+    </ul>
+    </div>
+    </div>
+
+
+
+    <div class="header content">
+        <div class="col-md-3 header-widget header-widget-left">
+            <?php echo $this->getChildHtml("logo"); ?>
+            <span><strong>Первый</strong> интернет-гипермаркет сварочного оборудования</span>
+        </div>
+        <div class="col-md-9">
+            <div class="header-widget header-widget-center">
+                <?php
+                    # echo $this->getChildHtml("top.search");
+                ?>
+                <div id="search">
+                    <div id="noResT"><p>По запросу ничего не найдено...</p></div>
+                    <input name="q" id="q" type="text" class="search_field" placeholder="Начните поиск по каталогу..."/>
+                    <a class="tiberis-header-search-button" href="#" alt="Найти"><i class="fa fa-search" aria-hidden="true"></i></a>
+                </div>
+                <span class="header-widget-search-span">Пример: <a class="search-example" href="#">сварог pro arc 180</a><a class="search-example" href="#">вольфрамовый электрод</a></span>
+                <script>
+                    require([
+                        'jquery',
+                        'Magento_Theme/js/jqueryui',
+                        'domReady!'
+                    ], function ($) {
+
+                        $('.tiberis-header-search-button').on('click', function(){
+                            var request = $('#q').val();
+                            window.location = 'http://51.254.132.135/catalogsearch/result/?q='+request;
+                        });
+
+
+                        $('.search-example').on('click', function(){
+                           $('#q').focus();
+                           $('#q').val($(this).html());
+                           $('#q').trigger('input');
+                        });
+
+                        function fixedEncodeURIComponent (str) {
+                            return decodeURIComponent(str).replace(/[!'()*]/g, function(c) {
+                                return '%' + c.charCodeAt(0).toString(16);
+                            });
+                        }
+
+                        function decodeUTFfck(badstring) {
+
+                            badstring = badstring.replace(/<\/?[^>]+>/gi, '');
+
+                            
+                            try{
+                                // If the string is UTF-8, this will work and not throw an error.
+                                //return decodeURIComponent(escape(badstring));
+                                return decodeURIComponent(escape(badstring)).replace(/\++/g, ' ');
+                            }catch(e){
+                                // If it isn't, an error will be thrown, and we can asume that we have an ISO string.
+                                return badstring;
+                                console.log(e);
+                                console.log(badstring);
+                            }
+                            
+
+                            
+    
+
+                            /*
+                            var x = badstring;
+                            var r = /\\u([\d\w]{4})/gi;
+                            x = x.replace(r, function (match, grp) {
+                                return String.fromCharCode(parseInt(grp, 16)); } );
+                            x = unescape(x);
+                            return x;*/
+
+                               /*
+                              return text.replace(/\\u[\dA-F]{4}/gi, 
+                              function (match) {
+                                   return String.fromCharCode(parseInt(match.replace(/\\u/g, ''), 16));
+                              });
+
+                              */
+
+                              //return decodeURIComponent(escape(text));
+                        }
+
+                        var cacheT = {};
+                        $('#q').autocomplete({
+                            source: function(request, response) {
+                                if (request.term in cacheT) {
+                                    response(cacheT[request.term]);
+                                    return;
+                                }
+                                request.term = request.term;
+                                //request.term = encodeURIComponent(request.term);
+                                $.get("http://51.254.132.135/tibscript/autocomplete/search.php?q="+fixedEncodeURIComponent(request.term), function(data){
+                                    console.log(data);
+                                    if (data.length<3) {
+                                        $(".ui-autocomplete").css("display", "none");
+                                        $('#noResT').css('display','block');
+
+                                        $('#noResT').animate({opacity:1}, 250, function(){
+                                            setTimeout(function(){
+                                                $('#noResT').animate({opacity:0}, 500, function(){
+                                                    $('#noResT').css('display','none');
+                                                });
+                                            }, 3000);
+                                        });
+
+                                    } else {
+                                        $('#noResT').css('display','none');
+                                        response(JSON.parse(data));
+                                    }
+                                });
+                            },
+                            select: function(event, ui) {
+                                window.location = ui.item.url;
+                            },
+                            focus: function(event, ui) {
+                                event.preventDefault();
+                            },
+                            minLength: 3,
+                            messages: {
+                                noResults: function() {
+                                    $('.ui-autocomplete').css('display','none');
+                                },
+                                results: function() {
+                                    $('.ui-autocomplete').css('display','block');
+                                    $('.ac-total-button').off();
+                                    $('.ac-total-button').on('click', function(){
+                                        $('.tiberis-header-search-button').click();
+                                    });
+                                }
+                            }
+                        }).data('ui-autocomplete')._renderItem = function(ul, item) {
+                            if (item.name == 'found') {
+                                return $('<li>')
+                                    .data('ui-autocomplete-item', item)
+                                    .append('<div class="ac-total"><p>Найдено товаров: <strong>'+item.num+'</strong></p><a class="ac-total-button">Перейти к результатам поиска</a></div>')
+                                    .appendTo(ul);
+                            } else {
+                                return $('<li>')
+                                    .data('ui-autocomplete-item', item)
+                                    .append('<a href="'+item.url+'"><div class="product-left-autocomplete"><div class="product-image-autocomplete"><img src="'+item.img+'"/></div><div class="product-price-autocomplete">'+decodeUTFfck(item.price)+'</div></div><div class="product-right-autocomplete"><div class="product-title-autocomplete">'+decodeUTFfck(item.name)+'</div><div class="product-desc-autocomplete">'+decodeUTFfck(item.desc)+'</div></div></a>')
+                                    .appendTo(ul);
+                            }
+                        };
+                    });
+                </script>
+            </div>
+            <div class="header-widget header-widget-right">
+                <?php echo $this->getChildHtml("custom_block"); ?>
+            </div>
+        </div>
+    </div>
+
+    <?php
+    # TIBERIS MAIN MENU
+
+    $useragent = $_SERVER['HTTP_USER_AGENT'];
+    if(preg_match('/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino/i',$useragent)||preg_match('/1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i',substr($useragent,0,4))): ?>
+        <?php
+        # Меню от porto theme
+        echo $this->getChildHtml("navigation.sections");
+        echo $this->getChildHtml("minicart");
+        ?>
+    <?php else: ?>
+
+        <div class="sections nav-sections">
+        <div class="section-items nav-sections-items nomobile" data-mage-init="{&quot;tabs&quot;:{&quot;openedState&quot;:&quot;active&quot;}}">
+
+        <?php # Своё меню ?>
+        <?php
+        $categoryHelper = $this->helper('Magento\Catalog\Helper\Category');
+        $categories = $categoryHelper->getStoreCategories(true,false,true);
+/*
+        $categoryId = 1;
+        $_objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+        $categories = $_objectManager->create('Magento\Catalog\Model\Category')
+            ->load($categoryId);*/
+        //print_r($object_manager->getData());
+        ?>
+
+        <div class="col-md-3 tiberis-head-catalogue">
+            <?php # Проверяем home page для меню
+            $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+            $request = $objectManager->get('Magento\Framework\App\Action\Context')->getRequest();
+            if ($request->getFullActionName() == 'cms_index_index') { ?>
+                <div class="tmt-nohover"></div>
+                <ul class="tiberis-menu main nav tib-active">
+                    <li class="tiberis-menu wrap active nomobile">
+                        <a class="tiberis-menu title dropdown-toggle" style="cursor:default;" data-toggle="dropdown"><text>Каталог товаров</text></a>
+                    </li>
+                </ul>
+            <?php } else { ?>
+                <ul class="tiberis-menu main nav">
+                    <li class="tiberis-menu wrap active nomobile">
+                        <a class="tiberis-menu title dropdown-toggle" data-toggle="dropdown"><text>Каталог товаров</text></a>
+
+                        <ul class="tiberis-menu items dropdown-menu" role="menu">
+                            <?php foreach($categories as $category): ?>
+                                <?php
+                                    # echo $category->getId();
+                                ?>
+                                <?php if ($category->getIsActive()): ?>
+                                    <?php if ($subcategories = $category->getChildren()): ?>
+                                        <?php
+                                        $i = 0;
+                                        foreach ($subcategories as $temp) {
+                                            $i++;
+                                        }
+                                        ?>
+                                        <?php if ($i != 0): ?>
+                                            <li class="tiberis-menu-li" data-submenu-id="tiberis-menu<?php echo $category->getId() ?>">
+                                                <a href="<?php echo $categoryHelper->getCategoryUrl($category) ?>"><?php echo $category->getName() ?></a>
+                                                <div id="tiberis-menu<?php echo $category->getId() ?>" class="tiberis-menu popover">
+                                                    <h3 class="tiberis-menu popover-title"><?php echo $category->getName() ?></h3>
+                                                    <div class="tiberis-menu popover-content">
+                                                        <?php
+                                                            $rendererCounter = 0;
+                                                        ?>
+                                                        <?php foreach($subcategories as $subcategory): ?>
+                                                            <?php
+                                                                if ($category->getName()=='Сварочные инверторы (РДС)') {
+                                                                    if ($rendererCounter == 0) {
+                                                                        echo '<div class="popover-left-block">';
+                                                                    } else {
+                                                                        if ($rendererCounter == 6) {
+                                                                            echo '</div><div class="popover-right-block">';
+                                                                        }
+                                                                    }
+                                                                }
+                                                                echo '<a href="'.$categoryHelper->getCategoryUrl($subcategory).'">'.$subcategory->getName().' <text>('.$subcategory->getProductCount().')</text></a><br>';
+                                                                if ($rendererCounter==0) {
+                                                                    echo '<br>';
+                                                                }
+                                                                $rendererCounter++;
+                                                            ?>
+                                                        <?php endforeach; ?>
+                                                        <?php echo '</div>'; ?>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        <?php else: ?>
+                                            <li class="tiberis-menu-li"><a href="<?php echo $categoryHelper->getCategoryUrl($category) ?>"><?php echo $category->getName() ?></a></li>
+                                        <?php endif; ?>
+                                    <?php else: ?>
+                                        <li class="tiberis-menu-li"><a href="<?php echo $categoryHelper->getCategoryUrl($category) ?>"><?php echo $category->getName() ?></a></li>
+                                    <?php endif; ?>
+                                <?php endif; ?>
+                            <?php endforeach ?>
+                            <li class="tiberis-menu-all"><a>Открыть полный каталог</a></li>
+                        </ul>
+
+                    </li>
+                </ul>
+                <script type="text/javascript">
+                    require([
+                        'jquery',
+                        'Magento_Theme/js/tiberis-menu'
+                    ], function ($) {
+
+                        var $menu = $(".dropdown-menu");
+
+                        // jQuery-menu-aim: <meaningful part of the example>
+                        // Hook up events to be fired on menu row activation.
+                        $menu.menuAim({
+                            activate: activateSubmenu,
+                            deactivate: deactivateSubmenu
+                        });
+                        // jQuery-menu-aim: </meaningful part of the example>
+
+                        // jQuery-menu-aim: the following JS is used to show and hide the submenu
+                        // contents. Again, this can be done in any number of ways. jQuery-menu-aim
+                        // doesn't care how you do this, it just fires the activate and deactivate
+                        // events at the right times so you know when to show and hide your submenus.
+                        function activateSubmenu(row) {
+                            var $row = $(row),
+                                submenuId = $row.data("submenuId"),
+                                $submenu = $("#" + submenuId),
+                                height = $menu.outerHeight(),
+                                width = $menu.outerWidth();
+
+                            // Show the submenu
+                            $submenu.css({
+                                display: "block",
+                                top: -1,
+                                left: width - 3,  // main should overlay submenu
+                                height: height - 4  // padding for main dropdown's arrow
+                            });
+
+                            // Keep the currently activated row's highlighted look
+                            $row.find("a").addClass("maintainHover");
+
+                        }
+
+                        function deactivateSubmenu(row) {
+                            var $row = $(row),
+                                submenuId = $row.data("submenuId"),
+                                $submenu = $("#" + submenuId);
+
+                            // Hide the submenu and remove the row's highlighted look
+                            $submenu.css("display", "none");
+                            $row.find("a").removeClass("maintainHover");
+                        }
+
+                        // Bootstrap's dropdown menus immediately close on document click.
+                        // Don't let this event close the menu if a submenu is being clicked.
+                        // This event propagation control doesn't belong in the menu-aim plugin
+                        // itself because the plugin is agnostic to bootstrap.
+                        $(".dropdown-menu li").click(function(e) {
+                            e.stopPropagation();
+                        });
+
+                        $(document).click(function() {
+                            // Simply hide the submenu on any click. Again, this is just a hacked
+                            // together menu/submenu structure to show the use of jQuery-menu-aim.
+                            $(".popover").css("display", "none");
+                            $("a.maintainHover").removeClass("maintainHover");
+                        });
+
+                        // События при ховере
+
+                        $('.tiberis-menu.wrap.active').on('click', function(){
+                            $('.tiberis-menu-stock-title').removeClass("open");
+                            $(".tiberis-menu-stock-title-ul").css("display", "none");
+                        });
+                        /*
+                         $('.tiberis-menu.wrap.active').on('mouseout', function(){
+                         if ($('.tiberis-menu.wrap.active:hover').length == 0) {
+                         $(this).find('a').click();
+                         }
+                         })
+                         */
+                    });
+                </script>
+            <?php } ?>
+        </div>
+
+        <div class="col-md-9">
+            <?php # 10 лучших брендов ?>
+            <ul class="tiberis-best-brand-wrap main nav">
+                <li>
+                    <a class="tiberis-best-brand-wrap-title"><text class="topbrandsnav">10 лучших брендов</text></a>
+                    <ul class="tiberis-best-brand-wrap-title-ul">
+                        <li class="tiberis-best-brand-wrap-li"><a href="#">Сварог</a></li>
+                        <li class="tiberis-best-brand-wrap-li"><a href="#">Брима</a></li>
+                        <li class="tiberis-best-brand-wrap-li"><a href="#">ESAB</a></li>
+                        <li class="tiberis-best-brand-wrap-li"><a href="#">Kemppi</a></li>
+                        <li class="tiberis-best-brand-wrap-li"><a href="#">EWM</a></li>
+                        <li class="tiberis-best-brand-wrap-li"><a href="#">LIncoln Elecric</a></li>
+                        <li class="tiberis-best-brand-wrap-li"><a href="#">GYS</a></li>
+                        <li class="tiberis-best-brand-wrap-li"><a href="#">Fubag</a></li>
+                        <li class="tiberis-best-brand-wrap-li"><a href="#">ПАТОН</a></li>
+                        <li class="tiberis-best-brand-wrap-li"><a href="#">BluWeld</a></li>
+                        <li class="tiberis-best-brand-wrap-li last"><a href="#">Перейти ко всем брендам</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <script>
+                require([
+                    'jquery'
+                ], function ($) {
+
+                    $('.tiberis-best-brand-wrap-title').on('click', function(){
+                        if ($('.tiberis-best-brand-wrap-title').hasClass("open")) {
+                            $('.tiberis-best-brand-wrap-title').removeClass("open");
+                            $(".tiberis-best-brand-wrap-title-ul").css("display", "none");
+                        } else {
+                            $('.tiberis-best-brand-wrap-title').addClass("open");
+                            $(".tiberis-best-brand-wrap-title-ul").css("display", "block");
+                        }
+                    });
+
+                    $(document).click(function(e) {
+                        if ((e.srcElement)&&((e.srcElement.className != 'tiberis-best-brand-wrap-title')&&(e.srcElement.className != 'tiberis-best-brand-wrap-title open'))) {
+                            if (e.srcElement.className != 'topbrandsnav') {
+                                $('.tiberis-best-brand-wrap-title').removeClass("open");
+                                $(".tiberis-best-brand-wrap-title-ul").css("display", "none");
+                            }
+                        }
+                    });
+                });
+            </script>
+
+            <?php # Акции ?>
+            <ul class="tiberis-menu-stock main nav">
+                <li>
+                    <a class="tiberis-menu-stock-title"><span>%</span><text class="stocksandsale">Акции и скидки</text></a>
+                    <ul class="tiberis-menu-stock-title-ul">
+                        <li class="tiberis-menu-stock-li"><a>Распродажа "Лето-2016"</a></li>
+                        <li class="tiberis-menu-stock-li"><a>Купи инвертор Fubag и получи маску в подарок</a></li>
+                        <li class="tiberis-menu-stock-li"><a>Акция "Турбо дача"</a></li>
+                        <li class="tiberis-menu-stock-li last"><a>Распродажа уценённых товаров</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <script>
+                require([
+                    'jquery'
+                ], function ($) {
+
+                    $('.tiberis-menu-stock-title').on('click', function(){
+                        if ($('.tiberis-menu-stock-title').hasClass("open")) {
+                            $('.tiberis-menu-stock-title').removeClass("open");
+                            $(".tiberis-menu-stock-title-ul").css("display", "none");
+                        } else {
+                            $('.tiberis-menu-stock-title').addClass("open");
+                            $(".tiberis-menu-stock-title-ul").css("display", "block");
+                        }
+                    });
+
+                    $(document).click(function(e) {
+                        if ((e.srcElement)&&((e.srcElement.className != 'tiberis-menu-stock-title')&&(e.srcElement.className != 'tiberis-menu-stock-title open'))) {
+                            if (e.srcElement.className != 'stocksandsale') {
+                                $('.tiberis-menu-stock-title').removeClass("open");
+                                $(".tiberis-menu-stock-title-ul").css("display", "none");
+                            }
+                        }
+                    });
+                });
+            </script>
+            <?php echo $this->getChildHtml("minicart"); ?>
+            <script>
+                require([
+                    'jquery',
+                    'domReady!'
+                ], function ($) {
+                    $('.minicart-wrapper').on('DOMNodeInserted DOMSubtreeModified DOMNodeRemoved', function(){
+                        if ($('.tibvalue').html() == '<!-- ko text: cart().summary_count --><!-- /ko --> шт.') {
+                            $('.tibvalue').css('opacity','0');
+                            $('.counter-number').css('opacity','0');
+                            $('.tiberis-carttotalprice').css('opacity','0');
+                        } else {
+                            $('.tibvalue').css('opacity','1');
+                            $('.counter-number').css('opacity','1');
+                            $('.tiberis-carttotalprice').css('opacity','1');
+                        }
+                    });
+                });
+            </script>
+            <div class="howtoorder">
+                <a class="tiberis-menu-howtoorder"><span>i</span><text>Как сделать заказ?</text></a>
+            </div>
+        </div>
+
+
+        </div>
+        </div>
+    <?php endif; ?>
+    
+    </header>
+    <?php
+}
+?>
+
+

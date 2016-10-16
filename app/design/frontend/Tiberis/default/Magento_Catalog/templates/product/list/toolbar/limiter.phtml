@@ -1,0 +1,62 @@
+<?php
+/**
+ * Copyright © 2015 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+?>
+<?php
+/**
+ * Product list toolbar
+ *
+ * @var $block \Magento\Catalog\Block\Product\ProductList\Toolbar
+ */
+use Magento\Catalog\Model\Product\ProductList\Toolbar;
+/*
+ * # Категории, для которых выводим таблицу вместо сетки
+$tableArray = array();
+$tableArray[0] = 43;
+
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$category = $objectManager->get('Magento\Framework\Registry')->registry('current_category');
+$catId = $category->getId();
+
+$ap = array();
+$ap[0] = 25;
+$ap[0] = 50;
+$ap[0] = 100;
+foreach ($tableArray as $item) {
+    if ($item == $catId) {
+        $ap = array();
+        $ap[0] = 12;
+        $ap[0] = 24;
+        $ap[0] = 48;
+        break;
+    }
+}
+
+$address = $_SERVER['REQUEST_URI'];
+$currentPage = explode("?p=", $address);
+$currentPage = $currentPage[1];
+*/
+
+?>
+<div class="field limiter">
+    <label class="label" for="limiter">
+        <span><?php /* @escapeNotVerified */ echo __('Показывать по') ?></span>
+    </label>
+    <div class="control">
+        <select id="limiter" data-role="limiter" class="limiter-options">
+            <?php foreach ($block->getAvailableLimit() as $_key => $_limit): ?>
+
+                <option value="<?php /* @escapeNotVerified */ echo $_key ?>"<?php if ($block->isLimitCurrent($_key)): ?>
+                    selected="selected"<?php endif ?>>
+                    <?php /* @escapeNotVerified */ echo $_limit ?>
+                </option>
+            <?php endforeach; ?>
+        </select>
+    </div>
+    <span class="limiter-text"><?php /* @escapeNotVerified */ echo __('на страницу') ?></span>
+</div>

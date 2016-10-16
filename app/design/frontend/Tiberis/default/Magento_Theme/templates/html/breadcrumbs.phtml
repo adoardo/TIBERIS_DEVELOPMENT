@@ -1,0 +1,49 @@
+<?php
+/**
+ * Copyright © 2015 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+?>
+<?php if ($crumbs && is_array($crumbs)) : ?>
+    <div class="breadcrumbs">
+        <ul class="items">
+            <?php foreach ($crumbs as $crumbName => $crumbInfo) : ?>
+                <?php if ($crumbInfo['label'] == 'Home') {$crumbInfo['label'] = 'Тиберис';} ?>
+                <?php
+                if ($crumbInfo['last']) {
+                    if ((strpos($_SERVER['REQUEST_URI'], 'delivery-msk'))||
+                        (strpos($_SERVER['REQUEST_URI'], 'payment-client'))||
+                        (strpos($_SERVER['REQUEST_URI'], 'payment-corporate'))) {
+                        ?>
+                        <li class="item <?php /* @escapeNotVerified */ echo 'payment-and-delivery' ?>">
+                            <a href="<?php /* @escapeNotVerified */ echo 'http://51.254.132.135/payment-and-delivery' ?>" title="<?php echo 'Доставка и оплата' ?>">
+                                <?php echo 'Доставка и оплата' ?>
+                            </a>
+                        </li>
+                        <?php
+                    }
+                    $crumbInfo['label'] = str_replace('Search results for', 'Результаты поиска', $crumbInfo['label']);
+                }
+
+
+
+
+                ?>
+                <li class="item <?php /* @escapeNotVerified */ echo $crumbName ?>">
+                    <?php if ($crumbInfo['link']) : ?>
+                        <a href="<?php /* @escapeNotVerified */ echo $crumbInfo['link'] ?>" title="<?php echo $block->escapeHtml($crumbInfo['title']) ?>">
+                            <?php echo $block->escapeHtml($crumbInfo['label']) ?>
+                        </a>
+                    <?php elseif ($crumbInfo['last']) : ?>
+                        <strong><?php echo $block->escapeHtml($crumbInfo['label']) ?></strong>
+                    <?php else: ?>
+                        <?php echo $block->escapeHtml($crumbInfo['label']) ?>
+                    <?php endif; ?>
+                </li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+<?php endif; ?>

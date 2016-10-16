@@ -1,0 +1,50 @@
+<?php
+$categoryHelper = $this->helper('Magento\Catalog\Helper\Category');
+$categories = $categoryHelper->getStoreCategories(true,false,true);
+
+/*
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$category = $objectManager->get('Magento\Framework\Registry')->registry('current_category');
+
+
+$_categories = $block->getCategoryCollection();
+$_categoryHelper = $this->getCategoryHelper();
+*/
+?>
+        <div class="tiberis-home-menu-inner" role="menu">
+            <ul>
+                <?php $iterator=0; ?>
+                <?php foreach($categories as $category): ?>
+                    <?php $iterator++; ?>
+                    <?php if ($category->getIsActive()): ?>
+                        <?php if ($subcategories = $category->getChildren()): ?>
+                            <?php
+                            $i = 0;
+                            foreach ($subcategories as $temp) {
+                                $i++;
+                            }
+                            ?>
+                            <?php if ($i != 0): ?>
+                                <li class="tiberis-home-menu-li">
+                                    <a href="<?php echo $categoryHelper->getCategoryUrl($category) ?>"><?php echo $category->getName() ?></a>
+                                    <?php if ($category->getName() == 'Сварочное оборудование'): ?>
+                                    <ul class="tiberis-home-menu-level2">
+                                        <?php foreach($subcategories as $subcategory): ?>
+                                            <li><a href="<?php echo $categoryHelper->getCategoryUrl($subcategory) ?>"><?php echo $subcategory->getName() ?></a></li>
+                                        <?php endforeach; ?>
+                                    </ul>
+                                    <?php endif; ?>
+                                </li>
+                            <?php else: ?>
+                                <li class="tiberis-home-menu-li"><a href="<?php echo $categoryHelper->getCategoryUrl($category) ?>"><?php echo $category->getName() ?></a></li>
+                            <?php endif; ?>
+                        <?php else: ?>
+                            <li class="tiberis-home-menu-li"><a href="<?php echo $categoryHelper->getCategoryUrl($category) ?>"><?php echo $category->getName() ?></a></li>
+                        <?php endif; ?>
+                    <?php endif; ?>
+                    <?php if ($iterator==10) { echo '<div class="tib-home-menu-divider"></div>';} ?>
+                <?php endforeach ?>
+                <li class="tiberis-home-menu-all"><a><img src="<?php echo $block->getUrl("pub/media/assets/")?>menu-bg.png"/>Открыть полный каталог</a></li>
+            </ul>
+        </div>
+

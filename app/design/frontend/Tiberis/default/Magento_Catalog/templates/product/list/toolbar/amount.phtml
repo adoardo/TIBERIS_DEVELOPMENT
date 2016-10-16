@@ -1,0 +1,41 @@
+<?php
+/**
+ * Copyright © 2015 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+?>
+<?php
+/**
+ * Product list toolbar
+ *
+ * @var $block \Magento\Catalog\Block\Product\ProductList\Toolbar
+ */
+use Magento\Catalog\Model\Product\ProductList\Toolbar;
+?>
+<p class="toolbar-amount" id="toolbar-amount">
+    <?php if ($block->getLastPageNum() > 1): ?>
+        <?php /* @escapeNotVerified */ echo __('Товары %1-%2 из %3',
+            '<span class="toolbar-number">' . $block->getFirstNum() . '</span>',
+            '<span class="toolbar-number">' . $block->getLastNum() . '</span>',
+            '<span class="toolbar-number">' . $block->getTotalNum() . '</span>') ?>
+    <?php else: ?>
+        <?php
+        $productCount = $block->getTotalNum();
+        if ((($productCount % 100) == 1)||((($productCount % 10) == 1)&&($productCount != 11))) {
+            echo __('%1 Товар',
+                '<span class="toolbar-number">' . $block->getTotalNum() . '</span>');
+        } else {
+            if ((((($productCount % 100) > 1)&&(($productCount % 100) < 5))||((($productCount % 10) > 1)&&(($productCount % 10) < 5)))&&(($productCount < 10)||($productCount > 20))) {
+                echo __('%1 Товара',
+                    '<span class="toolbar-number">' . $block->getTotalNum() . '</span>');
+            } else {
+                echo __('%1 Товаров',
+                    '<span class="toolbar-number">' . $block->getTotalNum() . '</span>');
+            }
+        }
+    ?>
+    <?php endif; ?>
+</p>

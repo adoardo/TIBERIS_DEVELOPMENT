@@ -1,0 +1,42 @@
+<?php
+
+# Получаем ID набора аттрибутов
+$setID = $this->getData("tib_product_att");
+$title = $this->getData("tib_product_name");
+$price = $this->getData("tib_product_price");
+
+//16 - Аппарат
+//Дальше значения для теста других наборов аттрибутов, которые будут добавлены в дальнейшем
+//100 - Сварочные материалы
+//101 - Электростанция
+//102 - Компрессор
+//103 - Бетономешалка
+//104 - Стабилизаторы напряжения
+#$title = $_product->getName();
+#$price = intval($_product->getPrice());
+
+if ($setID == 100) {
+    if ((strpos($title, 'Вольфрамовый электрод') !== false)||(strpos($title, 'Припой Castolin') !== false)) {
+        $dostavka = "Доставка 300 руб";
+    } else {
+        $dostavka = "Доставка 360 руб";
+    }
+} else {
+    if ($price < 4500) {
+        $dostavka = "Доставка 300 руб";
+    } else {
+        if (($setID == 101)||($setID == 102)||($setID == 103)||($setID == 104)) {
+            if ($price < 40000) {
+                $dostavka = "Доставка 500 руб";
+            } else {
+                $dostavka = "Бесплатная доставка";
+            }
+        } else {
+            $dostavka = "Бесплатная доставка";
+        }
+    }
+}
+
+echo $dostavka;
+
+?>

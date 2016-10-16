@@ -1,0 +1,32 @@
+<?php
+$_helper = $this->helper('Magento\Catalog\Helper\Output');
+$_product = $block->getProduct();
+$price = intval($_product->getSpecialPrice());
+if ($price): ?>
+	<?php
+		$price2 = intval($_product->getPrice());
+		$raznica = $price - $price2;
+	?>
+	<span class="ptSale" >
+		<p><text><?php echo $raznica; ?></text><img src="http://51.254.132.135/pub/media/assets/ruble.svg" alt="" /></p>
+	</span>
+<?php else: ?>
+<?php
+    $temp = $_helper->productAttribute($_product, $_product->getTegi(), 'tegi');
+    //$temp = ($_helper->productAttribute($_product, $_product->getTegi(), 'НОВИНКА')) ? $_product->getAttributeText(tegi) : '';
+    if (strpos($temp, 'new') !== false) { ?>
+    <span class="ptNew product-sticker" >
+                            <p><text>НОВИНКА!</text></p>
+                    </span>
+<?php
+} else {
+    if (strpos($temp, 'stock') !== false) { ?>
+        <span class="ptStock product-sticker" >
+                            <p><text>АКЦИЯ!</text></p>
+                        </span>
+    <?php
+    }
+}
+?>
+<?php endif;
+?>

@@ -1,0 +1,15 @@
+<div class="column main descbot">
+    <?php
+    $_category_desc = $this->helper('Smartwave\Porto\Helper\Data')->getConfig('porto_settings/category/category_description');
+    ?>
+    <?php if ($_category_desc == "main_column" && $_description = $block->getCurrentCategory()->getDescription()): ?>
+        <div class="category-description">
+            <?php
+                $temp = $this->helper('Magento\Catalog\Helper\Output')->categoryAttribute($block->getCurrentCategory(), $_description, 'description');
+                $pieces = explode("razdelitel", $temp);
+                //$one=substr($temp,0,283);
+                echo $pieces[0].'</p>';
+            ?>
+        </div>
+    <?php endif; ?>
+</div>

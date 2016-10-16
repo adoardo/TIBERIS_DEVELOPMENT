@@ -1,0 +1,95 @@
+/*
+
+[2014-03-18 20:59:06] request from_ip:[75.98.93.198]
+ -----------------------------------
+
+[key:]Field1    [val:]DCH Тестович Дмитрий
+[key:]Field2    [val:]1234 1234 1234
+[key:]Field26    [val:]Сварочный инвертор KEMPPI MinarcTIG EVO 200MLP 1 шт Артикул: 61009200MLP 87880 всего 87880
+Сварочный инвертор Ресанта САИ 250 1 шт Артикул: R65-6 8650 всего 8650
+
+[key:]Field3    [val:]Гомель
+[key:]Field4    [val:]Заугольная, 25Б 3-й этаж
+[key:]Field20    [val:]1@zaugolnaya.da
+[key:]Field23    [val:]Как физическое лицо (наличными, карточкой, переводом и др.)
+[key:]Field7    [val:]ТЕСТ, заказ тестовый
+[key:]Field17    [val:]321451034.1392040627
+[key:]Field18    [val:]tiberis.ru
+[key:]Field13    [val:]
+[key:]Field13-url    [val:]
+[key:]Entsource    [val:]
+[key:]CreatedBy    [val:]public
+[key:]DateCreated    [val:]2014-03-18 09:59:01
+[key:]EntryId    [val:]3120
+[key:]IP    [val:]93.125.126.31
+[key:]HandshakeKey    [val:]ASTRALOPITEK_diswashere_Gha67G019yBAQQ9
+
+ -----------------------------------
+1 	ФИО
+2 	Контактный телефон(ы)
+26 	Поле заказа
+3 	Город или населенный пункт
+4 	Адрес доставки или паспортные данные
+20 	Ваша электронная почта (email)
+23 	Я буду оплачивать:
+13 	Прикрепите реквизиты для выставления счета
+7 	Комментарии к заказу
+17 	clientID
+18 	site
+
+
+["EntryId"]
+	["EntryId"]
+	["clientID"]
+	["email"]
+	["fio"]
+	["site"]
+	["tel"]
+	["adress"]
+	["zakaz"]
+		["kol"]
+		["sku"]
+		["price"]
+		["text"]
+
+
+-----------------------------------------------------------------------------------
+Новая разметка поля заказа, отправляемого с сайтов tiberis.ru и resanta.tiberis.ru
+-----------------------------------------------------------------------------------
+
+˵  - разделитель строк, т.е. разделитель позиций заказа.
+¦  - разделитель наименования и кол-ва, артикула и цен
+
+
+ПРИМЕР:
+
+Было:
+Сварочный инвертор KEMPPI MinarcTIG EVO 200MLP 2 шт Артикул: 61009200MLP 87880 всего 175760
+Сварочный инвертор Ресанта САИ 250 1 шт Артикул: R65-6 8650 всего 8650
+
+Стало:
+Сварочный инвертор KEMPPI MinarcTIG EVO 200MLP ¦ 2 шт Артикул: 61009200MLP ¦ 87880 всего 175760˵
+Сварочный инвертор Ресанта САИ 250 ¦ 1 шт Артикул: R65-6 ¦ 8650 всего 8650˵
+
+
+
+*/
+
+// TIBERIS.ru
+// -----------------------------------------------------------------------------
+        {% for item in cart.items %}
+        {% capture sku %}{% if item.product.variants.first.sku == null %}-{% else %}{{item.product.variants.first.sku}}{% endif %}{% endcapture %}
+        <script type="text/javascript">product_data = product_data + '{{item.product.title}}' + ' ¦ {{item.quantity}} шт' + ' Артикул: {{sku}}' + ' ¦ {{item.price| money_without_currency | remove : delimiter | remove : ".00"}}' + ' всего {{item.line_price| money_without_currency | remove : delimiter | remove : ".00"}}' + '˵%0D';
+        product_data = product_data.split('"').join('\'');
+        </script>
+
+
+// RESANTA.tiberis.ru
+// -----------------------------------------------------------------------------
+        <script type="text/javascript">product_data = 'РЕСАНТА ';</script>
+
+        {% for item in cart.items %}
+          {% capture sku %}{% if item.product.variants.first.sku == null %}-{% else %}{{item.product.variants.first.sku}}{% endif %}{% endcapture %}
+        <script type="text/javascript">product_data = product_data + '{{item.product.title}}' + ' ¦ {{item.quantity}} шт' + ' Артикул: {{sku}}' + ' ¦ {{item.price| money_without_currency | remove : delimiter | remove : ".00"}}' + ' всего {{item.line_price| money_without_currency | remove : delimiter | remove : ".00"}}' + '˵%0D';
+        product_data = product_data.split('"').join('\'');
+        </script>

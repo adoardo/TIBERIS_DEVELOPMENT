@@ -1,0 +1,20 @@
+<div id="messages">
+       <div class="message"> MessageContents 
+           <button class="primary">ClickMe</button>
+       </div>
+</div>
+<script type="text/javascript">// <![CDATA[
+require([
+        'jquery',
+        'Magento_Ui/js/modal/alert'
+    ],
+    function($, alert) {
+       $('#messages').on('click', 'button.primary', function(event){
+            alert({
+               content: $(event.target).parent().text()
+            })
+       })
+    }
+);
+// ]]></script>
+</div>

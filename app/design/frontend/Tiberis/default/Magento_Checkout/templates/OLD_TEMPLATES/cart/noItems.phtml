@@ -1,0 +1,15 @@
+<?php
+/**
+ * Copyright © 2015 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/**  @var $block \Magento\Checkout\Block\Cart */
+?>
+<div class="cart-empty">
+    <?php echo $block->getChildHtml('checkout_cart_empty_widget'); ?>
+    <p><?php /* @escapeNotVerified */ echo __('Ваша корзина пуста...') ?></p>
+    <p><?php /* @escapeNotVerified */ echo __('<a href="%1">Ищите что то конкретное?</a>',
+            $block->escapeUrl($block->getContinueShoppingUrl())) ?></p>
+    <?php echo $block->getChildHtml('shopping.cart.table.after'); ?>
+</div>

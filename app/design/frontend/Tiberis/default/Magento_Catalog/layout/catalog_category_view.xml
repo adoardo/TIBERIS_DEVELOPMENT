@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2016 SW-THEMES. All rights reserved.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <!-- Блок баннера над кратким описанием категории -->
+        <referenceContainer name="page.top">
+            <block class="Magento\Catalog\Block\Category\View" name="category_banner" template="category/banner.phtml" ifconfig="porto_settings/category/category_description" after="-"/>
+        </referenceContainer>
+
+        <!-- Блок полного описания категории -->
+        <referenceContainer name="columns">
+            <block class="Magento\Catalog\Block\Category\View"
+                   name="category_desc_main_column"
+                   template="Magento_Catalog::category/desc_main_column.phtml"
+                   ifconfig="porto_settings/category/category_description"
+                   after="-"
+                   htmlTag="div"
+                   htmlId="bottom-desc">
+            </block>
+        </referenceContainer>
+
+        <!-- Наполняем сайдбар -->
+        <referenceContainer name="sidebar.main">
+            <!-- Баннер. Запускаем инициализацию. -->
+            <block class="Magento\Catalog\Block\Category\View"
+                   name="tiberis.sidebar.banner"
+                   template="Magento_Catalog::category/sidebar/banner_init.phtml"
+                   after="-"
+                   htmlTag="div"
+                   htmlId="bottom-desc">
+            </block>
+            <!-- Лучшие товары. Запускаем инициализацию. -->
+            <block class="Magento\Catalog\Block\Category\View"
+                   name="tiberis.sidebar.featured"
+                   template="Magento_Catalog::category/sidebar/featured_init.phtml"
+                   after="-"
+                   htmlTag="div"
+                   htmlId="bottom-desc">
+            </block>
+        </referenceContainer>
+
+    </body>
+</page>

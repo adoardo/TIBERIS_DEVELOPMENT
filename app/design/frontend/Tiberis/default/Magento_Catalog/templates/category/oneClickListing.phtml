@@ -1,0 +1,349 @@
+
+        <div id="popup-mpdal">
+
+            <div class="modal-product">
+                <img src="" />
+                <span></span>
+                <div></div>
+            </div>
+
+            <div class="modal-name">
+                <label>Контактное лицо:</label>
+                <input type="text" required placeholder="Пример: Иван Иванов" name="contact[name]">
+                <div class="modal-error">
+                    <span>Пожалуйста, введите Ваше имя</span>
+                </div>
+            </div>
+
+            <div class="modal-phone">
+                <label>Телефон: <text>+7</text></label>
+                <input type="text" required placeholder="(XXX) XXX XX XX" name="contact[phone]">
+                <div class="modal-error">
+                    <span>Пожалуйста, введите Ваш номер телефона в формате (XXX) XXX XX XX </span>
+                </div>
+            </div>
+
+            <div class="modal-comment">
+                <label>Комментарии:</label>
+                <textarea name="contact[body]"></textarea>
+            </div>
+
+            <div class="modal-loading">
+                <img src="<?php echo $block->getViewFileUrl('Magento_Catalog::images/loader-1.gif'); ?>" alt="<?php echo __('Отправка...'); ?>" title="<?php echo __('Отправка...'); ?>" />
+            </div>
+
+            <div class="modal-response">
+
+            </div>
+
+        </div>
+        <script>
+        require(
+            [
+                'jquery',
+                'Magento_Ui/js/modal/modal'
+            ],
+            function(
+                $,
+                modal
+                ) {
+                var options = {
+                    type: 'popup',
+                    responsive: true,
+                    innerScroll: false,
+                    title: 'Быстрый заказ',
+                    buttons: [{
+                        text: $.mage.__('Продолжить выбор товаров'),
+                        class: 'buyPopupButNo',
+                        click: function () {
+                            $('.modal-product img').attr('src','');
+                            $('.modal-product span').html('');
+                            $('.modal-product div').html('');
+                            this.closeModal();
+                        }
+                    },{
+                        text: $.mage.__('Сделать заказ'),
+                        class: 'buyPopupButYes',
+                        click: function () {
+                            $("#popup-mpdal .modal-phone input").trigger('focusout');
+                            $("#popup-mpdal .modal-name input").trigger('focusout');
+                            setTimeout(function(){
+                                if ((window.errPhoneInput+window.errNameInput)==0) {
+                                    $('#popup-mpdal .modal-loading').css('display','block');
+                                    name = $("#popup-mpdal .modal-name input").val();
+                                    phone = $("#popup-mpdal .modal-phone input").val();
+                                    comment = $("#popup-mpdal .modal-comment textarea").val();
+                                    url = $('.modal-product span').attr('data-url');
+                                    $.get('http://51.254.132.135/mail/process.php?name='+name+'&phone='+phone+'&message='+comment+'&url='+url, function(data){
+                                        $('.modal-response').html(data);
+                                        $('.modal-response').css('display','block');
+                                        $('.modal-loading').css('display','none');
+                                        $('.modal-product').css('display','none');
+                                        $('.modal-name').css('display','none');
+                                        $('.modal-phone').css('display','none');
+                                        $('.modal-comment').css('display','none');
+
+                                        temp = setTimeout(function(){
+                                            $('.buyPopupButNo').click();
+                                            $('.modal-response').css('display','none');
+                                            setTimeout(function(){
+                                                $('.modal-product').css('display','block');
+                                                $('.modal-name').css('display','block');
+                                                $('.modal-phone').css('display','block');
+                                                $('.modal-comment').css('display','block');
+                                            },1000);
+                                        }, 8000);
+                                        $('.modal-close-callback').off();
+                                        $('#popup-mpdal .modal-close-callback').on('click', function(){
+                                            $('.buyPopupButNo').click();
+                                            clearTimeout(temp);
+                                            $('.modal-response').css('display','none');
+                                            setTimeout(function(){
+                                                $('.modal-product').css('display','block');
+                                                $('.modal-name').css('display','block');
+                                                $('.modal-phone').css('display','block');
+                                                $('.modal-comment').css('display','block');
+                                            },1000);
+                                        });
+                                    });
+                                }
+                            }, 200);
+                        }
+                    }]
+                };
+
+                var popup = modal(options, $('#popup-mpdal'));
+
+                $('.oneClickBuyButton').on('click', function(event){
+
+                    $('.modal-product img').attr('src',$(this).attr('data-img'));
+                    $('.modal-product span').html($(this).attr('data-title'));
+                    var price = '<text style="color: #777;">Цена: </text>' + $(this).attr('data-price');
+                    $('.modal-product div').html(price);
+
+                    $('.modal-product span').attr('data-url',$(this).attr('data-url'));
+
+                    var url = $(this).attr('data-url');
+
+                    $('#popup-mpdal').modal('openModal');
+
+                    // Инициализация окна телефона
+                    errPhoneInput = 0;
+                    $(".modal-phone .modal-error").css('display','none');
+                    $(".modal-phone .modal-error").css('opacity','0');
+                    $(".modal-phone input").css('background','white');
+                    $(".modal-phone").css('background','#ffffff');
+
+                    $(".modal-phone input").off();
+                    $(".modal-phone input").val('');
+
+                    // Инициализация окна имени
+                    errNameInput = 0;
+                    $(".modal-name .modal-error").css('display','none');
+                    $(".modal-name .modal-error").css('opacity','0');
+                    $(".modal-name input").css('background','white');
+                    $(".modal-name").css('background','#ffffff');
+
+                    $(".modal-name input").off();
+                    $(".modal-name input").val('');
+
+                    $(".modal-comment textarea").val('');
+
+                    // Валидация ввода телефонного номера
+                    var testA = '';
+
+                    $("#popup-mpdal .modal-phone input").on('keydown',function(data) {
+                        testA = data.keyCode;
+                    });
+
+                    $("#popup-mpdal .modal-phone input").on('input',function(data){
+                        var a = $(this).val().toString();
+
+                        if (a.length>15)
+                        {
+                            a = a.slice(0,15);
+                            $(this).val(a);
+                        }
+
+                        if (a[0]!='(')
+                        {
+                            $(this).val('('+a);
+                        }
+
+                        if ((a.length==5)&&(a[4]!=')')&&(a[5]!=')')&&(a[3]!=')')&&(a[2]!=')')&&(a[1]!=')'))
+                        {
+                            var b = a.slice(0,4);
+                            var c = a.slice(5);
+
+                            $(this).val(b+') '+c);
+                        }
+                        else
+                        {
+                            if ((a[4]!=')')&&(a.length>5)&&(a[3]!=')')&&(a[2]!=')')&&(a[1]!=')'))
+                            {
+                                var b = a.slice(0,4);
+                                var c = a.slice(5);
+
+                                $(this).val(b+') '+c);
+                            }
+                        }
+
+                        if ((a.length==1)&&(a[0]!='('))
+                        {
+                            $(this).val('('+a);
+                        }
+                        else
+                        {
+                            if ((a.length==4)&&(testA!=8)&&(a[4]!=')')&&(a[5]!=')'))
+                            {
+                                $(this).val(a+') ');
+                            }
+                            else
+                            {
+                                if (a.length==9)
+                                {
+                                    if ((a[8]!=' ')&&(testA!=8))
+                                    {
+                                        $(this).val(a+' ');
+                                        if (a[a.length]==' ')
+                                        {
+                                            a = a.splice(0,a.length-1);
+                                            $(this).val(a);
+                                        }
+                                    }
+
+                                    if ((a[6]!=' ')&&(a[a.length-1]!=' ')&&(testA!=8))
+                                    {
+                                        $(this).val(a+' ');
+                                    }
+                                }
+                                else
+                                {
+                                    if (a.length==12)
+                                    {
+
+                                        if ((a[6]!=' ')&&(a[10]!=' ')&&(testA!=8))
+                                        {
+
+                                            $(this).val(a+' ');
+                                        }
+                                    }
+                                    else
+                                    {
+                                        if ((a.length==6)&&(a[6]!=' ')&&(testA!=8))
+                                        {
+                                            b = a[5];
+                                            $(this).val(a+' ');
+                                            a = a.slice(0,a.length-1);
+                                            $(this).val(a+' '+b);
+                                        }
+                                        else
+                                        {
+                                            if ((a.length==10)&&(a[10]!=' ')&&(testA!=8))
+                                            {
+                                                b = a[9];
+                                                $(this).val(a+' ');
+                                                a = a.slice(0,a.length-1);
+                                                $(this).val(a+' '+b);
+                                            }
+                                            else
+                                            {
+                                                if ((a.length==13)&&(a[13]!=' ')&&(testA!=8))
+                                                {
+                                                    b = a[12];
+                                                    $(this).val(a+' ');
+                                                    a = a.slice(0,a.length-1);
+                                                    $(this).val(a+' '+b);
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        if (((a[0]!='(')||(a[4]!=')')||(a[5]!=' ')||(a[9]!=' ')||(a[12]!=' '))&&(a[a.length]==' '))
+                        {
+
+                            a = a.splice(0,a.length-1);
+                            $(this).val(a);
+                        }
+
+                    });
+
+
+                    $("#popup-mpdal .modal-phone input").on('focusout',function(){
+                        var b = $(this).val();
+
+                        var a = parseInt($(this).val().replace(/\D+/g,""));
+                        a = a.toString();
+
+                        if (a.length==10)
+                        {
+
+                        }
+                        else
+                        {
+                            b='';
+                        }
+
+                        if (b=='')
+                        {
+                            if (window.errPhoneInput!=1)
+                            {
+                                window.errPhoneInput = 1;
+                                $(".modal-phone .modal-error").css('display','block');
+                                $(".modal-phone .modal-error").animate({opacity:1});
+                                $(".modal-phone input").css('background','rgb(255, 198, 198)');
+                                $(".modal-phone").css('background','#fff4f4');
+                            }
+                        }
+                        else
+                        {
+                            window.errPhoneInput = 0;
+                            $(".modal-phone .modal-error").css('display','none');
+                            $(".modal-phone .modal-error").css('opacity','0');
+                            $(".modal-phone input").css('background','white');
+                            $(".modal-phone").css('background','#ffffff');
+                        }
+                    });
+
+                    $("#popup-mpdal .modal-name input").on('focusout',function(){
+                        var b = $(this).val();
+
+                        b = b.toString();
+
+                        if (b.length>0)
+                        {
+
+                        }
+                        else
+                        {
+                            b='';
+                        }
+
+                        if (b=='')
+                        {
+                            if (window.errNameInput!=1)
+                            {
+                                window.errNameInput = 1;
+                                $(".modal-name .modal-error").css('display','block');
+                                $(".modal-name .modal-error").animate({opacity:1});
+                                $(".modal-name input").css('background','rgb(255, 198, 198)');
+                                $(".modal-name").css('background','#fff4f4');
+                            }
+                        }
+                        else
+                        {
+                            window.errNameInput = 0;
+                            $(".modal-name .modal-error").css('display','none');
+                            $(".modal-name .modal-error").css('opacity','0');
+                            $(".modal-name input").css('background','white');
+                            $(".modal-name").css('background','#ffffff');
+                        }
+                    });
+
+                });
+            }
+        );
+        </script>

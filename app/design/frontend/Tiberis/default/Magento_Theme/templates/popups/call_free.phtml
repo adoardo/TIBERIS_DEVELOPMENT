@@ -1,0 +1,41 @@
+<div id="popup-callfree-modal">
+    <div class="modal-content-wrapper">
+        <span class="popup-callfree-text">
+            Позвоните нам по номеру <strong>8-800-100-6756</strong> из любой точки России! Звонок абсолютно <strong>бесплатный</strong> как со стационарных, так и с мобильных телефонов. Мы будем рады Вам помочь. Спасибо!
+        </span>
+    </div>
+</div>
+
+<script>
+require(
+    [
+        'jquery',
+        'Magento_Ui/js/modal/modal'
+    ],
+    function(
+        $,
+        modal
+        ) {
+        var options = {
+            type: 'popup',
+            responsive: true,
+            innerScroll: false,
+            title: 'Бесплатный звонок из России',
+            buttons: [{
+                text: $.mage.__('Вернуться к странице'),
+                class: 'callPopupButNo',
+                click: function () {
+                    this.closeModal();
+                }
+            }]
+        };
+
+        var popup = modal(options, $('#popup-callfree-modal'));
+
+        $('.freecallbutton').on('click', function(){
+            console.log('freecall');
+            $('#popup-callfree-modal').modal('openModal');
+        });
+    }
+);
+</script>

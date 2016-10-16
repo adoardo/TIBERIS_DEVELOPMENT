@@ -1,0 +1,38 @@
+<?php
+$_helper = $this->helper('Magento\Catalog\Helper\Output');
+$_product = $block->getProduct();
+$prod_id = $_helper->productAttribute($_product, $_product->getId(), 'Скидка: ');
+
+$prod_SKU = $_helper->productAttribute($_product, $_product->getSku(), 'Скидка: ');
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$prodCollection = $objectManager->create('Magento\Catalog\Model\ResourceModel\Product\CollectionFactory');
+$collection = $prodCollection->create()->addAttributeToSelect('*')->addFieldToFilter('sku',$prod_SKU);
+
+foreach ($collection as $product){
+    $cat = $product->getCategory();
+    if ($cat) {
+        $cat_id = $cat->getId();
+    } else {
+        $cat_id = '9999';
+    }
+
+}
+
+$host = 'localhost';
+$user = 'root';
+$pass = '12431243';
+$db = 'custom_attributes';
+
+ini_set('mssql.charset', 'UTF-8');
+
+$db = new PDO ('mysql:host=' . $host . ';dbname=' . $db, $user, $pass );
+
+$db->query('SET NAMES utf8;');
+
+if ($result = $db->query("SELECT popularity FROM tiberis_popularity_bufer WHERE cat_id='".$cat_id."' AND prod_id='".$prod_id."';")->fetch()) {
+    $newp = intval($result['popularity']) + 1;
+    $db->query("UPDATE tiberis_popularity_bufer SET popularity='".$newp."' WHERE cat_id='".$cat_id."' AND prod_id='".$prod_id."';");
+} else {
+    $db->query("INSERT INTO tiberis_popularity_bufer(cat_id, prod_id, popularity) VALUES('".$cat_id."', '".$prod_id."', '1') ;");
+}
+?>

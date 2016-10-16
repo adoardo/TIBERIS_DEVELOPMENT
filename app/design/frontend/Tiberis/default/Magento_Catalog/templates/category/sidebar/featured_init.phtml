@@ -1,0 +1,14 @@
+<?php
+# Берём ID текущей категории
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$category = $objectManager->get('Magento\Framework\Registry')->registry('current_category');
+$catId = $category->getId();
+
+# Вызываем блок лучших товаров передавая ему в параметре ID текущей категории
+/*
+echo $block->getLayout()
+                 ->createBlock('Smartwave\Filterproducts\Block\Home\FeaturedList')
+                 ->setTemplate('Magento_Catalog::category/sidebar/featured_grid.phtml')
+                 ->setCategoryId($catId)->toHtml();
+*/
+?>

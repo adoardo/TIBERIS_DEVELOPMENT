@@ -1,0 +1,78 @@
+<?php
+    $tiberisSorter = array();
+    $tiberisSorter[0] = array();
+    $tiberisSorter[1] = array();
+
+    # Лейблы сортировки
+    $tiberisSorter[0][0] = 'по популярности';
+    $tiberisSorter[0][1] = 'сначала дешёвые';
+    $tiberisSorter[0][2] = 'сначала дорогие';
+    $tiberisSorter[0][3] = 'новинки';
+    $tiberisSorter[0][4] = 'со скидкой';
+
+    # Параметры сортировки
+    $tiberisSorter[1][0] = '&product_list_order=popular_att&product_list_dir=desc';
+    $tiberisSorter[1][1] = '&product_list_order=price&product_list_dir=asc';
+    $tiberisSorter[1][2] = '&product_list_order=price&product_list_dir=desc';
+    $tiberisSorter[1][3] = '&product_list_order=created_at&product_list_dir=desc';
+    $tiberisSorter[1][4] = '&product_list_order=sale_amount&product_list_dir=desc';
+
+    $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+    $storeManager = $objectManager->get('\Magento\Store\Model\StoreManagerInterface');
+    $url = $storeManager->getStore()->getCurrentUrl();
+
+    $temp = explode("&", $url);
+    $i = 0;
+    $end = (count($temp)-1);
+    $currentSort = '';
+
+    # Удаляем лишнее
+    while ($i < $end) {
+        if ((strpos($temp[$end], 'store=default') !== false)
+            ||(strpos($temp[$end], 'product_list_order=popular_att') !== false)
+            ||(strpos($temp[$end], 'product_list_order=price') !== false)
+            ||(strpos($temp[$end], 'product_list_order=created_at') !== false)
+            ||(strpos($temp[$end], 'product_list_order=sale_amount') !== false)
+            ||(strpos($temp[$end], 'product_list_dir=desc') !== false)
+            ||(strpos($temp[$end], 'product_list_dir=asc') !== false)
+            ||(strpos($temp[$end], 'from_store') !== false)) {
+            # Для класса текущей сортировки
+            if (strpos($temp[$end], 'product_list_order=popular_att') !== false){
+                $currentSort = $tiberisSorter[1][0];
+            } elseif (strpos($temp[$end], 'product_list_order=price') !== false) {
+                if (strpos($url, 'product_list_dir=desc')!== false) {
+                    $currentSort = $tiberisSorter[1][2];
+                } else {
+                    $currentSort = $tiberisSorter[1][1];
+                }
+            } elseif (strpos($temp[$end], 'product_list_order=created_at')!== false) {
+                $currentSort = $tiberisSorter[1][3];
+            } elseif (strpos($temp[$end], 'product_list_order=sale_amount')!== false) {
+                $currentSort = $tiberisSorter[1][4];
+            }
+            unset($temp[$end]);
+        }
+        $end = $end -1;
+    }
+    # Объединяем оставшиеся куски в URL
+    $url = implode("&", $temp);
+    $url = str_replace('___store=default&','',$url);
+
+
+
+    # Формируем список сортировки
+    ?>
+    <div class="toolbar-sorter sorter">
+        <label class="sorter-label">Сортировать: </label>
+    <?php
+        $i = 0;
+        while ($i < count($tiberisSorter[0])) {
+            if ($currentSort == $tiberisSorter[1][$i]) {
+                echo '<a class="tiberis-sorter-elem active">'.$tiberisSorter[0][$i].'</a>';
+            } else {
+                echo '<a class="tiberis-sorter-elem" href="'.$url.$tiberisSorter[1][$i].'">'.$tiberisSorter[0][$i].'</a>';
+            }
+            $i++;
+        }
+    ?>
+    </div>

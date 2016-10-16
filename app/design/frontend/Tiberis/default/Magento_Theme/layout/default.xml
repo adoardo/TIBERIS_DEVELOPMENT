@@ -1,0 +1,12 @@
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="main.content">
+            <!-- Всплывающее окно купить в 1 клик -->
+            <block class="Magento\Customer\Block\Account\Customer" name="tiberis.popup.oneclick" after="-" template="Magento_Theme::popups/one_click.phtml"></block>
+            <!-- Всплывающее окно заказ обратного звонка -->
+            <block class="Magento\Customer\Block\Account\Customer" name="tiberis.popup.callrequest" after="-" template="Magento_Theme::popups/call_request.phtml"></block>
+            <!-- Всплывающее окно бесплатного звонка из России -->
+            <block class="Magento\Customer\Block\Account\Customer" name="tiberis.popup.callfree" after="-" template="Magento_Theme::popups/call_free.phtml"></block>
+        </referenceContainer>
+    </body>
+</page>

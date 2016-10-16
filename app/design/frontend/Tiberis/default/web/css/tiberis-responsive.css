@@ -1,0 +1,255 @@
+/* PORTRAIT */
+
+@media only screen
+and (max-device-width: 800px) {
+    .custom-block.f-right {
+        margin-left: 0px !important;
+    }
+    .footer-after-copy {
+        padding-left: 0px;
+        margin-right: 0px;
+        border-left: none;
+    }
+    .footer-widget {
+        border:none !important;
+        margin-top:20px;
+    }
+    .footer-widget1 {
+        margin-top:0px;
+    }
+
+    /* MODAL WINDOWS */
+
+
+    .modal-product img{
+        width:100%;
+        display:none;
+    }
+    .modal-product span{
+        font-size: 1.4rem;
+        width: 100%;
+    }
+    .modal-product div{
+        position:relative;
+    }
+    .modal-name, .modal-phone, .modal-comment {
+        padding:0px;
+        width:100%;
+        padding: 0px;
+        width: 100%;
+        padding-bottom: 30px;
+    }
+    .modal-error{
+        font-size: 1.1rem;
+    }
+    .buyPopupButYes, .buyPopupButNo, .callrequestPopupButNo, .callrequestPopupButYes {
+        width:100%;
+    }
+    .modal-inner-wrap {
+        background: white !important;
+        width: 100% !important;
+    }
+    .modal-name input, .modal-phone input {
+        width: 100%;
+        margin-top: 0px;
+        position: relative;
+        right: 0px;
+    }
+    .modal-comment {
+        padding: 0px;
+        margin:0px;
+    }
+    .modal-phone {
+        padding-bottom: 42px;
+    }
+    .modal-popup .modal-footer {
+        padding-bottom: 6rem;
+        padding-top: 3rem;
+    }
+
+    .buyPopupButYes, .callrequestPopupButYes {
+        margin-top:10px;
+        background: rgba(105,183,66,0.2) !important;
+    }
+    .buyPopupButNo, .callrequestPopupButNo {
+        background: rgba(238,138,53,0.2) !important;
+    }
+    .modal-comment {
+        padding-bottom: 0px;
+    }
+    .modal-popup .modal-header {
+        padding-top:0rem;
+    }
+    .modal-popup .modal-footer {
+        padding-bottom: 1.5rem;
+        padding-top: 1.5rem;
+    }
+    .modal-product div {
+        color: #ff6000;
+        font-size: 1.5rem;
+        font-weight: bold;
+        cursor: default;
+    }
+    .modal-product {
+        border-bottom: 1px solid #c1c1c1;
+        padding-bottom: 9px;
+    }
+}
+
+@media (min-width: 768px) {
+    @media (max-width: 1280px) {
+        .section-items.nav-sections-items {
+            background-color: #38404C !important;
+        }
+        input[type="text"], input[type="password"], input[type="url"], input[type="tel"], input[type="search"], input[type="number"], input[type="datetime"], input[type="email"] {
+            width:70%;
+        }
+        .block-search .action.search {
+            right:30% !important;
+        }
+        .header-widget-center {
+            width:37.8%;
+        }
+        .header-widget-right {
+        /*    width: 42.2%; */
+            width: 62%;
+        }
+        #search input {
+            width: 280px;
+        }
+        .header-widget-right-phone span {
+            font-size: 16px;
+            color: #222;
+        }
+        .header-widget-right-phone, .header-widget-right-label, .header-widget-right-link {
+            float: left;
+            /*   */
+            margin-left: 10px;
+        }
+        .header-widget-right-right {
+            border-left: none;
+        }
+        .page-header.type2 .custom-block {
+            font-size:11px !important;
+        }
+        .page-header.type2 .custom-block > * {
+            vertical-align: top!important;
+        }
+        .header-widget-right-link {
+            padding-top: 20px;
+            font-size: 14px;
+        }
+    }
+}
+
+@media only screen and (min-device-width: 768px) {
+    @media only screen and (max-device-width: 1280px) {
+        .minicart-wrapper {
+            position: absolute !important;
+           /* top: 150px !important; */
+            margin-right: 15px !important;
+        }
+        .nav-sections-item-content > .navigation {
+            max-height:45px;
+            overflow:hidden;
+        }
+        .navigation.sw-megamenu {
+            width: 80%;
+            float: left;
+        }
+    }
+}
+
+@media only screen and (min-device-width: 320px) {
+    @media only screen and (max-device-width: 768px) {
+        .page-header .panel.wrapper {
+            display:none;
+        }
+    }
+}
+
+@media only screen and (max-device-width: 1280px) {
+    .header .logo {
+        display:none !important;
+    }
+    #tiberis-home-top {
+        margin-top: 100px;
+    }
+    .tiberis-home-menu {
+        display:none;
+    }
+    .slider-with-side {
+        width:100%;
+    }
+    .slider-with-side .slider-area {
+        width:100% !important;
+    }
+    .tiberis-home-slider-wrapper {
+        min-height:auto !important;
+    }
+    .slider-with-side .side-area {
+        width: 100% !important;
+        margin-left: 0% !important;
+    }
+    .slider-with-side .side-area .item1, .slider-with-side .side-area .item2, .slider-with-side .side-area .item3 {
+        height: auto !important;
+    }
+    .section-items.nav-sections-items {
+       /* height:0px !important; */
+    }
+    header.page-header .nav-sections-item-title {
+        display:none !important;
+    }
+    .search-area {
+        display:none !important;
+    }
+    header.page-header .nav-sections-item-content {
+        margin-top:31px !important;
+    }
+    .panel.header::after, .top-panel::after, .bottom-panel::after {
+        content:'';
+        display:block;
+        clear:both;
+    }
+    .top-panel {
+        float: left;
+        width: 35%;
+    }
+    .bottom-panel {
+        width: 65%;
+        float: left;
+    }
+    .panel.header {
+        padding: 0px !important;
+    }
+    .page-header.type4 .minicart-wrapper {
+        width: 100%;
+    }
+    .tiberis-cart-details {
+        float: left;
+        position: absolute;
+        width: 80%;
+        padding: 0px;
+        padding-left: 16px;
+    }
+    .minicart-wrapper .block-minicart {
+        width: 320px !important;
+    }
+    .minicart-items .product-item-details .price {
+        font-size:1.4rem !important;
+    }
+    .minicart-item-fields-wrapper .product-item-pricing .details-qty label {
+        font-size: 10px;
+        margin-left: 10px;
+        width:38%;
+    }
+    .minicart-items .item-qty {
+        width:34px !important;
+    }
+    .minicart-item-fields-wrapper .product-item-pricing .details-qty {
+        margin-top:-3px !important;
+    }
+    .minicart-item-fields-wrapper .product.actions {
+        margin-top:6px !important;
+    }
+}

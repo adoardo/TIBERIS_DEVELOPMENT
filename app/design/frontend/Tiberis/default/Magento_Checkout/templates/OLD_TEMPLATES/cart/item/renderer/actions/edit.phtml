@@ -1,0 +1,19 @@
+<?php
+/**
+ * Copyright © 2015 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/** @var $block \Magento\Checkout\Block\Cart\Item\Renderer\Actions\Edit */
+?>
+<?php if ($block->isProductVisibleInSiteVisibility()): ?>
+    <a class="action action-edit"
+       href="<?php /* @escapeNotVerified */ echo $block->getConfigureUrl() ?>"
+       title="<?php echo $block->escapeHtml(__('Изменить праметры товара')); ?>">
+        <span>
+            <?php /* @escapeNotVerified */ echo __('Изменить') ?>
+        </span>
+   </a>
+<?php endif ?>

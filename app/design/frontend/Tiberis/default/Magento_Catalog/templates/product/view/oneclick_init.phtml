@@ -1,0 +1,13 @@
+<?php
+$_helper = $this->helper('Magento\Catalog\Helper\Output');
+$_product = $block->getProduct();
+if ($_product->getFinalPrice() != 0) {
+    if ($_product->isAvailable()) {
+        echo $block->getLayout()
+            ->createBlock('Magento\Catalog\Block\Producty\View')
+            ->setTemplate('Magento_Catalog::product/view/oneclick.phtml')->toHtml();
+    }
+    } else {
+        //Товар с нулевой ценой
+    }
+?>

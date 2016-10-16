@@ -1,0 +1,12 @@
+<?php
+# Берём ID текущей категории
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+$category = $objectManager->get('Magento\Framework\Registry')->registry('current_category');
+$catId = $category->getId();
+
+# Вызываем блок баннера передавая ему в параметре ID текущей категории
+echo $block->getLayout()
+    ->createBlock('Magento\Catalog\Block\Category\View')
+    ->setTemplate('Magento_Catalog::category/sidebar/banner.phtml')
+    ->setCategoryId($catId)->toHtml();
+?>

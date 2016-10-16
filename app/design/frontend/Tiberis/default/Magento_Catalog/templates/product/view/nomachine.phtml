@@ -1,0 +1,34 @@
+<?php
+    $_helper = $this->helper('Magento\Catalog\Helper\Output');
+    $_product = $block->getProduct();
+
+    $_call = 'getTegi';
+    $_code = 'tegi';
+
+    $_attributeType = $block->getAtType();
+
+    if ($_attributeType && $_attributeType == 'text') {
+    	$_attributeValue = ($_helper->productAttribute($_product, $_product->$_call(), $_code)) ? $_product->getAttributeText($_code) : '';
+	} else {
+	    $_attributeValue = $_helper->productAttribute($_product, $_product->$_call(), $_code);
+	}
+
+	if (strpos($_attributeValue, 'no-machine') !== false): ?>
+			<?php
+		    $_call = 'getBrend';
+		    $_code = 'brend';
+
+		    $_attributeType2 = $block->getAtType();
+
+		    if ($_attributeType2 && $_attributeType2 == 'text') {
+		    	$_attributeValue2 = ($_helper->productAttribute($_product, $_product->$_call(), $_code)) ? $_product->getAttributeText($_code) : '';
+			} else {
+			    $_attributeValue2 = $_helper->productAttribute($_product, $_product->$_call(), $_code);
+			}
+			?>
+		<div class="no-machine-product">
+	    	<img src="http://51.254.132.135/pub/media/assets/no-machine-2.gif" alt="" />
+	    	<p>К сожалению, бренд <?php echo $_attributeValue2; ?> снял с производства <?php echo $_product->getName(); ?>.</p>
+	    </div>
+	<?php endif;
+?>

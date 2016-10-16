@@ -1,0 +1,208 @@
+<?php
+/**
+ * Copyright © 2015 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+?>
+
+<?php
+    /** @var \Magento\Catalog\Pricing\Render\FinalPriceBox $block */
+
+    $productId = $block->getSaleableItem()->getId();
+
+    /** @var \Magento\Catalog\Pricing\Price\RegularPrice $priceModel */
+    $priceModel = $block->getPriceType('regular_price');
+
+    /** @var \Magento\Catalog\Pricing\Price\FinalPrice $finalPriceModel */
+    $finalPriceModel = $block->getPriceType('final_price');
+    $idSuffix = $block->getIdSuffix() ? $block->getIdSuffix() : '';
+    $schema = ($block->getZone() == 'item_view') ? true : false;
+
+    $_product = $block->getSaleableItem();
+/*
+echo '******************'.'<br>';
+echo $controllerName = $this->getRequest()->getControllerName().'<br>';
+echo $actionName = $this->getRequest()->getActionName().'<br>';
+echo $routeName = $this->getRequest()->getRouteName().'<br>';
+echo $moduleName = $this->getRequest()->getModuleName().'<br>';
+
+    echo $this->getRequest()->getFullActionName().'<br>';
+
+echo '******************'.'<br>';
+*/
+/* Проверяем продуктовая это страница или страница категории или хоум пэйдж */
+    $pageType = $this->getRequest()->getFullActionName();
+    if ($pageType == 'catalog_product_view') {
+        /* Сюда попадаем если продуктовая страница */
+        $className = 'price-productPage';
+    } else {
+        if ($pageType == 'catalog_category_view') {
+            /* Сюда попадаем если страница категории*/
+            $className = 'price-catalogPage';
+        } else {
+            if ($pageType == 'cms_index_index') {
+                /* Сюда попадаем если главная страница */
+                $className = 'price-indexPage';
+            } else {
+                $className = 'price-undefinedPage';
+            }
+        }
+    }
+
+
+
+        if ($_product->isAvailable()) { ?>
+            <?php if ($block->hasSpecialPrice()): ?>
+                <?php if ($className != 'price-catalogPage'): ?>
+                <div class="opt-price skidka <?php echo $className; ?>">
+                    <strong>Розничная цена:</strong>
+                    <span class="old-price" style="color: #999;">
+                    <?php
+                        $temp = $block->renderAmount($priceModel->getAmount(), [
+                            'display_label'     => __('Regular Price'),
+                            'price_id'          => $block->getPriceId('old-price-' . $idSuffix),
+                            'price_type'        => 'oldPrice',
+                            'include_container' => true,
+                            'skip_adjustments'  => true
+                        ]);
+
+                        echo str_replace(',00','',$temp);
+                    ?>
+                    </span>
+                </div>
+
+                <div class="new-price skidka <?php echo $className; ?>">
+                    <strong>Цена по скидке:</strong>
+                    <span class="special-price">
+                        <?php
+                            $temp = $block->renderAmount($finalPriceModel->getAmount(), [
+                                'display_label'     => __('Special Price'),
+                                'price_id'          => $block->getPriceId('product-price-' . $idSuffix),
+                                'price_type'        => 'finalPrice',
+                                'include_container' => true,
+                                'schema' => $schema
+                            ]);
+                            echo str_replace(',00','',$temp);
+                        ?>
+                    </span>
+                </div>
+                <?php else: ?>
+                    <div class="new-price skidka <?php echo $className; ?>">
+                        <span class="special-price">
+                            <?php
+                            $temp = $block->renderAmount($finalPriceModel->getAmount(), [
+                                'display_label'     => __('Special Price'),
+                                'price_id'          => $block->getPriceId('product-price-' . $idSuffix),
+                                'price_type'        => 'finalPrice',
+                                'include_container' => true,
+                                'schema' => $schema
+                            ]);
+                            echo str_replace(',00','',$temp);
+                            ?>
+                        </span>
+                    </div>
+
+                    <div class="opt-price skidka <?php echo $className; ?>">
+                        <span class="old-price" style="color: #999;">
+                        <?php
+                        $temp = $block->renderAmount($priceModel->getAmount(), [
+                            'display_label'     => __('Regular Price'),
+                            'price_id'          => $block->getPriceId('old-price-' . $idSuffix),
+                            'price_type'        => 'oldPrice',
+                            'include_container' => true,
+                            'skip_adjustments'  => true
+                        ]);
+
+                        echo str_replace(',00','',$temp);
+                        ?>
+                        </span>
+                    </div>
+
+
+                <?php endif; ?>
+            <?php else: ?>
+
+                <?php if ($className != 'price-catalogPage'): ?>
+                <div class="new-price2 <?php echo $className; ?>">
+                    <strong>Розничная цена:</strong>
+                    <span>
+                    <?php
+
+                        if ($_product->getFinalPrice() != 0) {
+                            $temp = $block->renderAmount($finalPriceModel->getAmount(), [
+                                'price_id'          => $block->getPriceId('product-price-' . $idSuffix),
+                                'price_type'        => 'finalPrice',
+                                'include_container' => true,
+                                'schema' => $schema
+                            ]);
+                            echo str_replace(',00','',$temp);
+                        } else {
+                            echo '<span style="top:2px !important;" class="special-price vozmoznyskidky callrequestbutton">Звоните!</span>';
+                        }
+                    ?>
+                    </span>
+                </div>
+
+                <div class="new-price <?php echo $className; ?>">
+                    <strong>Оптовая цена:</strong>
+                    <span class="special-price vozmoznyskidky callrequestbutton">
+                        Возможны скидки!
+                    </span>
+                </div>
+
+                <?php else: ?>
+
+
+                    <div class="new-price <?php echo $className; ?> vozmozenopt">
+                    <span class="special-price vozmoznyskidky callrequestbutton">
+                        Возможен ОПТ!
+                    </span>
+                    </div>
+                    <div class="new-price2 <?php echo $className; ?>">
+
+                    <span>
+                    <?php
+
+                    if ($_product->getFinalPrice() != 0) {
+                        $temp = $block->renderAmount($finalPriceModel->getAmount(), [
+                            'price_id'          => $block->getPriceId('product-price-' . $idSuffix),
+                            'price_type'        => 'finalPrice',
+                            'include_container' => true,
+                            'schema' => $schema
+                        ]);
+                        echo str_replace(',00','',$temp);
+                    } else {
+                        echo '<span style="top:2px !important;" class="special-price vozmoznyskidky callrequestbutton">Звоните!</span>';
+                    }
+                    ?>
+                    </span>
+                    </div>
+
+                <?php endif; ?>
+
+            <?php endif; ?>
+
+            <?php if ($block->showMinimalPrice()): ?>
+                <?php if ($block->getUseLinkForAsLowAs()):?>
+                    <a href="<?php echo $block->getSaleableItem()->getProductUrl(); ?>" class="minimal-price-link">
+                        <?php echo $block->renderAmountMinimal(); ?>
+                    </a>
+                <?php else:?>
+                    <span class="minimal-price-link">
+                <?php echo $block->renderAmountMinimal(); ?>
+            </span>
+                <?php endif?>
+            <?php endif;
+        } else { ?>
+            <div class="new-price2 <?php echo $className; ?>">
+                <span>
+                    <p class="nop-call callrequestbutton">Звоните!</p>
+                </span>
+            </div>
+        <?php
+        }
+
+?>
